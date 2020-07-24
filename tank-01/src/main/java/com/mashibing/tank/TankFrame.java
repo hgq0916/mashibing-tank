@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
  Tank mytank = new Tank(200,200,Dir.DOWN);
+ Bullet b = new Bullet(300,300,Dir.DOWN);
 
   public TankFrame(){
     setSize(800,600);
@@ -30,6 +31,8 @@ public class TankFrame extends Frame {
     //paint会先清屏，然后绘制
     ///System.out.println("paint");
     mytank.paint(g);
+    b.paint(g);
+
     //x +=10;
     //y +=10;
   }
