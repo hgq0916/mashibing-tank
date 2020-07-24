@@ -9,14 +9,12 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
-  int x=200,y=200;
-  Dir dir = Dir.DOWN;
-  private static final int SPEED = 10;
+ Tank mytank = new Tank(200,200,Dir.DOWN);
 
   public TankFrame(){
     setSize(800,600);
     setResizable(false);
-    setTitle("tank war");
+    setTitle("mytank war");
     setVisible(true);
     this.addKeyListener(new MyKeyListener());
     addWindowListener(new WindowAdapter() {
@@ -31,23 +29,7 @@ public class TankFrame extends Frame {
   public void paint(Graphics g) {
     //paint会先清屏，然后绘制
     ///System.out.println("paint");
-    g.fillRect(x,y,50,50);
-
-    switch (dir){
-      case LEFT:
-        x -= SPEED;
-        break;
-      case RIGHT:
-        x += SPEED;
-        break;
-      case UP:
-        y -= SPEED;
-        break;
-      case DOWN:
-        y += SPEED;
-        break;
-    }
-
+    mytank.paint(g);
     //x +=10;
     //y +=10;
   }
@@ -84,10 +66,10 @@ public class TankFrame extends Frame {
     }
 
     private void setMainTankDir() {
-      if(BU) dir = Dir.UP;
-      if(BD) dir = Dir.DOWN;
-      if(BL) dir = Dir.LEFT;
-      if(BR) dir = Dir.RIGHT;
+      if(BU) mytank.setDir(Dir.UP);
+      if(BD) mytank.setDir(Dir.DOWN);
+      if(BL) mytank.setDir(Dir.LEFT);
+      if(BR) mytank.setDir(Dir.RIGHT);
     }
 
     @Override
