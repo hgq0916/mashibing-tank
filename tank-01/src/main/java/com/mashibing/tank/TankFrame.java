@@ -31,7 +31,7 @@ public class TankFrame extends Frame {
     System.out.println("paint");
     g.fillRect(x,y,50,50);
     x +=10;
-    y +=10;
+    //y +=10;
   }
 
   private class MyKeyListener extends KeyAdapter {
@@ -39,7 +39,9 @@ public class TankFrame extends Frame {
 
     @Override
     public void keyPressed(KeyEvent e) {
+      x += 200;
       System.out.println("keyPressed");
+      //repaint();
     }
 
     @Override
