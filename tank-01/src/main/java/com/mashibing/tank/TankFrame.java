@@ -28,25 +28,77 @@ public class TankFrame extends Frame {
   @Override
   public void paint(Graphics g) {
     //paint会先清屏，然后绘制
-    System.out.println("paint");
+    ///System.out.println("paint");
     g.fillRect(x,y,50,50);
-    x +=10;
+    //x +=10;
     //y +=10;
   }
 
   private class MyKeyListener extends KeyAdapter {
 
+    boolean BU = false;
+    boolean BD = false;
+    boolean BL = false;
+    boolean BR = false;
 
     @Override
     public void keyPressed(KeyEvent e) {
-      x += 200;
-      System.out.println("keyPressed");
-      //repaint();
+      System.out.println(e);
+
+      int keyCode = e.getKeyCode();
+
+      switch (keyCode){
+        case KeyEvent.VK_UP:
+          BU = true;
+          break;
+        case KeyEvent.VK_DOWN:
+          BD = true;
+          break;
+        case KeyEvent.VK_LEFT:
+          BL = true;
+          break;
+        case KeyEvent.VK_RIGHT:
+          BR = true;
+          break;
+      }
+
+      moveTank();
+    }
+
+    private void moveTank() {
+      if(BU){
+        y = y-10;
+      }
+      if(BD){
+        y = y+10;
+      }
+      if(BL){
+        x = x-10;
+      }
+      if(BR){
+        x = x+10;
+      }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-      System.out.println("keyReleased");
+      int keyCode = e.getKeyCode();
+      switch (keyCode){
+        case KeyEvent.VK_UP:
+          BU = false;
+          break;
+        case KeyEvent.VK_DOWN:
+          BD = false;
+          break;
+        case KeyEvent.VK_LEFT:
+          BL = false;
+          break;
+        case KeyEvent.VK_RIGHT:
+          BR = false;
+          break;
+      }
+
+      moveTank();
     }
   }
 }
