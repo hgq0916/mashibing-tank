@@ -7,6 +7,7 @@ import java.awt.Graphics;
  */
 public class Tank {
 
+  private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.DOWN;
 
@@ -14,10 +15,11 @@ public class Tank {
 
   private static final int SPEED = 10;
 
-  public Tank(int x, int y, Dir dir) {
+  public Tank(int x, int y, Dir dir,TankFrame tf) {
     this.x = x;
     this.y = y;
     this.dir = dir;
+    this.tf = tf;
   }
 
   public boolean isMoving() {
@@ -78,4 +80,10 @@ public class Tank {
       }
     }
   }
+
+  public void fire() {
+    Bullet bullet = new Bullet(this.x,this.y,this.dir);
+    this.tf.b = bullet;
+  }
+
 }

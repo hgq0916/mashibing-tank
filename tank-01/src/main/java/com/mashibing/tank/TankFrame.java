@@ -13,7 +13,7 @@ public class TankFrame extends Frame {
 
   private static final int WIN_WIDTH = 800;
   private static final int WIN_HEIGHT = 600;
-  Tank mytank = new Tank(200,200,Dir.DOWN);
+  Tank mytank = new Tank(200,200,Dir.DOWN,this);
  Bullet b = new Bullet(300,300,Dir.DOWN);
 
   public TankFrame(){
@@ -73,6 +73,8 @@ public class TankFrame extends Frame {
           break;
         case KeyEvent.VK_RIGHT:
           BR = true;
+        case KeyEvent.VK_CONTROL:
+          mytank.fire();
           break;
       }
 
