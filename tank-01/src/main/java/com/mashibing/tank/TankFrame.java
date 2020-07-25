@@ -8,15 +8,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class TankFrame extends Frame {
 
-  private static final int WIN_WIDTH = 800;
-  private static final int WIN_HEIGHT = 600;
+  public static final int WIN_WIDTH = 800;
+  public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
-      Tank mytank = new Tank(200,200,Dir.DOWN,this);
- Bullet b = new Bullet(300,300,Dir.DOWN);
+  Tank mytank = new Tank(200,200,Dir.DOWN,this);
+  List<Bullet> bullets = new ArrayList<>();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
@@ -50,9 +53,32 @@ public class TankFrame extends Frame {
   public void paint(Graphics g) {
     //paint会先清屏，然后绘制
     Color color = g.getColor();
-    mytank.paint(g);
-    b.paint(g);
+
+    g.setColor(Color.WHITE);
+    g.drawString("子弹数量："+bullets.size(),60,60);
     g.setColor(color);
+
+    mytank.paint(g);
+
+    for(int i=0;i<bullets.size();i++){
+      bullets.get(i).paint(g);
+    }
+
+    /*Iterator<Bullet> iterator = bullets.iterator();
+    for(;iterator.hasNext();){
+      Bullet bullet = iterator.next();
+      if(!bullet.live){
+        iterator.remove();
+      }else {
+        bullet.paint(g);
+      }
+    }*/
+
+    //使用迭代器不允许在其他线程删除元素
+    /*for(Bullet bullet: bullets){
+      bullet.paint(g);
+    }*/
+
   }
 
   private class MyKeyListener extends KeyAdapter {

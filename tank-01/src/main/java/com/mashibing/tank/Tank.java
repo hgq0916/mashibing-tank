@@ -8,6 +8,8 @@ import java.awt.Graphics;
  */
 public class Tank {
 
+  private static final int TANK_WIDTH = 50;
+  private static final int TANK_HEIGHT = 50;
   private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.DOWN;
@@ -58,7 +60,7 @@ public class Tank {
   public void paint(Graphics g) {
     Color color = g.getColor();
     g.setColor(Color.ORANGE);
-    g.fillRect(x,y,50,50);
+    g.fillRect(x,y,TANK_WIDTH,TANK_HEIGHT);
     g.setColor(color);
     move();
 
@@ -85,8 +87,8 @@ public class Tank {
   }
 
   public void fire() {
-    Bullet bullet = new Bullet(this.x,this.y,this.dir);
-    this.tf.b = bullet;
+    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf);
+    this.tf.bullets.add(bullet);
   }
 
 }
