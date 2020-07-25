@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class TankFrame extends Frame {
 
@@ -18,13 +19,24 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
-  Tank mytank = new Tank(200,200,Dir.DOWN,this);
+  Tank mytank = new Tank(200,200,Dir.DOWN,this,true);
   List<Bullet> bullets = new ArrayList<>();
+  List<Tank> enemyTanks = new ArrayList<>();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
     setTitle("mytank war");
+
+    Dir[] values = Dir.values();
+    Random random = new Random();
+    for(int i=0;i<10;i++){
+
+      Dir dir = values[random.nextInt(values.length)];
+      Tank tank = new Tank(20+i*80,100,dir,this,false);
+      enemyTanks.add(tank);
+    }
+
     setVisible(true);
     this.addKeyListener(new MyKeyListener());
     addWindowListener(new WindowAdapter() {
@@ -59,6 +71,10 @@ public class TankFrame extends Frame {
     g.setColor(color);
 
     mytank.paint(g);
+
+    for(int i=0;i<enemyTanks.size();i++){
+      enemyTanks.get(i).paint(g);
+    }
 
     for(int i=0;i<bullets.size();i++){
       bullets.get(i).paint(g);
@@ -107,9 +123,6 @@ public class TankFrame extends Frame {
         case KeyEvent.VK_RIGHT:
           BR = true;
           break;
-        case KeyEvent.VK_CONTROL:
-          mytank.fire();
-          break;
       }
 
       setMainTankDir();
@@ -144,6 +157,9 @@ public class TankFrame extends Frame {
           break;
         case KeyEvent.VK_RIGHT:
           BR = false;
+          break;
+        case KeyEvent.VK_CONTROL:
+          mytank.fire();
           break;
       }
 

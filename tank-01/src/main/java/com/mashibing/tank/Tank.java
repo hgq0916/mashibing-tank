@@ -14,15 +14,18 @@ public class Tank {
   private int x,y;
   private Dir dir = Dir.DOWN;
 
+  private boolean good;
+
   private boolean moving = false;
 
   private static final int SPEED = 10;
 
-  public Tank(int x, int y, Dir dir,TankFrame tf) {
+  public Tank(int x, int y, Dir dir,TankFrame tf,boolean good) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.tf = tf;
+    this.good = good;
   }
 
   public boolean isMoving() {
@@ -59,12 +62,15 @@ public class Tank {
 
   public void paint(Graphics g) {
     Color color = g.getColor();
-    g.setColor(Color.ORANGE);
+    if(good){
+      g.setColor(Color.ORANGE);
+    }else {
+      g.setColor(Color.BLUE);
+    }
+
     g.fillRect(x,y,TANK_WIDTH,TANK_HEIGHT);
     g.setColor(color);
     move();
-
-
   }
 
   private void move() {
