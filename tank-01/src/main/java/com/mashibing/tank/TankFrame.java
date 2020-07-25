@@ -13,7 +13,9 @@ public class TankFrame extends Frame {
 
   private static final int WIN_WIDTH = 800;
   private static final int WIN_HEIGHT = 600;
-  Tank mytank = new Tank(200,200,Dir.DOWN,this);
+  private Image image = null;
+
+      Tank mytank = new Tank(200,200,Dir.DOWN,this);
  Bullet b = new Bullet(300,300,Dir.DOWN);
 
   public TankFrame(){
@@ -32,9 +34,14 @@ public class TankFrame extends Frame {
 
   @Override
   public void update(Graphics g) {
-    Image image = this.createImage(WIN_WIDTH, WIN_HEIGHT);
+    if(image == null){
+      image = this.createImage(WIN_WIDTH, WIN_HEIGHT);
+    }
     Graphics graphics = image.getGraphics();
+    Color c = graphics.getColor();
     graphics.setColor(Color.BLACK);
+    graphics.fillRect(0,0,WIN_WIDTH,WIN_HEIGHT);
+    graphics.setColor(c);
     paint(graphics);
     g.drawImage(image,0,0,null);
   }
@@ -73,6 +80,7 @@ public class TankFrame extends Frame {
           break;
         case KeyEvent.VK_RIGHT:
           BR = true;
+          break;
         case KeyEvent.VK_CONTROL:
           mytank.fire();
           break;
