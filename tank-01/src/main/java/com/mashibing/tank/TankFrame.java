@@ -1,7 +1,9 @@
 package com.mashibing.tank;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -9,11 +11,13 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
- Tank mytank = new Tank(200,200,Dir.DOWN);
+  private static final int WIN_WIDTH = 800;
+  private static final int WIN_HEIGHT = 600;
+  Tank mytank = new Tank(200,200,Dir.DOWN);
  Bullet b = new Bullet(300,300,Dir.DOWN);
 
   public TankFrame(){
-    setSize(800,600);
+    setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
     setTitle("mytank war");
     setVisible(true);
@@ -27,14 +31,21 @@ public class TankFrame extends Frame {
   }
 
   @Override
+  public void update(Graphics g) {
+    Image image = this.createImage(WIN_WIDTH, WIN_HEIGHT);
+    Graphics graphics = image.getGraphics();
+    graphics.setColor(Color.BLACK);
+    paint(graphics);
+    g.drawImage(image,0,0,null);
+  }
+
+  @Override
   public void paint(Graphics g) {
     //paint会先清屏，然后绘制
-    ///System.out.println("paint");
+    Color color = g.getColor();
     mytank.paint(g);
     b.paint(g);
-
-    //x +=10;
-    //y +=10;
+    g.setColor(color);
   }
 
   private class MyKeyListener extends KeyAdapter {
