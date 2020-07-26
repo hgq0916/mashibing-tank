@@ -3,6 +3,7 @@ package com.mashibing.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 /**
@@ -11,8 +12,8 @@ import java.util.Iterator;
 public class Bullet {
 
   public static final int SPEED = 15;
-  public static final int WIDTH =  30;
-  public static final int HEIGHT = 30;
+  public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
+  public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   private final TankFrame tf;
 
   private int x;
@@ -58,8 +59,34 @@ public class Bullet {
     if(!this.live) this.tf.bullets.remove(this);
 
     Color oldColor = g.getColor();
-    g.setColor(Color.RED);
-    g.fillOval(x,y,WIDTH,HEIGHT);
+    BufferedImage image = null;
+    switch (dir){
+      case NORTHEAST:
+        image = ReourseMgr.bulletRU;
+        break;
+      case NORTHWEST:
+        image = ReourseMgr.bulletLU;
+        break;
+      case SOUTHEAST:
+        image = ReourseMgr.bulletRD;
+        break;
+      case SOUTHWEST:
+        image = ReourseMgr.bulletLD;
+        break;
+      case WEST:
+        image = ReourseMgr.bulletL;
+        break;
+      case EAST:
+        image = ReourseMgr.bulletR;
+        break;
+      case NORTH:
+        image = ReourseMgr.bulletU;
+        break;
+      case SOUTH:
+        image = ReourseMgr.bulletD;
+        break;
+    }
+    g.drawImage(image,x,y,null);
     g.setColor(oldColor);
 
     move();
