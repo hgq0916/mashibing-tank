@@ -29,7 +29,13 @@ public class Explode {
       return;
     }
 
-    g.drawImage(ReourseMgr.explodes[step++],x,y,null);
+    BufferedImage bufferedImage = ReourseMgr.explodes[step++];
+    int width = bufferedImage.getWidth();
+    int height = bufferedImage.getHeight();
+    int startX = x - width/2;
+    int startY = y - height/2;
+
+    g.drawImage(bufferedImage,startX,startY,null);
 
     if(step>=ReourseMgr.explodes.length){
       this.living = false;
