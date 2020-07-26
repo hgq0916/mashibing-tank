@@ -19,6 +19,8 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
+  private Audio explodeAudio = new Audio("audio/explode.wav");
+
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
@@ -106,6 +108,9 @@ public class TankFrame extends Frame {
             tank.die();
             //产生爆炸
             explodes.add(new Explode(bullet.getX(),bullet.getY(),this));
+            new Thread(()->{
+              explodeAudio.play();
+            }).start();
             break;
           }
         }
