@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  */
 public class Bullet {
 
-  public static final int SPEED = 15;
+  public static final int SPEED = 12;
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   private final TankFrame tf;

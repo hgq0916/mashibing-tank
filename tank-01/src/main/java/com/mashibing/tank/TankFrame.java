@@ -34,6 +34,7 @@ public class TankFrame extends Frame {
 
       Dir dir = values[random.nextInt(values.length)];
       Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
+      tank.setMoving(true);
       enemyTanks.add(tank);
     }
 
@@ -83,22 +84,6 @@ public class TankFrame extends Frame {
 
     //碰撞检测
     collisionDetection();
-
-    /*Iterator<Bullet> iterator = bullets.iterator();
-    for(;iterator.hasNext();){
-      Bullet bullet = iterator.next();
-      if(!bullet.living){
-        iterator.remove();
-      }else {
-        bullet.paint(g);
-      }
-    }*/
-
-    //使用迭代器不允许在其他线程删除元素
-    /*for(Bullet bullet: bullets){
-      bullet.paint(g);
-    }*/
-
   }
 
   private void collisionDetection() {

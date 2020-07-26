@@ -21,7 +21,7 @@ public class Tank {
 
   private boolean moving = false;
 
-  private static final int SPEED = 10;
+  private static final int SPEED = 5;
 
   private boolean living =true;
 
