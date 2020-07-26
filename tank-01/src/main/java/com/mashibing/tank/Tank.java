@@ -124,10 +124,23 @@ public class Tank {
     }
     g.drawImage(image,x,y,null);
     g.setColor(color);
+
+    int tempX = x;
+    int tempY = y;
     move();
+    //边界检测
+    if(outofBoundary()){
+      x = tempX;
+      y = tempY;
+      if(Group.BAD.equals(group)){
+        this.dir = Dir.randomDir();
+      }
+    }
+
   }
 
   private void move() {
+
     if(moving){
       switch (dir){
         case NORTHEAST:
@@ -162,10 +175,20 @@ public class Tank {
     }
 
     if(Group.BAD.equals(group)){
-      if(random.nextInt(10)>8){
+      if(random.nextInt(30)>28){
+        this.dir = Dir.randomDir();
+      }
+      if(random.nextInt(20)>18){
         this.fire();
       }
     }
+  }
+
+  private boolean outofBoundary() {
+    if(x<0 || y<30 || x+Tank.TANK_WIDTH>TankFrame.WIN_WIDTH || y+Tank.TANK_HEIGHT>TankFrame.WIN_HEIGHT){
+      return true;
+    }
+    return false;
   }
 
   public void fire() {
