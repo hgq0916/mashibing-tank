@@ -18,7 +18,7 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
-  Tank mytank = new Tank(200,200,Dir.SOUTH,this,true);
+  Tank mytank = new Tank(200,400,Dir.SOUTH,this,true);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
 

@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public class Bullet {
 
-  public static final int SPEED = 10;
+  public static final int SPEED = 15;
   public static final int WIDTH =  30;
   public static final int HEIGHT = 30;
   private final TankFrame tf;
@@ -67,6 +67,22 @@ public class Bullet {
 
   private void move() {
     switch (dir){
+      case NORTHEAST:
+        y -= SPEED;
+        x += SPEED;
+        break;
+      case NORTHWEST:
+        y -= SPEED;
+        x -= SPEED;
+        break;
+      case SOUTHEAST:
+        y += SPEED;
+        x += SPEED;
+        break;
+      case SOUTHWEST:
+        y += SPEED;
+        x -= SPEED;
+        break;
       case WEST:
         x -= SPEED;
         break;
@@ -106,6 +122,7 @@ public class Bullet {
       Tank tank = iterator.next();
       if(this.intersection(tank)){
         iterator.remove();
+        this.live = false;
       }
     }
   }
