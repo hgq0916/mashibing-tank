@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  * 坦克类
@@ -16,7 +17,7 @@ public class Tank {
   private int x,y;
   private Dir dir = Dir.SOUTH;
 
-  private boolean good;
+  private Group group = Group.BAD;
 
   private boolean moving = false;
 
@@ -24,12 +25,34 @@ public class Tank {
 
   private boolean living =true;
 
-  public Tank(int x, int y, Dir dir,TankFrame tf,boolean good) {
+  private Random random = new Random();
+
+  public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.tf = tf;
-    this.good = good;
+    this.group = group;
+  }
+
+  public TankFrame getTf() {
+    return tf;
+  }
+
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
+  }
+
+  public boolean isLiving() {
+    return living;
+  }
+
+  public void setLiving(boolean living) {
+    this.living = living;
   }
 
   public boolean isMoving() {
@@ -137,10 +160,16 @@ public class Tank {
           break;
       }
     }
+
+    if(Group.BAD.equals(group)){
+      if(random.nextInt(10)>8){
+        this.fire();
+      }
+    }
   }
 
   public void fire() {
-    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf);
+    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
     this.tf.bullets.add(bullet);
   }
 

@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -20,7 +19,7 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
-  Tank mytank = new Tank(200,400,Dir.SOUTH,this,true);
+  Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
 
@@ -34,7 +33,7 @@ public class TankFrame extends Frame {
     for(int i=0;i<10;i++){
 
       Dir dir = values[random.nextInt(values.length)];
-      Tank tank = new Tank(20+i*80,100,dir,this,false);
+      Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
       enemyTanks.add(tank);
     }
 
@@ -108,13 +107,15 @@ public class TankFrame extends Frame {
       for(int j=0;j<enemyTanks.size();j++){
         Bullet bullet = bullets.get(i);
         Tank tank = enemyTanks.get(j);
-        Rectangle bulletRectangle = bullet.getRectangle();
-        Rectangle tankRectangle = tank.getRectangle();
-        if(bulletRectangle.intersects(tankRectangle)){
-          //发生碰撞
-          bullet.die();
-          tank.die();
-          break;
+        if(!tank.getGroup().equals(bullet.getGroup())){
+          Rectangle bulletRectangle = bullet.getRectangle();
+          Rectangle tankRectangle = tank.getRectangle();
+          if(bulletRectangle.intersects(tankRectangle)){
+            //发生碰撞
+            bullet.die();
+            tank.die();
+            break;
+          }
         }
       }
     }

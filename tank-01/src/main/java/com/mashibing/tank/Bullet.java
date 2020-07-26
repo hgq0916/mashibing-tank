@@ -15,18 +15,37 @@ public class Bullet {
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   private final TankFrame tf;
 
+  private Group group = Group.BAD;
+
   private int x;
   private int y;
   private Dir dir;
 
   boolean living;
 
-  public Bullet(int x, int y, Dir dir,TankFrame tankFrame) {
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
+  }
+
+  public boolean isLiving() {
+    return living;
+  }
+
+  public void setLiving(boolean living) {
+    this.living = living;
+  }
+
+  public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
     this.tf = tankFrame;
+    this.group = group;
   }
 
   public int getX() {
@@ -55,10 +74,10 @@ public class Bullet {
 
   public void paint(Graphics g) {
 
-    /*if(!this.living){
+    if(!this.living){
       this.tf.bullets.remove(this);
       return;
-    }*/
+    }
 
     Color oldColor = g.getColor();
     BufferedImage image = null;
@@ -133,13 +152,6 @@ public class Bullet {
 
   public Rectangle getRectangle(){
     return new Rectangle(x,y,WIDTH,HEIGHT);
-  }
-
-  public boolean intersection(Tank tank){
-    Rectangle tankRectangle = tank.getRectangle();
-    Rectangle bulletRectangle = this.getRectangle();
-    //判断两个矩形是否相交
-    return tankRectangle.intersects(bulletRectangle);
   }
 
   public void die() {
