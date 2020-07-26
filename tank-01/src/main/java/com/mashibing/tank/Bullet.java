@@ -2,6 +2,8 @@ package com.mashibing.tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.Iterator;
 
 /**
  * 子弹类
@@ -79,8 +81,33 @@ public class Bullet {
         break;
     }
 
+    //碰撞检测
+    collisionDetection();
+
     if(x<0 || y<0 || x>TankFrame.WIN_WIDTH || y>TankFrame.WIN_HEIGHT){
       this.live = false;
     }
   }
+
+  public Rectangle getRectangle(){
+    return new Rectangle(x,y,WIDTH,HEIGHT);
+  }
+
+  public boolean intersection(Tank tank){
+    Rectangle tankRectangle = tank.getRectangle();
+    Rectangle bulletRectangle = this.getRectangle();
+    //判断两个矩形是否相交
+    return tankRectangle.intersects(bulletRectangle);
+  }
+
+  private void collisionDetection() {
+    Iterator<Tank> iterator = tf.enemyTanks.iterator();
+    while (iterator.hasNext()){
+      Tank tank = iterator.next();
+      if(this.intersection(tank)){
+        iterator.remove();
+      }
+    }
+  }
+
 }

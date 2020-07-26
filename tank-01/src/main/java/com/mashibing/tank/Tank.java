@@ -2,6 +2,7 @@ package com.mashibing.tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * 坦克类
@@ -95,6 +96,10 @@ public class Tank {
   public void fire() {
     Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf);
     this.tf.bullets.add(bullet);
+  }
+
+  public Rectangle getRectangle() {
+    return new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
   }
 
 }
