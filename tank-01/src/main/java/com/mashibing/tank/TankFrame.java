@@ -22,6 +22,7 @@ public class TankFrame extends Frame {
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
+  List<Explode> explodes = new ArrayList<>();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
@@ -74,6 +75,10 @@ public class TankFrame extends Frame {
 
     mytank.paint(g);
 
+    for(int i=0;i<explodes.size();i++){
+      explodes.get(i).paint(g);
+    }
+
     for(int i=0;i<enemyTanks.size();i++){
       enemyTanks.get(i).paint(g);
     }
@@ -99,6 +104,8 @@ public class TankFrame extends Frame {
             //发生碰撞
             bullet.die();
             tank.die();
+            //产生爆炸
+            explodes.add(new Explode(bullet.getX(),bullet.getY(),this));
             break;
           }
         }
