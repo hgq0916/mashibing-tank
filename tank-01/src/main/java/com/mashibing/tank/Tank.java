@@ -90,7 +90,6 @@ public class Tank {
   public void paint(Graphics g) {
 
     if(!this.living){
-      this.tf.enemyTanks.remove(this);
       return;
     }
 

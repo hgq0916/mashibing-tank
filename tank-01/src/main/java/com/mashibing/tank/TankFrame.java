@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +36,7 @@ public class TankFrame extends Frame {
 
       Dir dir = values[random.nextInt(values.length)];
       Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
-      tank.setMoving(true);
+      tank.setMoving(false);
       enemyTanks.add(tank);
     }
 
@@ -75,16 +76,34 @@ public class TankFrame extends Frame {
 
     mytank.paint(g);
 
-    for(int i=0;i<explodes.size();i++){
-      explodes.get(i).paint(g);
+    Iterator<Explode> explodeIterator = explodes.iterator();
+    while (explodeIterator.hasNext()){
+      Explode explode = explodeIterator.next();
+      if(!explode.isLiving()) {
+        explodeIterator.remove();
+        continue;
+      }
+      explode.paint(g);
     }
 
-    for(int i=0;i<enemyTanks.size();i++){
-      enemyTanks.get(i).paint(g);
+    Iterator<Tank> tankIterator = enemyTanks.iterator();
+    while (tankIterator.hasNext()){
+      Tank tank = tankIterator.next();
+      if(!tank.isLiving()) {
+        tankIterator.remove();
+        continue;
+      }
+      tank.paint(g);
     }
 
-    for(int i=0;i<bullets.size();i++){
-      bullets.get(i).paint(g);
+    Iterator<Bullet> bulletIterator = bullets.iterator();
+    while (bulletIterator.hasNext()){
+      Bullet bullet = bulletIterator.next();
+      if(!bullet.isLiving()) {
+        bulletIterator.remove();
+        continue;
+      }
+      bullet.paint(g);
     }
 
     //碰撞检测
