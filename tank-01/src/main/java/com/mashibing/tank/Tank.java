@@ -3,14 +3,15 @@ package com.mashibing.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 /**
  * 坦克类
  */
 public class Tank {
 
-  private static final int TANK_WIDTH = 50;
-  private static final int TANK_HEIGHT = 50;
+  private static final int TANK_WIDTH = ReourseMgr.tankD.getWidth();
+  private static final int TANK_HEIGHT = ReourseMgr.tankD.getHeight();
   private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.SOUTH;
@@ -63,13 +64,34 @@ public class Tank {
 
   public void paint(Graphics g) {
     Color color = g.getColor();
-    if(good){
-      g.setColor(Color.ORANGE);
-    }else {
-      g.setColor(Color.BLUE);
+    BufferedImage image = null;
+    switch (dir){
+      case NORTHEAST:
+        image = ReourseMgr.tankRU;
+        break;
+      case NORTHWEST:
+        image = ReourseMgr.tankLU;
+        break;
+      case SOUTHEAST:
+        image = ReourseMgr.tankRD;
+        break;
+      case SOUTHWEST:
+        image = ReourseMgr.tankLD;
+        break;
+      case WEST:
+        image = ReourseMgr.tankL;
+        break;
+      case EAST:
+        image = ReourseMgr.tankR;
+        break;
+      case NORTH:
+        image = ReourseMgr.tankU;
+        break;
+      case SOUTH:
+        image = ReourseMgr.tankD;
+        break;
     }
-
-    g.fillRect(x,y,TANK_WIDTH,TANK_HEIGHT);
+    g.drawImage(image,x,y,null);
     g.setColor(color);
     move();
   }
