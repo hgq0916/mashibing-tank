@@ -22,6 +22,8 @@ public class Tank {
 
   private static final int SPEED = 10;
 
+  private boolean living =true;
+
   public Tank(int x, int y, Dir dir,TankFrame tf,boolean good) {
     this.x = x;
     this.y = y;
@@ -63,6 +65,12 @@ public class Tank {
   }
 
   public void paint(Graphics g) {
+
+    if(!this.living){
+      this.tf.enemyTanks.remove(this);
+      return;
+    }
+
     Color color = g.getColor();
     BufferedImage image = null;
     switch (dir){
@@ -138,6 +146,10 @@ public class Tank {
 
   public Rectangle getRectangle() {
     return new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+  }
+
+  public void die() {
+    this.living = false;
   }
 
 }

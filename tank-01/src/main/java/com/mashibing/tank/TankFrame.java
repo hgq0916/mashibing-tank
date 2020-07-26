@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -67,6 +69,7 @@ public class TankFrame extends Frame {
 
     g.setColor(Color.WHITE);
     g.drawString("子弹数量："+bullets.size(),60,60);
+    g.drawString("坦克数量："+enemyTanks.size(),60,80);
     g.setColor(color);
 
     mytank.paint(g);
@@ -79,10 +82,13 @@ public class TankFrame extends Frame {
       bullets.get(i).paint(g);
     }
 
+    //碰撞检测
+    collisionDetection();
+
     /*Iterator<Bullet> iterator = bullets.iterator();
     for(;iterator.hasNext();){
       Bullet bullet = iterator.next();
-      if(!bullet.live){
+      if(!bullet.living){
         iterator.remove();
       }else {
         bullet.paint(g);
@@ -94,6 +100,24 @@ public class TankFrame extends Frame {
       bullet.paint(g);
     }*/
 
+  }
+
+  private void collisionDetection() {
+    //让每一颗子弹和每一辆坦克相撞
+    for(int i=0;i<bullets.size();i++){
+      for(int j=0;j<enemyTanks.size();j++){
+        Bullet bullet = bullets.get(i);
+        Tank tank = enemyTanks.get(j);
+        Rectangle bulletRectangle = bullet.getRectangle();
+        Rectangle tankRectangle = tank.getRectangle();
+        if(bulletRectangle.intersects(tankRectangle)){
+          //发生碰撞
+          bullet.die();
+          tank.die();
+          break;
+        }
+      }
+    }
   }
 
   private class MyKeyListener extends KeyAdapter {

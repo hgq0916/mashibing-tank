@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
 
 /**
  * 子弹类
@@ -20,13 +19,13 @@ public class Bullet {
   private int y;
   private Dir dir;
 
-  boolean live;
+  boolean living;
 
   public Bullet(int x, int y, Dir dir,TankFrame tankFrame) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.live =  true;
+    this.living =  true;
     this.tf = tankFrame;
   }
 
@@ -56,7 +55,10 @@ public class Bullet {
 
   public void paint(Graphics g) {
 
-    if(!this.live) this.tf.bullets.remove(this);
+    /*if(!this.living){
+      this.tf.bullets.remove(this);
+      return;
+    }*/
 
     Color oldColor = g.getColor();
     BufferedImage image = null;
@@ -124,11 +126,8 @@ public class Bullet {
         break;
     }
 
-    //碰撞检测
-    collisionDetection();
-
     if(x<0 || y<0 || x>TankFrame.WIN_WIDTH || y>TankFrame.WIN_HEIGHT){
-      this.live = false;
+      this.living = false;
     }
   }
 
@@ -143,15 +142,8 @@ public class Bullet {
     return tankRectangle.intersects(bulletRectangle);
   }
 
-  private void collisionDetection() {
-    Iterator<Tank> iterator = tf.enemyTanks.iterator();
-    while (iterator.hasNext()){
-      Tank tank = iterator.next();
-      if(this.intersection(tank)){
-        iterator.remove();
-        this.live = false;
-      }
-    }
+  public void die() {
+    this.living = false;
   }
 
 }
