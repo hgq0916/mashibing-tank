@@ -67,16 +67,16 @@ public class Bullet {
 
   private void move() {
     switch (dir){
-      case LEFT:
+      case WEST:
         x -= SPEED;
         break;
-      case RIGHT:
+      case EAST:
         x += SPEED;
         break;
-      case UP:
+      case NORTH:
         y -= SPEED;
         break;
-      case DOWN:
+      case SOUTH:
         y += SPEED;
         break;
     }

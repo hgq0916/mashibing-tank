@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -19,7 +18,7 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = 600;
   private Image image = null;
 
-  Tank mytank = new Tank(200,200,Dir.DOWN,this,true);
+  Tank mytank = new Tank(200,200,Dir.SOUTH,this,true);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
 
@@ -106,7 +105,6 @@ public class TankFrame extends Frame {
 
     @Override
     public void keyPressed(KeyEvent e) {
-      System.out.println(e);
 
       int keyCode = e.getKeyCode();
 
@@ -129,15 +127,43 @@ public class TankFrame extends Frame {
     }
 
     private void setMainTankDir() {
+      boolean bu = BU;
+      boolean bd = BD;
+      boolean bl = BL;
+      boolean br = BR;
 
-      if(!BU && !BD && !BL && !BR){
+      if(bu && bd){
+        bu = false;
+        bd = false;
+      }
+      if(bl && br){
+        bl = false;
+        br = false;
+      }
+
+      if(!bu && !bd && !bl && !br){
         mytank.setMoving(false);
       } else {
         mytank.setMoving(true);
-        if(BU) mytank.setDir(Dir.UP);
-        if(BD) mytank.setDir(Dir.DOWN);
-        if(BL) mytank.setDir(Dir.LEFT);
-        if(BR) mytank.setDir(Dir.RIGHT);
+
+        if(bu && bl){
+          mytank.setDir(Dir.NORTHWEST);
+        }else if(bu && br){
+          mytank.setDir(Dir.NORTHEAST);
+        }else if(br && bd){
+          mytank.setDir(Dir.SOUTHEAST);
+        }else if(bl && bd){
+          mytank.setDir(Dir.SOUTHWEST);
+        }else if(bu){
+          mytank.setDir(Dir.NORTH);
+        }else if(bd){
+          mytank.setDir(Dir.SOUTH);
+        }else if(bl){
+          mytank.setDir(Dir.WEST);
+        }else if(br){
+          mytank.setDir(Dir.EAST);
+        }
+
       }
 
     }

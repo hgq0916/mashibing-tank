@@ -13,7 +13,7 @@ public class Tank {
   private static final int TANK_HEIGHT = 50;
   private final TankFrame tf;
   private int x,y;
-  private Dir dir = Dir.DOWN;
+  private Dir dir = Dir.SOUTH;
 
   private boolean good;
 
@@ -77,16 +77,32 @@ public class Tank {
   private void move() {
     if(moving){
       switch (dir){
-        case LEFT:
-          x -= SPEED;
-          break;
-        case RIGHT:
+        case NORTHEAST:
+          y -= SPEED;
           x += SPEED;
           break;
-        case UP:
+        case NORTHWEST:
+          y -= SPEED;
+          x -= SPEED;
+          break;
+        case SOUTHEAST:
+          y += SPEED;
+          x += SPEED;
+          break;
+        case SOUTHWEST:
+          y += SPEED;
+          x -= SPEED;
+          break;
+        case WEST:
+          x -= SPEED;
+          break;
+        case EAST:
+          x += SPEED;
+          break;
+        case NORTH:
           y -= SPEED;
           break;
-        case DOWN:
+        case SOUTH:
           y += SPEED;
           break;
       }
