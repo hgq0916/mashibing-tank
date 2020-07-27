@@ -50,11 +50,6 @@ public class Explode {
 
   public void paint(Graphics g){
 
-    if(!this.living){
-      this.tf.explodes.remove(this);
-      return;
-    }
-
     BufferedImage bufferedImage = ReourseMgr.explodes[step++];
 
     g.drawImage(bufferedImage,x,y,null);
