@@ -17,6 +17,8 @@ public class Bullet {
 
   private Group group = Group.BAD;
 
+  private Rectangle rectangle;
+
   private int x;
   private int y;
   private Dir dir;
@@ -151,7 +153,14 @@ public class Bullet {
   }
 
   public Rectangle getRectangle(){
-    return new Rectangle(x,y,WIDTH,HEIGHT);
+    if(rectangle == null){
+      rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
+    }else {
+      rectangle.x = x;
+      rectangle.y = y;
+    }
+
+    return rectangle;
   }
 
   public void die() {

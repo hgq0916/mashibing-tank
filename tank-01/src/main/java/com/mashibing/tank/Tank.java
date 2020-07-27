@@ -19,6 +19,8 @@ public class Tank {
 
   private Group group = Group.BAD;
 
+  private Rectangle rectangle;
+
   private boolean moving = false;
 
   private static final int SPEED = 5;
@@ -227,7 +229,14 @@ public class Tank {
   }
 
   public Rectangle getRectangle() {
-    return new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+    if(rectangle == null){
+      rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+    }else {
+      rectangle.x = x;
+      rectangle.y = y;
+    }
+
+    return rectangle;
   }
 
   public void die() {
