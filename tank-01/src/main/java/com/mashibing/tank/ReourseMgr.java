@@ -2,6 +2,7 @@ package com.mashibing.tank;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 /**
@@ -32,8 +33,11 @@ public class ReourseMgr {
       bulletRU =ImageUtil.rotateImage(bullet,45);
       bulletU = bullet;
 
-      BufferedImage goodtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/goodTank2.png"));
-      BufferedImage badtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/badTank1.png"));
+      InputStream resourceAsStream = ReourseMgr.class.getClassLoader()
+          .getResourceAsStream("images/GoodTank2.png");
+      System.out.println("goodTank2:"+resourceAsStream);
+      BufferedImage goodtank= ImageIO.read(resourceAsStream);
+      BufferedImage badtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
 
       goodtankD = ImageUtil.rotateImage(goodtank,180);
       goodtankL = ImageUtil.rotateImage(goodtank,-90);
