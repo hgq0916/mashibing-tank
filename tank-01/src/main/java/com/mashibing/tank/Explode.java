@@ -50,6 +50,8 @@ public class Explode {
 
   public void paint(Graphics g){
 
+    if(!this.living) return;
+
     BufferedImage bufferedImage = ReourseMgr.explodes[step++];
 
     g.drawImage(bufferedImage,x,y,null);

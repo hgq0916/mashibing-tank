@@ -76,10 +76,7 @@ public class Bullet {
 
   public void paint(Graphics g) {
 
-    if(!this.living){
-      this.tf.bullets.remove(this);
-      return;
-    }
+    if(!this.living) return;
 
     Color oldColor = g.getColor();
     BufferedImage image = null;

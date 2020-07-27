@@ -91,10 +91,10 @@ public class TankFrame extends Frame {
     Iterator<Tank> tankIterator = enemyTanks.iterator();
     while (tankIterator.hasNext()){
       Tank tank = tankIterator.next();
-     /* if(!tank.isLiving()) {
+      if(!tank.isLiving()) {
         tankIterator.remove();
         continue;
-      }*/
+      }
       tank.paint(g);
     }
 
