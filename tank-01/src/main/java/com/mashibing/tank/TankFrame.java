@@ -36,7 +36,7 @@ public class TankFrame extends Frame {
 
       Dir dir = values[random.nextInt(values.length)];
       Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
-      tank.setMoving(false);
+      tank.setMoving(true);
       enemyTanks.add(tank);
     }
 
@@ -72,6 +72,7 @@ public class TankFrame extends Frame {
     g.setColor(Color.WHITE);
     g.drawString("子弹数量："+bullets.size(),60,60);
     g.drawString("坦克数量："+enemyTanks.size(),60,80);
+    g.drawString("爆炸数量："+explodes.size(),60,100);
     g.setColor(color);
 
     mytank.paint(g);
