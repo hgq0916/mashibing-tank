@@ -81,6 +81,7 @@ public class TankFrame extends Frame {
     while (explodeIterator.hasNext()){
       Explode explode = explodeIterator.next();
       if(!explode.isLiving()) {
+        explodeIterator.remove();
         continue;
       }
       explode.paint(g);
@@ -90,6 +91,7 @@ public class TankFrame extends Frame {
     while (tankIterator.hasNext()){
       Tank tank = tankIterator.next();
       if(!tank.isLiving()) {
+        tankIterator.remove();
         continue;
       }
       tank.paint(g);
@@ -99,6 +101,7 @@ public class TankFrame extends Frame {
     while (bulletIterator.hasNext()){
       Bullet bullet = bulletIterator.next();
       if(!bullet.isLiving()) {
+        bulletIterator.remove();
         continue;
       }
       bullet.paint(g);
@@ -106,35 +109,6 @@ public class TankFrame extends Frame {
 
     //碰撞检测
     collisionDetection();
-
-    //清理死亡对象
-   clearDiedObject();
-  }
-
-  private void clearDiedObject() {
-    Iterator<Explode> explodeIterator = explodes.iterator();
-    while (explodeIterator.hasNext()){
-      Explode explode = explodeIterator.next();
-      if(!explode.isLiving()) {
-        explodeIterator.remove();
-      }
-    }
-
-    Iterator<Tank> tankIterator = enemyTanks.iterator();
-    while (tankIterator.hasNext()){
-      Tank tank = tankIterator.next();
-      if(!tank.isLiving()) {
-        tankIterator.remove();
-      }
-    }
-
-    Iterator<Bullet> bulletIterator = bullets.iterator();
-    while (bulletIterator.hasNext()){
-      Bullet bullet = bulletIterator.next();
-      if(!bullet.isLiving()) {
-        bulletIterator.remove();
-      }
-    }
   }
 
   private void collisionDetection() {
