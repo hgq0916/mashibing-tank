@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class Bullet {
 
-  public static final int SPEED = 12;
+  public static final int SPEED = PropertyMgr.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   private final TankFrame tf;
