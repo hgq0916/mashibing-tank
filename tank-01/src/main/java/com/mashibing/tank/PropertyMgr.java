@@ -67,17 +67,24 @@ public class PropertyMgr {
   }*/
 
   //方式五：使用静态内部类
-  private static class PropertyHolder {
-    private static Properties properties = new Properties();
 
-    static {
-      try {
-        properties.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+  private  Properties properties = new Properties();
+
+  private PropertyMgr(){
+    try {
+      properties.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
+  private static class PropertyHolder {
+    private static PropertyMgr PROPERTYMGR = new PropertyMgr();
+
+  }
+
+  public static PropertyMgr getInstance(){
+    return PropertyHolder.PROPERTYMGR;
   }
 
   //方式六：使用枚举
@@ -91,17 +98,17 @@ public class PropertyMgr {
     }
   }*/
 
-  public  static Object get(String key){
-    return PropertyHolder.properties == null?null:PropertyHolder.properties.get(key);
+  public  Object get(String key){
+    return properties == null?null:properties.get(key);
   }
 
-  public  static String getString(String key){
-    return PropertyHolder.properties == null?null: (String) PropertyHolder.properties.get(key);
+  public  String getString(String key){
+    return properties == null?null: (String) properties.get(key);
   }
 
-  public  static Integer getInt(String key){
-    if(PropertyHolder.properties == null) return null;
-    Object value = PropertyHolder.properties.get(key);
+  public  Integer getInt(String key){
+    if(properties == null) return null;
+    Object value = properties.get(key);
     return value == null?null:Integer.parseInt(value.toString());
   }
 
