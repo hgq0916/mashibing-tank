@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class TankFrame extends Frame {
 
-  public static final int WIN_WIDTH = PropertyMgr.getInt("gameWidth");
-  public static final int WIN_HEIGHT = PropertyMgr.getInt("gameHeight");
+  public static final int WIN_WIDTH = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameWidth");
+  public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
   private Image image = null;
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
@@ -33,7 +33,7 @@ public class TankFrame extends Frame {
     Dir[] values = Dir.values();
     Random random = new Random();
 
-    int initTankCount = PropertyMgr.getInt("initTankCount");
+    int initTankCount = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("initTankCount");
     for(int i=0;i<initTankCount;i++){
 
       Dir dir = values[random.nextInt(values.length)];

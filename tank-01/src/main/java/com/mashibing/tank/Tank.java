@@ -23,7 +23,7 @@ public class Tank {
 
   private boolean moving = false;
 
-  private static final int SPEED = PropertyMgr.getInt("tankSpeed");
+  private static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("tankSpeed");
 
   private boolean living =true;
 

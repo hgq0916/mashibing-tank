@@ -33,10 +33,7 @@ public class ReourseMgr {
       bulletRU =ImageUtil.rotateImage(bullet,45);
       bulletU = bullet;
 
-      InputStream resourceAsStream = ReourseMgr.class.getClassLoader()
-          .getResourceAsStream("images/GoodTank2.png");
-      System.out.println("goodTank2:"+resourceAsStream);
-      BufferedImage goodtank= ImageIO.read(resourceAsStream);
+      BufferedImage goodtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/GoodTank2.png"));
       BufferedImage badtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
 
       goodtankD = ImageUtil.rotateImage(goodtank,180);
