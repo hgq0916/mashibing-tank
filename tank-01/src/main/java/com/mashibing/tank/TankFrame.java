@@ -125,7 +125,7 @@ public class TankFrame extends Frame {
             bullet.die();
             tank.die();
             //产生爆炸
-            explodes.add(new Explode(bullet.getX(),bullet.getY(),this));
+            explodes.add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
             new Thread(()->{
               Audio explodeAudio = new Audio("audio/explode.wav");
               explodeAudio.play();

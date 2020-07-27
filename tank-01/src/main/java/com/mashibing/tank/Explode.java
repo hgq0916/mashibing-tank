@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
  */
 public class Explode {
 
+  public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
+  public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
   private final TankFrame tf;
   private int x;
   private int y;
@@ -54,12 +56,8 @@ public class Explode {
     }
 
     BufferedImage bufferedImage = ReourseMgr.explodes[step++];
-    int width = bufferedImage.getWidth();
-    int height = bufferedImage.getHeight();
-    int startX = x - width/2;
-    int startY = y - height/2;
 
-    g.drawImage(bufferedImage,startX,startY,null);
+    g.drawImage(bufferedImage,x,y,null);
 
     if(step>=ReourseMgr.explodes.length){
       this.living = false;
