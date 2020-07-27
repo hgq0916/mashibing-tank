@@ -156,19 +156,7 @@ public class Tank {
 
     g.drawImage(image,x,y,null);
     g.setColor(color);
-
-    int tempX = x;
-    int tempY = y;
     move();
-    //边界检测
-    if(outofBoundary()){
-      x = tempX;
-      y = tempY;
-      if(Group.BAD.equals(group)){
-        this.dir = Dir.randomDir();
-      }
-    }
-
   }
 
   private void move() {
@@ -206,6 +194,8 @@ public class Tank {
       }
     }
 
+    boundaryDetect();
+
     if(Group.BAD.equals(group)){
       if(random.nextInt(30)>28){
         this.dir = Dir.randomDir();
@@ -216,11 +206,11 @@ public class Tank {
     }
   }
 
-  private boolean outofBoundary() {
-    if(x<0 || y<30 || x+Tank.TANK_WIDTH>TankFrame.WIN_WIDTH || y+Tank.TANK_HEIGHT>TankFrame.WIN_HEIGHT){
-      return true;
-    }
-    return false;
+  private void boundaryDetect() {
+    if(x<2) this.x = 2;
+    if(y<32) this.y = 32;
+    if(x+Tank.TANK_WIDTH>TankFrame.WIN_WIDTH-2) x = TankFrame.WIN_WIDTH-Tank.TANK_WIDTH-2;
+    if(y+Tank.TANK_HEIGHT>TankFrame.WIN_HEIGHT-2) y = TankFrame.WIN_HEIGHT-Tank.TANK_HEIGHT-2;
   }
 
   public void fire() {
