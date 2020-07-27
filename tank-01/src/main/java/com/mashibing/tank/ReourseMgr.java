@@ -51,7 +51,7 @@ public class ReourseMgr {
       badtankR = ImageUtil.rotateImage(badtank,90);
       badtankRD =ImageUtil.rotateImage(badtank,135);
       badtankRU =ImageUtil.rotateImage(badtank,45);
-      badtankRU = badtank;
+      badtankU = badtank;
 
       explodes = new BufferedImage[16];
       for(int i=0;i<explodes.length;i++){
