@@ -16,8 +16,8 @@ import java.util.Random;
 
 public class TankFrame extends Frame {
 
-  public static final int WIN_WIDTH = 800;
-  public static final int WIN_HEIGHT = 600;
+  public static final int WIN_WIDTH = 1080;
+  public static final int WIN_HEIGHT = 960;
   private Image image = null;
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);

@@ -11,8 +11,8 @@ import java.util.Random;
  */
 public class Tank {
 
-  private static final int TANK_WIDTH = ReourseMgr.tankD.getWidth();
-  private static final int TANK_HEIGHT = ReourseMgr.tankD.getHeight();
+  private static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
+  private static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
   private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.SOUTH;
@@ -95,32 +95,63 @@ public class Tank {
 
     Color color = g.getColor();
     BufferedImage image = null;
-    switch (dir){
-      case NORTHEAST:
-        image = ReourseMgr.tankRU;
-        break;
-      case NORTHWEST:
-        image = ReourseMgr.tankLU;
-        break;
-      case SOUTHEAST:
-        image = ReourseMgr.tankRD;
-        break;
-      case SOUTHWEST:
-        image = ReourseMgr.tankLD;
-        break;
-      case WEST:
-        image = ReourseMgr.tankL;
-        break;
-      case EAST:
-        image = ReourseMgr.tankR;
-        break;
-      case NORTH:
-        image = ReourseMgr.tankU;
-        break;
-      case SOUTH:
-        image = ReourseMgr.tankD;
-        break;
+
+    if(Group.GOOD.equals(group)){
+      switch (dir){
+        case NORTHEAST:
+          image = ReourseMgr.goodtankRU;
+          break;
+        case NORTHWEST:
+          image = ReourseMgr.goodtankLU;
+          break;
+        case SOUTHEAST:
+          image = ReourseMgr.goodtankRD;
+          break;
+        case SOUTHWEST:
+          image = ReourseMgr.goodtankLD;
+          break;
+        case WEST:
+          image = ReourseMgr.goodtankL;
+          break;
+        case EAST:
+          image = ReourseMgr.goodtankR;
+          break;
+        case NORTH:
+          image = ReourseMgr.goodtankU;
+          break;
+        case SOUTH:
+          image = ReourseMgr.goodtankD;
+          break;
+      }
+    }else {
+      switch (dir){
+        case NORTHEAST:
+          image = ReourseMgr.badtankRU;
+          break;
+        case NORTHWEST:
+          image = ReourseMgr.badtankLU;
+          break;
+        case SOUTHEAST:
+          image = ReourseMgr.badtankRD;
+          break;
+        case SOUTHWEST:
+          image = ReourseMgr.badtankLD;
+          break;
+        case WEST:
+          image = ReourseMgr.badtankL;
+          break;
+        case EAST:
+          image = ReourseMgr.badtankR;
+          break;
+        case NORTH:
+          image = ReourseMgr.badtankU;
+          break;
+        case SOUTH:
+          image = ReourseMgr.badtankD;
+          break;
+      }
     }
+
     g.drawImage(image,x,y,null);
     g.setColor(color);
 
