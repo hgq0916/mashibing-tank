@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * 子弹类
@@ -48,6 +49,8 @@ public class Bullet {
     this.living =  true;
     this.tf = tankFrame;
     this.group = group;
+
+    rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
   }
 
   public int getX() {
@@ -147,16 +150,13 @@ public class Bullet {
     if(x<0 || y<0 || x>TankFrame.WIN_WIDTH || y>TankFrame.WIN_HEIGHT){
       this.living = false;
     }
+
+    //移动方块
+    rectangle.x = x;
+    rectangle.y = y;
   }
 
   public Rectangle getRectangle(){
-    if(rectangle == null){
-      rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
-    }else {
-      rectangle.x = x;
-      rectangle.y = y;
-    }
-
     return rectangle;
   }
 

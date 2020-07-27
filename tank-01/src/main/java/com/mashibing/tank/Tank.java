@@ -35,6 +35,7 @@ public class Tank {
     this.dir = dir;
     this.tf = tf;
     this.group = group;
+    rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
   }
 
   public TankFrame getTf() {
@@ -194,6 +195,7 @@ public class Tank {
       }
     }
 
+    //边界检测
     boundaryDetect();
 
     if(Group.BAD.equals(group)){
@@ -204,6 +206,10 @@ public class Tank {
         this.fire();
       }
     }
+
+    //移动方块
+    rectangle.x = x;
+    rectangle.y = y;
   }
 
   private void boundaryDetect() {
@@ -219,13 +225,6 @@ public class Tank {
   }
 
   public Rectangle getRectangle() {
-    if(rectangle == null){
-      rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
-    }else {
-      rectangle.x = x;
-      rectangle.y = y;
-    }
-
     return rectangle;
   }
 
