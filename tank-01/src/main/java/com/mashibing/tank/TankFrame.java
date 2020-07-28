@@ -22,6 +22,7 @@ public class TankFrame extends Frame {
 
   private FireStrategy  fourDirectionFireStrategy = new FourDirectionFireStrategy();
   private FireStrategy  eightDirectionFireStrategy = new EightDirectionFireStrategy();
+  private FireStrategy  triplePlayFireStrategy = new TriplePlayFireStrategy();
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
@@ -234,10 +235,13 @@ public class TankFrame extends Frame {
         case KeyEvent.VK_CONTROL:
           mytank.fire();
           break;
+        case KeyEvent.VK_Z:
+          mytank.fire(triplePlayFireStrategy);
+          break;
         case KeyEvent.VK_SPACE:
           mytank.fire(fourDirectionFireStrategy);
           break;
-        case KeyEvent.VK_ALT:
+        case KeyEvent.VK_ENTER:
           mytank.fire(eightDirectionFireStrategy);
           break;
       }
