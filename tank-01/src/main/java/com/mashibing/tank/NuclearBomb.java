@@ -127,4 +127,25 @@ public class NuclearBomb extends AbstractBullet{
   public Rectangle getRectangle() {
     return rectangle;
   }
+
+  @Override
+  public void collideWithTank(AbstractTank tank) {
+    if(!tank.getGroup().equals(this.getGroup())){
+      Rectangle bulletRectangle = this.getRectangle();
+      Rectangle tankRectangle = tank.getRectangle();
+      if(bulletRectangle.intersects(tankRectangle)){
+        //发生碰撞
+        this.die();
+        tank.die();
+        //产生爆炸new BombExplode()
+        AbstractExplode expolode = TankWarFactoryContextHolder.getTankWarFactory().createExplode(this.getX()+ GeneralBullet.WIDTH/2- BombExplode.WIDTH/2,this.getY()+
+                        GeneralBullet.HEIGHT/2- BombExplode.HEIGHT/2,this.tf);
+        this.tf.explodes.add(expolode);
+        new Thread(()->{
+          Audio explodeAudio = new Audio("audio/explode.wav");
+          explodeAudio.play();
+        }).start();
+      }
+    }
+  }
 }

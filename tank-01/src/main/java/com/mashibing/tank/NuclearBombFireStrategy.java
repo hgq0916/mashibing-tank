@@ -20,7 +20,7 @@ public class NuclearBombFireStrategy implements FireStrategy{
   public void fire(AbstractTank tank) {
     NuclearBomb nuclearBomb = new NuclearBomb(tank.getX()+tank.getWidth()/2-NuclearBomb.WIDTH/2,tank.getY()
         + tank.getHeight()/2-NuclearBomb.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
-    tank.getTf().nuclearBombs.add(nuclearBomb);
+    tank.getTf().bullets.add(nuclearBomb);
   }
 
 }

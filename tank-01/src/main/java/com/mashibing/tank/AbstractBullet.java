@@ -1,9 +1,7 @@
 package com.mashibing.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 
 /**
  * 抽象子弹类
@@ -82,5 +80,7 @@ public abstract class AbstractBullet {
   public void die() {
     this.living = false;
   }
+
+  public abstract void collideWithTank(AbstractTank tank);
 
 }

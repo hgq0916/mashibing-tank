@@ -6,12 +6,12 @@ import java.awt.image.BufferedImage;
 /**
  * 爆炸
  */
-public class Explode extends AbstractExplode{
+public class BombExplode extends AbstractExplode{
 
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
 
-  public Explode(int x,int y,TankFrame tf){
+  public BombExplode(int x,int y,TankFrame tf){
     super(x,y,tf);
   }
 
@@ -29,6 +29,16 @@ public class Explode extends AbstractExplode{
       this.living = false;
     }
 
+  }
+
+  @Override
+  public int getWidth() {
+    return WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
 }

@@ -25,11 +25,10 @@ public class TankFrame extends Frame {
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
-  LightTank mytank = new LightTank(200,400,Dir.SOUTH,this,Group.GOOD);
+  AbstractTank mytank = TankWarFactoryContextHolder.getTankWarFactory().createTank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<AbstractBullet> bullets = new ArrayList<>();
-  List<LightTank> enemyTanks = new ArrayList<>();
-  List<Explode> explodes = new ArrayList<>();
-  List<NuclearBomb> nuclearBombs = new ArrayList<>();
+  List<AbstractTank> enemyTanks = new ArrayList<>();
+  List<AbstractExplode> explodes = new ArrayList<>();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
@@ -43,7 +42,7 @@ public class TankFrame extends Frame {
     for(int i=0;i<initTankCount;i++){
 
       Dir dir = values[random.nextInt(values.length)];
-      LightTank tank = new LightTank(20+i*80,100,dir,this,Group.BAD);
+      AbstractTank tank = TankWarFactoryContextHolder.getTankWarFactory().createTank(20+i*80,100,dir,this,Group.BAD);
       tank.setMoving(true);
       enemyTanks.add(tank);
     }
@@ -85,9 +84,9 @@ public class TankFrame extends Frame {
 
     mytank.paint(g);
 
-    Iterator<Explode> explodeIterator = explodes.iterator();
+    Iterator<AbstractExplode> explodeIterator = explodes.iterator();
     while (explodeIterator.hasNext()){
-      Explode explode = explodeIterator.next();
+      AbstractExplode explode = explodeIterator.next();
       if(!explode.isLiving()) {
         explodeIterator.remove();
         continue;
@@ -96,9 +95,9 @@ public class TankFrame extends Frame {
     }
 
     int i =0;
-    Iterator<LightTank> tankIterator = enemyTanks.iterator();
+    Iterator<AbstractTank> tankIterator = enemyTanks.iterator();
     while (tankIterator.hasNext()){
-      LightTank tank = tankIterator.next();
+      AbstractTank tank = tankIterator.next();
       if(!tank.isLiving()) {
         tankIterator.remove();
         continue;
@@ -116,16 +115,6 @@ public class TankFrame extends Frame {
       bullet.paint(g);
     }
 
-    Iterator<NuclearBomb> nuclearBombIterator = nuclearBombs.iterator();
-    while (nuclearBombIterator.hasNext()){
-      NuclearBomb nuclearBomb = nuclearBombIterator.next();
-      if(!nuclearBomb.isLiving()) {
-        nuclearBombIterator.remove();
-        continue;
-      }
-      nuclearBomb.paint(g);
-    }
-
     //碰撞检测
     collisionDetection();
   }
@@ -135,51 +124,13 @@ public class TankFrame extends Frame {
     for(int i=0;i<bullets.size();i++){
       for(int j=0;j<enemyTanks.size();j++){
         AbstractBullet bullet = bullets.get(i);
-        LightTank tank = enemyTanks.get(j);
-        if(!tank.getGroup().equals(bullet.getGroup())){
-          Rectangle bulletRectangle = bullet.getRectangle();
-          Rectangle tankRectangle = tank.getRectangle();
-          if(bulletRectangle.intersects(tankRectangle)){
-            //发生碰撞
-            bullet.die();
-            tank.die();
-            //产生爆炸
-            explodes.add(new Explode(bullet.getX()+ GeneralBullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+
-                GeneralBullet.HEIGHT/2-Explode.HEIGHT/2,this));
-            new Thread(()->{
-              Audio explodeAudio = new Audio("audio/explode.wav");
-              explodeAudio.play();
-            }).start();
-            break;
-          }
-        }
+        AbstractTank tank = enemyTanks.get(j);
+
+        bullet.collideWithTank(tank);
+
+
       }
     }
-
-    for(int i=0;i<nuclearBombs.size();i++){
-      for(int j=0;j<enemyTanks.size();j++){
-        NuclearBomb nuclearBomb = nuclearBombs.get(i);
-        LightTank tank = enemyTanks.get(j);
-        if(!tank.getGroup().equals(nuclearBomb.getGroup())){
-          Rectangle nuclearBombRectangle = nuclearBomb.getRectangle();
-          Rectangle tankRectangle = tank.getRectangle();
-          if(nuclearBombRectangle.intersects(tankRectangle)){
-            //发生碰撞
-            nuclearBomb.die();
-            tank.die();
-            //产生爆炸
-            explodes.add(new Explode(nuclearBomb.getX()+ GeneralBullet.WIDTH/2-Explode.WIDTH/2,nuclearBomb.getY()+
-                GeneralBullet.HEIGHT/2-Explode.HEIGHT/2,this));
-            new Thread(()->{
-              Audio explodeAudio = new Audio("audio/explode.wav");
-              explodeAudio.play();
-            }).start();
-            break;
-          }
-        }
-      }
-    }
-
   }
 
   private class MyKeyListener extends KeyAdapter {
