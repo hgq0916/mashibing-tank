@@ -17,12 +17,12 @@ public class EightDirectionFireStrategy implements FireStrategy{
   }
 
   @Override
-  public void fire(Tank tank) {
+  public void fire(AbstractTank tank) {
 
     Dir[] values = Dir.values();
     for(int i=0;i<values.length;i++){
-      Bullet bullet = new Bullet(tank.getX()+Tank.TANK_WIDTH/2-Bullet.WIDTH/2,tank.getY()
-          +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,values[i],tank.getTf(),tank.getGroup());
+      Bullet bullet = new Bullet(tank.getX()+ tank.getWidth()/2-Bullet.WIDTH/2,tank.getY()
+          + tank.getHeight()/2-Bullet.HEIGHT/2,values[i],tank.getTf(),tank.getGroup());
       tank.getTf().bullets.add(bullet);
     }
 

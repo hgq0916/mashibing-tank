@@ -7,36 +7,25 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
- * 坦克类
+ * 重型坦克类
  */
-public class Tank {
+public class HeavyTank extends AbstractTank{
 
   public static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
-  private final TankFrame tf;
-  private int x,y;
-  private Dir dir = Dir.SOUTH;
-
-  private Group group = Group.BAD;
 
   private Rectangle rectangle;
 
-  private boolean moving = false;
-
   private static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("tankSpeed");
-
-  private boolean living =true;
 
   private Random random = new Random();
 
   private FireStrategy fireStrategy;
 
-  public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
-    this.x = x;
-    this.y = y;
-    this.dir = dir;
-    this.tf = tf;
-    this.group = group;
+  public HeavyTank(int x, int y, Dir dir,TankFrame tf,Group group) {
+
+    super(x,y,dir,tf,group);
+
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
 
     try {
@@ -52,58 +41,7 @@ public class Tank {
     }
   }
 
-  public TankFrame getTf() {
-    return tf;
-  }
-
-  public Group getGroup() {
-    return group;
-  }
-
-  public void setGroup(Group group) {
-    this.group = group;
-  }
-
-  public boolean isLiving() {
-    return living;
-  }
-
-  public void setLiving(boolean living) {
-    this.living = living;
-  }
-
-  public boolean isMoving() {
-    return moving;
-  }
-
-  public void setMoving(boolean moving) {
-    this.moving = moving;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public Dir getDir() {
-    return dir;
-  }
-
-  public void setDir(Dir dir) {
-    this.dir = dir;
-  }
-
+  @Override
   public void paint(Graphics g) {
 
     if(!this.living){
@@ -229,10 +167,11 @@ public class Tank {
   private void boundaryDetect() {
     if(x<2) this.x = 2;
     if(y<32) this.y = 32;
-    if(x+Tank.TANK_WIDTH>TankFrame.WIN_WIDTH-2) x = TankFrame.WIN_WIDTH-Tank.TANK_WIDTH-2;
-    if(y+Tank.TANK_HEIGHT>TankFrame.WIN_HEIGHT-2) y = TankFrame.WIN_HEIGHT-Tank.TANK_HEIGHT-2;
+    if(x+ HeavyTank.TANK_WIDTH>TankFrame.WIN_WIDTH-2) x = TankFrame.WIN_WIDTH- HeavyTank.TANK_WIDTH-2;
+    if(y+ HeavyTank.TANK_HEIGHT>TankFrame.WIN_HEIGHT-2) y = TankFrame.WIN_HEIGHT- HeavyTank.TANK_HEIGHT-2;
   }
 
+  @Override
   public void fire() {
 
     if(Group.GOOD.equals(this.group)){
@@ -244,16 +183,29 @@ public class Tank {
 
   }
 
+  @Override
   public void fire(FireStrategy fireStrategy){
     fireStrategy.fire(this);
   }
 
+  @Override
   public Rectangle getRectangle() {
     return rectangle;
   }
 
-  public void die() {
-    this.living = false;
+  @Override
+  public int getWidth() {
+    return TANK_WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return TANK_HEIGHT;
+  }
+
+  @Override
+  public int speed() {
+    return SPEED;
   }
 
 }

@@ -25,9 +25,9 @@ public class TankFrame extends Frame {
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
-  Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
+  LightTank mytank = new LightTank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
-  List<Tank> enemyTanks = new ArrayList<>();
+  List<LightTank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
   List<NuclearBomb> nuclearBombs = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class TankFrame extends Frame {
     for(int i=0;i<initTankCount;i++){
 
       Dir dir = values[random.nextInt(values.length)];
-      Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
+      LightTank tank = new LightTank(20+i*80,100,dir,this,Group.BAD);
       tank.setMoving(true);
       enemyTanks.add(tank);
     }
@@ -96,9 +96,9 @@ public class TankFrame extends Frame {
     }
 
     int i =0;
-    Iterator<Tank> tankIterator = enemyTanks.iterator();
+    Iterator<LightTank> tankIterator = enemyTanks.iterator();
     while (tankIterator.hasNext()){
-      Tank tank = tankIterator.next();
+      LightTank tank = tankIterator.next();
       if(!tank.isLiving()) {
         tankIterator.remove();
         continue;
@@ -135,7 +135,7 @@ public class TankFrame extends Frame {
     for(int i=0;i<bullets.size();i++){
       for(int j=0;j<enemyTanks.size();j++){
         Bullet bullet = bullets.get(i);
-        Tank tank = enemyTanks.get(j);
+        LightTank tank = enemyTanks.get(j);
         if(!tank.getGroup().equals(bullet.getGroup())){
           Rectangle bulletRectangle = bullet.getRectangle();
           Rectangle tankRectangle = tank.getRectangle();
@@ -158,7 +158,7 @@ public class TankFrame extends Frame {
     for(int i=0;i<nuclearBombs.size();i++){
       for(int j=0;j<enemyTanks.size();j++){
         NuclearBomb nuclearBomb = nuclearBombs.get(i);
-        Tank tank = enemyTanks.get(j);
+        LightTank tank = enemyTanks.get(j);
         if(!tank.getGroup().equals(nuclearBomb.getGroup())){
           Rectangle nuclearBombRectangle = nuclearBomb.getRectangle();
           Rectangle tankRectangle = tank.getRectangle();

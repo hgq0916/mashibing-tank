@@ -8,6 +8,6 @@ package com.mashibing.tank;
  */
 public interface FireStrategy {
 
-  void fire(Tank tank);
+  void fire(AbstractTank tank);
 
 }
