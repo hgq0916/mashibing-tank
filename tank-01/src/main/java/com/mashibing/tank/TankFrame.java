@@ -20,6 +20,9 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
   private Image image = null;
 
+  private FireStrategy  fourDirectionFireStrategy = new FourDirectionFireStrategy();
+  private FireStrategy  eightDirectionFireStrategy = new EightDirectionFireStrategy();
+
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
@@ -230,6 +233,12 @@ public class TankFrame extends Frame {
           break;
         case KeyEvent.VK_CONTROL:
           mytank.fire();
+          break;
+        case KeyEvent.VK_SPACE:
+          mytank.fire(fourDirectionFireStrategy);
+          break;
+        case KeyEvent.VK_ALT:
+          mytank.fire(eightDirectionFireStrategy);
           break;
       }
 

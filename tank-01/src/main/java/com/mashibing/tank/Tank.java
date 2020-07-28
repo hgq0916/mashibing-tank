@@ -29,7 +29,7 @@ public class Tank {
 
   private Random random = new Random();
 
-  private FireStrategy fireStrategy;
+  //private FireStrategy fireStrategy;
 
   public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
     this.x = x;
@@ -39,7 +39,7 @@ public class Tank {
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
 
-    try {
+    /*try {
       Class<?> fireStrategyClass = Class
           .forName(PropertyMgr.getInstance().getString("fireStrategyClass"));
       fireStrategy = (FireStrategy) fireStrategyClass.newInstance();
@@ -49,9 +49,7 @@ public class Tank {
       e.printStackTrace();
     } catch (InstantiationException e) {
       e.printStackTrace();
-    }
-
-
+    }*/
   }
 
   public TankFrame getTf() {
@@ -236,12 +234,20 @@ public class Tank {
   }
 
   public void fire() {
-    if(Group.GOOD.equals(this.group)){
+
+    /*if(Group.GOOD.equals(this.group)){
       fireStrategy.fire(this);
     }else {
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
       this.tf.bullets.add(bullet);
-    }
+    }*/
+
+    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
+    this.tf.bullets.add(bullet);
+  }
+
+  public void fire(FireStrategy fireStrategy){
+    fireStrategy.fire(this);
   }
 
   public Rectangle getRectangle() {
