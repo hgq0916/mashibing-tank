@@ -11,8 +11,8 @@ import java.util.Random;
  */
 public class Tank {
 
-  private static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
-  private static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
+  public static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
+  public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
   private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.SOUTH;
@@ -29,6 +29,8 @@ public class Tank {
 
   private Random random = new Random();
 
+  private FireStrategy fireStrategy;
+
   public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
     this.x = x;
     this.y = y;
@@ -36,6 +38,20 @@ public class Tank {
     this.tf = tf;
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+
+    try {
+      Class<?> fireStrategyClass = Class
+          .forName(PropertyMgr.getInstance().getString("fireStrategyClass"));
+      fireStrategy = (FireStrategy) fireStrategyClass.newInstance();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
+      e.printStackTrace();
+    } catch (InstantiationException e) {
+      e.printStackTrace();
+    }
+
+
   }
 
   public TankFrame getTf() {
@@ -220,8 +236,12 @@ public class Tank {
   }
 
   public void fire() {
-    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
-    this.tf.bullets.add(bullet);
+    if(Group.GOOD.equals(this.group)){
+      fireStrategy.fire(this);
+    }else {
+      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
+      this.tf.bullets.add(bullet);
+    }
   }
 
   public Rectangle getRectangle() {
