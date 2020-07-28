@@ -8,6 +8,14 @@ package com.mashibing.tank;
  */
 public class TriplePlayFireStrategy implements FireStrategy{
 
+  private TriplePlayFireStrategy(){}
+
+  private static TriplePlayFireStrategy triplePlayFireStrategy = new TriplePlayFireStrategy();
+
+  public static FireStrategy getInstance() {
+    return triplePlayFireStrategy;
+  }
+
   @Override
   public void fire(Tank tank) {
 

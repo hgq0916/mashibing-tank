@@ -8,6 +8,14 @@ package com.mashibing.tank;
  */
 public class NuclearBombFireStrategy implements FireStrategy{
 
+  private NuclearBombFireStrategy(){}
+
+  private static NuclearBombFireStrategy nuclearBombFireStrategy = new NuclearBombFireStrategy();
+
+  public static FireStrategy getInstance() {
+    return nuclearBombFireStrategy;
+  }
+
   @Override
   public void fire(Tank tank) {
     NuclearBomb nuclearBomb = new NuclearBomb(tank.getX()+Tank.TANK_WIDTH/2-NuclearBomb.WIDTH/2,tank.getY()

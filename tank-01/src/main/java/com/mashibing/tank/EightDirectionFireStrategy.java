@@ -8,6 +8,14 @@ package com.mashibing.tank;
  */
 public class EightDirectionFireStrategy implements FireStrategy{
 
+  private EightDirectionFireStrategy(){}
+
+  private static EightDirectionFireStrategy eightDirectionFireStrategy = new EightDirectionFireStrategy();
+
+  public static FireStrategy getInstance() {
+    return eightDirectionFireStrategy;
+  }
+
   @Override
   public void fire(Tank tank) {
 

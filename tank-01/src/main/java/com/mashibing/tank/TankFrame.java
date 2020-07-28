@@ -20,10 +20,10 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
   private Image image = null;
 
-  private FireStrategy  fourDirectionFireStrategy = new FourDirectionFireStrategy();
-  private FireStrategy  eightDirectionFireStrategy = new EightDirectionFireStrategy();
-  private FireStrategy  triplePlayFireStrategy = new TriplePlayFireStrategy();
-  private FireStrategy  nuclearBombFireStrategy = new NuclearBombFireStrategy();
+  private FireStrategy  fourDirectionFireStrategy = FourDirectionFireStrategy.getInstance();
+  private FireStrategy  eightDirectionFireStrategy = EightDirectionFireStrategy.getInstance();
+  private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
+  private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
