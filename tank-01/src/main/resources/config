@@ -4,4 +4,4 @@ tankSpeed=5
 bulletSpeed=10
 gameWidth=1080
 gameHeight=960
-fireStrategyClass=com.mashibing.tank.EightDirectionFireStrategy
+fireStrategyClass=com.mashibing.tank.RandomDirectionFireStrategy
