@@ -175,7 +175,8 @@ public class HeavyTank extends AbstractTank{
   public void fire() {
 
     if(Group.GOOD.equals(this.group)){
-      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
+      GeneralBullet bullet = new GeneralBullet(this.x+TANK_WIDTH/2- GeneralBullet.WIDTH/2,this.y+TANK_HEIGHT/2-
+          GeneralBullet.HEIGHT/2,this.dir,this.tf,this.group);
       this.tf.bullets.add(bullet);
     }else {
       this.fireStrategy.fire(this);

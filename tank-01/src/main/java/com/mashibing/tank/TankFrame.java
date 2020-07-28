@@ -26,7 +26,7 @@ public class TankFrame extends Frame {
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
   LightTank mytank = new LightTank(200,400,Dir.SOUTH,this,Group.GOOD);
-  List<Bullet> bullets = new ArrayList<>();
+  List<AbstractBullet> bullets = new ArrayList<>();
   List<LightTank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
   List<NuclearBomb> nuclearBombs = new ArrayList<>();
@@ -106,9 +106,9 @@ public class TankFrame extends Frame {
       tank.paint(g);
     }
 
-    Iterator<Bullet> bulletIterator = bullets.iterator();
+    Iterator<AbstractBullet> bulletIterator = bullets.iterator();
     while (bulletIterator.hasNext()){
-      Bullet bullet = bulletIterator.next();
+      AbstractBullet bullet = bulletIterator.next();
       if(!bullet.isLiving()) {
         bulletIterator.remove();
         continue;
@@ -134,7 +134,7 @@ public class TankFrame extends Frame {
     //让每一颗子弹和每一辆坦克相撞
     for(int i=0;i<bullets.size();i++){
       for(int j=0;j<enemyTanks.size();j++){
-        Bullet bullet = bullets.get(i);
+        AbstractBullet bullet = bullets.get(i);
         LightTank tank = enemyTanks.get(j);
         if(!tank.getGroup().equals(bullet.getGroup())){
           Rectangle bulletRectangle = bullet.getRectangle();
@@ -144,7 +144,8 @@ public class TankFrame extends Frame {
             bullet.die();
             tank.die();
             //产生爆炸
-            explodes.add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
+            explodes.add(new Explode(bullet.getX()+ GeneralBullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+
+                GeneralBullet.HEIGHT/2-Explode.HEIGHT/2,this));
             new Thread(()->{
               Audio explodeAudio = new Audio("audio/explode.wav");
               explodeAudio.play();
@@ -167,7 +168,8 @@ public class TankFrame extends Frame {
             nuclearBomb.die();
             tank.die();
             //产生爆炸
-            explodes.add(new Explode(nuclearBomb.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,nuclearBomb.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
+            explodes.add(new Explode(nuclearBomb.getX()+ GeneralBullet.WIDTH/2-Explode.WIDTH/2,nuclearBomb.getY()+
+                GeneralBullet.HEIGHT/2-Explode.HEIGHT/2,this));
             new Thread(()->{
               Audio explodeAudio = new Audio("audio/explode.wav");
               explodeAudio.play();

@@ -19,16 +19,18 @@ public class TriplePlayFireStrategy implements FireStrategy{
   @Override
   public void fire(AbstractTank tank) {
 
-      Bullet bullet = new Bullet(tank.getX()+ tank.getWidth()/2-Bullet.WIDTH/2,tank.getY()
-          + tank.getHeight()/2-Bullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
+      GeneralBullet bullet = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+          + tank.getHeight()/2- GeneralBullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
       tank.getTf().bullets.add(bullet);
 
-    Bullet bullet1 = new Bullet(tank.getX()+ tank.getWidth()/2-Bullet.WIDTH/2-Bullet.WIDTH/2,tank.getY()
-        + tank.getHeight()/2-Bullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
+    GeneralBullet bullet1 = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2-
+        GeneralBullet.WIDTH/2,tank.getY()
+        + tank.getHeight()/2- GeneralBullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
     tank.getTf().bullets.add(bullet1);
 
-    Bullet bullet2 = new Bullet(tank.getX()+ tank.getWidth()/2-Bullet.WIDTH/2+Bullet.WIDTH-Bullet.WIDTH/2,tank.getY()
-        + tank.getHeight()/2-Bullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
+    GeneralBullet bullet2 = new GeneralBullet(tank.getX()+ tank.getWidth()/2-
+        GeneralBullet.WIDTH/2+ GeneralBullet.WIDTH- GeneralBullet.WIDTH/2,tank.getY()
+        + tank.getHeight()/2- GeneralBullet.HEIGHT/2,tank.getDir(),tank.getTf(),tank.getGroup());
     tank.getTf().bullets.add(bullet2);
 
   }

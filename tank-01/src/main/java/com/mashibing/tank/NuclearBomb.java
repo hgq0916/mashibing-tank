@@ -11,10 +11,8 @@ import java.awt.image.BufferedImage;
  * @Description: 核弹
  * @date 2020/7/28 16:47
  */
-public class NuclearBomb {
+public class NuclearBomb extends AbstractBullet{
 
-  private int x;
-  private int y;
   public static final int WIDTH = ReourseMgr.nuclearBombD.getWidth();
   public static final int HEIGHT = ReourseMgr.nuclearBombD.getHeight();
 
@@ -22,72 +20,30 @@ public class NuclearBomb {
 
   private boolean living = true;
 
-  private Dir dir;
-
-  private Group group;
-
-  private TankFrame tankFrame;
-
   private Rectangle rectangle;
 
-  public Group getGroup() {
-    return group;
-  }
-
-  public void setGroup(Group group) {
-    this.group = group;
-  }
-
   public NuclearBomb(int x, int y,Dir dir, TankFrame tankFrame,Group group) {
-    this.x = x;
-    this.y = y;
-    this.dir =dir;
-    this.tankFrame = tankFrame;
-    this.group = group;
 
+    super(x,y,dir,tankFrame,group);
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
   }
 
-  public int getX() {
-    return x;
+  @Override
+  public int getWidth() {
+    return WIDTH;
   }
 
-  public void setX(int x) {
-    this.x = x;
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
-  public int getY() {
-    return y;
+  @Override
+  public int speed() {
+    return SPEED;
   }
 
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public boolean isLiving() {
-    return living;
-  }
-
-  public void setLiving(boolean living) {
-    this.living = living;
-  }
-
-  public Dir getDir() {
-    return dir;
-  }
-
-  public void setDir(Dir dir) {
-    this.dir = dir;
-  }
-
-  public TankFrame getTankFrame() {
-    return tankFrame;
-  }
-
-  public void setTankFrame(TankFrame tankFrame) {
-    this.tankFrame = tankFrame;
-  }
-
+  @Override
   public void paint(Graphics g){
 
     if(!this.living) return;
@@ -158,7 +114,7 @@ public class NuclearBomb {
         break;
     }
 
-    if(x<0 || y<0 || x>tankFrame.WIN_WIDTH || y>tankFrame.WIN_HEIGHT){
+    if(x<0 || y<0 || x>tf.WIN_WIDTH || y>tf.WIN_HEIGHT){
       this.living = false;
     }
 
@@ -167,11 +123,8 @@ public class NuclearBomb {
 
   }
 
+  @Override
   public Rectangle getRectangle() {
     return rectangle;
-  }
-
-  public void die() {
-    this.living = false;
   }
 }

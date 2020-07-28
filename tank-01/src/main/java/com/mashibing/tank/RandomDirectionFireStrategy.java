@@ -11,8 +11,8 @@ public class RandomDirectionFireStrategy implements FireStrategy{
   @Override
   public void fire(AbstractTank tank) {
 
-    Bullet bullet = new Bullet(tank.getX()+ tank.getWidth()/2-Bullet.WIDTH/2,tank.getY()
-        + tank.getHeight()/2-Bullet.HEIGHT/2,Dir.randomDir(),tank.getTf(),tank.getGroup());
+    GeneralBullet bullet = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+        + tank.getHeight()/2- GeneralBullet.HEIGHT/2,Dir.randomDir(),tank.getTf(),tank.getGroup());
 
     tank.getTf().bullets.add(bullet);
   }

@@ -8,15 +8,18 @@ public interface TankWarFactory {
   /**
    * 生产坦克
    */
+  AbstractTank createTank();
 
 
   /**
    * 生产子弹
    */
+  AbstractBullet createBullet();
 
   /**
    * 爆炸
    */
+
 
 
 }

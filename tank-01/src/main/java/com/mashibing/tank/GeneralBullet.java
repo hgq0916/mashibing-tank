@@ -9,74 +9,35 @@ import java.util.HashMap;
 /**
  * 子弹类
  */
-public class Bullet {
+public class GeneralBullet extends AbstractBullet{
 
   public static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
-  private final TankFrame tf;
-
-  private Group group = Group.BAD;
 
   private Rectangle rectangle;
 
-  private int x;
-  private int y;
-  private Dir dir;
-
-  boolean living;
-
-  public Group getGroup() {
-    return group;
-  }
-
-  public void setGroup(Group group) {
-    this.group = group;
-  }
-
-  public boolean isLiving() {
-    return living;
-  }
-
-  public void setLiving(boolean living) {
-    this.living = living;
-  }
-
-  public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
-    this.x = x;
-    this.y = y;
-    this.dir = dir;
-    this.living =  true;
-    this.tf = tankFrame;
-    this.group = group;
-
+  public GeneralBullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+    super(x,y,dir,tankFrame,group);
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
   }
 
-  public int getX() {
-    return x;
+  @Override
+  public int getWidth() {
+    return WIDTH;
   }
 
-  public void setX(int x) {
-    this.x = x;
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
-  public int getY() {
-    return y;
+  @Override
+  public int speed() {
+    return SPEED;
   }
 
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public Dir getDir() {
-    return dir;
-  }
-
-  public void setDir(Dir dir) {
-    this.dir = dir;
-  }
-
+  @Override
   public void paint(Graphics g) {
 
     if(!this.living) return;
@@ -156,12 +117,9 @@ public class Bullet {
     rectangle.y = y;
   }
 
+  @Override
   public Rectangle getRectangle(){
     return rectangle;
-  }
-
-  public void die() {
-    this.living = false;
   }
 
 }
