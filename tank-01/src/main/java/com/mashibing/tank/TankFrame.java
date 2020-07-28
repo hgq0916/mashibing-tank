@@ -154,6 +154,30 @@ public class TankFrame extends Frame {
         }
       }
     }
+
+    for(int i=0;i<nuclearBombs.size();i++){
+      for(int j=0;j<enemyTanks.size();j++){
+        NuclearBomb nuclearBomb = nuclearBombs.get(i);
+        Tank tank = enemyTanks.get(j);
+        if(!tank.getGroup().equals(nuclearBomb.getGroup())){
+          Rectangle nuclearBombRectangle = nuclearBomb.getRectangle();
+          Rectangle tankRectangle = tank.getRectangle();
+          if(nuclearBombRectangle.intersects(tankRectangle)){
+            //发生碰撞
+            nuclearBomb.die();
+            tank.die();
+            //产生爆炸
+            explodes.add(new Explode(nuclearBomb.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,nuclearBomb.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
+            new Thread(()->{
+              Audio explodeAudio = new Audio("audio/explode.wav");
+              explodeAudio.play();
+            }).start();
+            break;
+          }
+        }
+      }
+    }
+
   }
 
   private class MyKeyListener extends KeyAdapter {

@@ -2,6 +2,7 @@ package com.mashibing.tank;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -27,12 +28,24 @@ public class NuclearBomb {
 
   private TankFrame tankFrame;
 
+  private Rectangle rectangle;
+
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
+  }
+
   public NuclearBomb(int x, int y,Dir dir, TankFrame tankFrame,Group group) {
     this.x = x;
     this.y = y;
     this.dir =dir;
     this.tankFrame = tankFrame;
     this.group = group;
+
+    rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
   }
 
   public int getX() {
@@ -149,6 +162,16 @@ public class NuclearBomb {
       this.living = false;
     }
 
+    rectangle.x = x;
+    rectangle.y = y;
+
   }
 
+  public Rectangle getRectangle() {
+    return rectangle;
+  }
+
+  public void die() {
+    this.living = false;
+  }
 }
