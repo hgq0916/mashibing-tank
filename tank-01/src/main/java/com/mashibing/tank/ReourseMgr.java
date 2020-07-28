@@ -17,6 +17,7 @@ public class ReourseMgr {
   public static BufferedImage goodtankD,goodtankL,goodtankLD,goodtankLU,goodtankR,goodtankRD,goodtankRU,goodtankU;
   public static BufferedImage badtankD,badtankL,badtankLD,badtankLU,badtankR,badtankRD,badtankRU,badtankU;
   public static BufferedImage bulletD,bulletL,bulletLD,bulletLU,bulletR,bulletRD,bulletRU,bulletU;
+  public static BufferedImage nuclearBombD,nuclearBombL,nuclearBombLD,nuclearBombLU,nuclearBombR,nuclearBombRD,nuclearBombRU,nuclearBombU;
   public static BufferedImage explodes[];
 
   static {
@@ -58,6 +59,18 @@ public class ReourseMgr {
       for(int i=0;i<explodes.length;i++){
         explodes[i] = ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/e"+(i+1)+".gif"));
       }
+
+      //核弹
+      BufferedImage nuclearBomb = ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/nuclearBombU.png"));
+
+      nuclearBombD = ImageUtil.rotateImage(nuclearBomb,180);
+      nuclearBombL = ImageUtil.rotateImage(nuclearBomb,-90);
+      nuclearBombLD =ImageUtil.rotateImage(nuclearBomb,-135);
+      nuclearBombLU =ImageUtil.rotateImage(nuclearBomb,-45);
+      nuclearBombR = ImageUtil.rotateImage(nuclearBomb,90);
+      nuclearBombRD =ImageUtil.rotateImage(nuclearBomb,135);
+      nuclearBombRU =ImageUtil.rotateImage(nuclearBomb,45);
+      nuclearBombU = nuclearBomb;
 
     } catch (IOException e) {
       e.printStackTrace();

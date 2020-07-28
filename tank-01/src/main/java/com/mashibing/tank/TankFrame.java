@@ -23,11 +23,13 @@ public class TankFrame extends Frame {
   private FireStrategy  fourDirectionFireStrategy = new FourDirectionFireStrategy();
   private FireStrategy  eightDirectionFireStrategy = new EightDirectionFireStrategy();
   private FireStrategy  triplePlayFireStrategy = new TriplePlayFireStrategy();
+  private FireStrategy  nuclearBombFireStrategy = new NuclearBombFireStrategy();
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
+  List<NuclearBomb> nuclearBombs = new ArrayList<>();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
@@ -112,6 +114,16 @@ public class TankFrame extends Frame {
         continue;
       }
       bullet.paint(g);
+    }
+
+    Iterator<NuclearBomb> nuclearBombIterator = nuclearBombs.iterator();
+    while (nuclearBombIterator.hasNext()){
+      NuclearBomb nuclearBomb = nuclearBombIterator.next();
+      if(!nuclearBomb.isLiving()) {
+        nuclearBombIterator.remove();
+        continue;
+      }
+      nuclearBomb.paint(g);
     }
 
     //碰撞检测
@@ -239,7 +251,7 @@ public class TankFrame extends Frame {
           mytank.fire(triplePlayFireStrategy);
           break;
         case KeyEvent.VK_SPACE:
-          mytank.fire(fourDirectionFireStrategy);
+          mytank.fire(nuclearBombFireStrategy);
           break;
         case KeyEvent.VK_ENTER:
           mytank.fire(eightDirectionFireStrategy);
