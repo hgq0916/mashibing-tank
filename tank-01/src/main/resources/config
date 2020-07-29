@@ -5,3 +5,4 @@ bulletSpeed=10
 gameWidth=1080
 gameHeight=960
 fireStrategyClass=com.mashibing.tank.DefaultFireStrategy
+tankFactory=com.mashibing.tank.SuperTankWarFactory

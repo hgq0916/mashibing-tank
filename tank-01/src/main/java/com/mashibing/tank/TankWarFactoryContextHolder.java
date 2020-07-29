@@ -13,7 +13,13 @@ public class TankWarFactoryContextHolder {
     private static TankWarFactory tankWarFactory;
 
     static {
-      tankWarFactory = new DefaultTankWarFactory();
+      String tankFactoryClass = PropertyMgr.getInstance().getString("tankFactory");
+      try {
+        Class<?> aClass = Class.forName(tankFactoryClass);
+        tankWarFactory = (TankWarFactory) aClass.newInstance();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 
   }
