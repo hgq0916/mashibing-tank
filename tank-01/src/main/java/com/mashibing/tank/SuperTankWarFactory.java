@@ -20,7 +20,7 @@ public class SuperTankWarFactory implements TankWarFactory{
 
   @Override
   public AbstractExplode createExplode(int x, int y, TankFrame tf) {
-    return new BombExplode(x,y,tf);
+    return new NuclearBombExplode(x,y,tf);
   }
 
 }
