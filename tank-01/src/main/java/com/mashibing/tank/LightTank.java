@@ -173,15 +173,7 @@ public class LightTank extends AbstractTank{
 
   @Override
   public void fire() {
-
-    if(Group.GOOD.equals(this.group)){
-      AbstractBullet bullet = new GeneralBullet(this.x+TANK_WIDTH/2- GeneralBullet.WIDTH/2,this.y+TANK_HEIGHT/2-
-          GeneralBullet.HEIGHT/2,this.dir,this.tf,this.group);
-      this.tf.bullets.add(bullet);
-    }else {
-      this.fireStrategy.fire(this);
-    }
-
+    this.fireStrategy.fire(this);
   }
 
   @Override

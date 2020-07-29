@@ -13,6 +13,12 @@ public class DefaultTankWarFactory implements TankWarFactory{
   }
 
   @Override
+  public AbstractBullet createBullet(BulletCreater bulletCreater) {
+    AbstractBullet bullet = bulletCreater.createBullet(GeneralBullet.WIDTH, GeneralBullet.HEIGHT);
+    return bullet;
+  }
+
+  @Override
   public AbstractExplode createExplode(int x, int y, TankFrame tf) {
     return new BombExplode(x,y,tf);
   }

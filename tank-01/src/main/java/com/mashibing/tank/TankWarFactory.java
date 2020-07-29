@@ -16,6 +16,9 @@ public interface TankWarFactory {
    */
   AbstractBullet createBullet(int x, int y, Dir dir,TankFrame tankFrame,Group group);
 
+
+  AbstractBullet createBullet(BulletCreater bulletCreater);
+
   /**
    * 爆炸
    */

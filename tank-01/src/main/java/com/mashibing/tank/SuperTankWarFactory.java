@@ -13,6 +13,12 @@ public class SuperTankWarFactory implements TankWarFactory{
   }
 
   @Override
+  public AbstractBullet createBullet(BulletCreater bulletCreater) {
+    AbstractBullet bullet = bulletCreater.createBullet(NuclearBomb.WIDTH, NuclearBomb.HEIGHT);
+    return bullet;
+  }
+
+  @Override
   public AbstractExplode createExplode(int x, int y, TankFrame tf) {
     return new BombExplode(x,y,tf);
   }
