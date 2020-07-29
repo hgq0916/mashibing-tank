@@ -13,7 +13,7 @@ public class TankWarFactoryContextHolder {
     private static TankWarFactory tankWarFactory;
 
     static {
-      tankWarFactory = new SuperTankWarFactory();
+      tankWarFactory = new DefaultTankWarFactory();
     }
 
   }

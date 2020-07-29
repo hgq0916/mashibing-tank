@@ -16,6 +16,10 @@ public class ReourseMgr {
 
   public static BufferedImage goodtankD,goodtankL,goodtankLD,goodtankLU,goodtankR,goodtankRD,goodtankRU,goodtankU;
   public static BufferedImage badtankD,badtankL,badtankLD,badtankLU,badtankR,badtankRD,badtankRU,badtankU;
+
+  public static BufferedImage goodtank1D,goodtank1L,goodtank1LD,goodtank1LU,goodtank1R,goodtank1RD,goodtank1RU,goodtank1U;
+  public static BufferedImage badtank1D,badtank1L,badtank1LD,badtank1LU,badtank1R,badtank1RD,badtank1RU,badtank1U;
+
   public static BufferedImage bulletD,bulletL,bulletLD,bulletLU,bulletR,bulletRD,bulletRU,bulletU;
   public static BufferedImage nuclearBombD,nuclearBombL,nuclearBombLD,nuclearBombLU,nuclearBombR,nuclearBombRD,nuclearBombRU,nuclearBombU;
   public static BufferedImage explodes[];
@@ -34,7 +38,7 @@ public class ReourseMgr {
       bulletRU =ImageUtil.rotateImage(bullet,45);
       bulletU = bullet;
 
-      BufferedImage goodtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/GoodTank2.png"));
+      BufferedImage goodtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
       BufferedImage badtank= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
 
       goodtankD = ImageUtil.rotateImage(goodtank,180);
@@ -54,6 +58,27 @@ public class ReourseMgr {
       badtankRD =ImageUtil.rotateImage(badtank,135);
       badtankRU =ImageUtil.rotateImage(badtank,45);
       badtankU = badtank;
+
+      BufferedImage goodtank1= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/GoodTank2.png"));
+      BufferedImage badtank1= ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/BadTank2.png"));
+
+      goodtank1D = ImageUtil.rotateImage(goodtank1,180);
+      goodtank1L = ImageUtil.rotateImage(goodtank1,-90);
+      goodtank1LD =ImageUtil.rotateImage(goodtank1,-135);
+      goodtank1LU =ImageUtil.rotateImage(goodtank1,-45);
+      goodtank1R = ImageUtil.rotateImage(goodtank1,90);
+      goodtank1RD =ImageUtil.rotateImage(goodtank1,135);
+      goodtank1RU =ImageUtil.rotateImage(goodtank1,45);
+      goodtank1U = goodtank1;
+
+      badtank1D = ImageUtil.rotateImage(badtank1,180);
+      badtank1L = ImageUtil.rotateImage(badtank1,-90);
+      badtank1LD =ImageUtil.rotateImage(badtank1,-135);
+      badtank1LU =ImageUtil.rotateImage(badtank1,-45);
+      badtank1R = ImageUtil.rotateImage(badtank1,90);
+      badtank1RD =ImageUtil.rotateImage(badtank1,135);
+      badtank1RU =ImageUtil.rotateImage(badtank1,45);
+      badtank1U = badtank1;
 
       explodes = new BufferedImage[16];
       for(int i=0;i<explodes.length;i++){

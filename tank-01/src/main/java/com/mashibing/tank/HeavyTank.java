@@ -11,8 +11,8 @@ import java.util.Random;
  */
 public class HeavyTank extends AbstractTank{
 
-  public static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
-  public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
+  public static final int TANK_WIDTH = ReourseMgr.goodtank1D.getWidth();
+  public static final int TANK_HEIGHT = ReourseMgr.goodtank1D.getHeight();
 
   private Rectangle rectangle;
 
@@ -54,55 +54,55 @@ public class HeavyTank extends AbstractTank{
     if(Group.GOOD.equals(group)){
       switch (dir){
         case NORTHEAST:
-          image = ReourseMgr.goodtankRU;
+          image = ReourseMgr.goodtank1RU;
           break;
         case NORTHWEST:
-          image = ReourseMgr.goodtankLU;
+          image = ReourseMgr.goodtank1LU;
           break;
         case SOUTHEAST:
-          image = ReourseMgr.goodtankRD;
+          image = ReourseMgr.goodtank1RD;
           break;
         case SOUTHWEST:
-          image = ReourseMgr.goodtankLD;
+          image = ReourseMgr.goodtank1LD;
           break;
         case WEST:
-          image = ReourseMgr.goodtankL;
+          image = ReourseMgr.goodtank1L;
           break;
         case EAST:
-          image = ReourseMgr.goodtankR;
+          image = ReourseMgr.goodtank1R;
           break;
         case NORTH:
-          image = ReourseMgr.goodtankU;
+          image = ReourseMgr.goodtank1U;
           break;
         case SOUTH:
-          image = ReourseMgr.goodtankD;
+          image = ReourseMgr.goodtank1D;
           break;
       }
     }else {
       switch (dir){
         case NORTHEAST:
-          image = ReourseMgr.badtankRU;
+          image = ReourseMgr.badtank1RU;
           break;
         case NORTHWEST:
-          image = ReourseMgr.badtankLU;
+          image = ReourseMgr.badtank1LU;
           break;
         case SOUTHEAST:
-          image = ReourseMgr.badtankRD;
+          image = ReourseMgr.badtank1RD;
           break;
         case SOUTHWEST:
-          image = ReourseMgr.badtankLD;
+          image = ReourseMgr.badtank1LD;
           break;
         case WEST:
-          image = ReourseMgr.badtankL;
+          image = ReourseMgr.badtank1L;
           break;
         case EAST:
-          image = ReourseMgr.badtankR;
+          image = ReourseMgr.badtank1R;
           break;
         case NORTH:
-          image = ReourseMgr.badtankU;
+          image = ReourseMgr.badtank1U;
           break;
         case SOUTH:
-          image = ReourseMgr.badtankD;
+          image = ReourseMgr.badtank1D;
           break;
       }
     }
