@@ -23,6 +23,7 @@ public class ReourseMgr {
   public static BufferedImage bulletD,bulletL,bulletLD,bulletLU,bulletR,bulletRD,bulletRU,bulletU;
   public static BufferedImage nuclearBombD,nuclearBombL,nuclearBombLD,nuclearBombLU,nuclearBombR,nuclearBombRD,nuclearBombRU,nuclearBombU;
   public static BufferedImage explodes[];
+  public static BufferedImage explodes1[];
 
   static {
     try {
@@ -83,6 +84,11 @@ public class ReourseMgr {
       explodes = new BufferedImage[16];
       for(int i=0;i<explodes.length;i++){
         explodes[i] = ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/e"+(i+1)+".gif"));
+      }
+
+      explodes1 = new BufferedImage[11];
+      for(int i=0;i<explodes1.length;i++){
+        explodes1[i] = ImageIO.read(ReourseMgr.class.getClassLoader().getResourceAsStream("images/"+(i)+".gif"));
       }
 
       //核弹

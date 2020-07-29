@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
  */
 public class BombExplode extends AbstractExplode{
 
-  public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
-  public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
+  public static final int WIDTH = ReourseMgr.explodes1[0].getWidth();
+  public static final int HEIGHT = ReourseMgr.explodes1[0].getHeight();
 
   public BombExplode(int x,int y,TankFrame tf){
     super(x,y,tf);
@@ -21,11 +21,11 @@ public class BombExplode extends AbstractExplode{
 
     if(!this.living) return;
 
-    BufferedImage bufferedImage = ReourseMgr.explodes[step++];
+    BufferedImage bufferedImage = ReourseMgr.explodes1[step++];
 
     g.drawImage(bufferedImage,x,y,null);
 
-    if(step>=ReourseMgr.explodes.length){
+    if(step>=ReourseMgr.explodes1.length){
       this.living = false;
     }
 
