@@ -23,7 +23,6 @@ public class TankFrame extends Frame {
   private FireStrategy  fourDirectionFireStrategy = FourDirectionFireStrategy.getInstance();
   private FireStrategy  eightDirectionFireStrategy = EightDirectionFireStrategy.getInstance();
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
-  private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
   AbstractTank mytank = TankWarFactoryContextHolder.getTankWarFactory().createTank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<AbstractBullet> bullets = new ArrayList<>();
@@ -128,7 +127,6 @@ public class TankFrame extends Frame {
 
         bullet.collideWithTank(tank);
 
-
       }
     }
   }
@@ -228,7 +226,7 @@ public class TankFrame extends Frame {
           mytank.fire(triplePlayFireStrategy);
           break;
         case KeyEvent.VK_SPACE:
-          mytank.fire(nuclearBombFireStrategy);
+          mytank.fire(fourDirectionFireStrategy);
           break;
         case KeyEvent.VK_ENTER:
           mytank.fire(eightDirectionFireStrategy);

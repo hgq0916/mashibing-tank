@@ -19,16 +19,17 @@ public class FourDirectionFireStrategy implements FireStrategy{
   @Override
   public void fire(AbstractTank tank) {
 
-    GeneralBullet bullet = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+    TankWarFactory tankWarFactory = TankWarFactoryContextHolder.getTankWarFactory();
+    AbstractBullet bullet = tankWarFactory.createBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
         + tank.getHeight()/2- GeneralBullet.HEIGHT/2,Dir.NORTH,tank.getTf(),tank.getGroup());
 
-    GeneralBullet bullet1 = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+    AbstractBullet bullet1 = tankWarFactory.createBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
         + tank.getHeight()/2- GeneralBullet.HEIGHT/2,Dir.EAST,tank.getTf(),tank.getGroup());
 
-    GeneralBullet bullet2 = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+    AbstractBullet bullet2 = tankWarFactory.createBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
         +tank.getHeight()/2- GeneralBullet.HEIGHT/2,Dir.SOUTH,tank.getTf(),tank.getGroup());
 
-    GeneralBullet bullet3 = new GeneralBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
+    AbstractBullet bullet3 = tankWarFactory.createBullet(tank.getX()+ tank.getWidth()/2- GeneralBullet.WIDTH/2,tank.getY()
         + tank.getHeight()/2- GeneralBullet.HEIGHT/2,Dir.WEST,tank.getTf(),tank.getGroup());
 
     tank.getTf().bullets.add(bullet);
