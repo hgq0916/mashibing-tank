@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * 子弹类
  */
-public class Bullet {
+public class Bullet extends GameObject{
 
   public static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();

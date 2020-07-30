@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * @Description: 核弹
  * @date 2020/7/28 16:47
  */
-public class NuclearBomb {
+public class NuclearBomb  extends GameObject{
 
   private int x;
   private int y;

@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * 坦克类
  */
-public class Tank {
+public class Tank  extends GameObject{
 
   public static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();

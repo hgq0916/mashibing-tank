@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * 爆炸
  */
-public class Explode {
+public class Explode  extends GameObject{
 
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
