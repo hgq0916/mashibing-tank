@@ -11,7 +11,7 @@ import java.awt.Rectangle;
 public class TankTankCollider implements Collider {
 
   @Override
-  public void collideWith(GameObject o1, GameObject o2) {
+  public boolean collideWith(GameObject o1, GameObject o2) {
     if(o1 instanceof Tank && o2 instanceof Tank){
       Tank tank1 = (Tank) o1;
       Tank tank2 = (Tank) o2;
@@ -23,7 +23,7 @@ public class TankTankCollider implements Collider {
         tank2.backToPrevious();
       }
     }else {
-      return;
     }
+    return true;
   }
 }

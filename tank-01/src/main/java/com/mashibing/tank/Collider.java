@@ -8,6 +8,6 @@ package com.mashibing.tank;
  */
 public interface Collider {
 
-  void collideWith(GameObject o1,GameObject o2);
+  boolean collideWith(GameObject o1,GameObject o2);
 
 }

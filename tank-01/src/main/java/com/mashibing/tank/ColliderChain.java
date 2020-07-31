@@ -9,7 +9,7 @@ import java.util.List;
  * @Description: 碰撞链
  * @date 2020/7/31 17:35
  */
-public class ColliderChain {
+public class ColliderChain implements Collider{
 
   private List<Collider> colliders = new LinkedList<>();
 
@@ -29,13 +29,16 @@ public class ColliderChain {
     colliders.remove(collider);
   }
 
-  public void collideWith(GameObject o1,GameObject o2){
+  public boolean collideWith(GameObject o1,GameObject o2){
 
     for(int i=0;i<colliders.size();i++){
       Collider collider = colliders.get(i);
-      collider.collideWith(o1,o2);
+      if(!collider.collideWith(o1,o2)){
+        return false;
+      }
     }
 
+    return true;
   }
 
 

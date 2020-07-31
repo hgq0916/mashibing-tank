@@ -11,12 +11,12 @@ import java.awt.Rectangle;
 public class BulletTankCollider implements Collider {
 
   @Override
-  public void collideWith(GameObject o1, GameObject o2) {
+  public boolean collideWith(GameObject o1, GameObject o2) {
     if(o1 instanceof Bullet && o2 instanceof Tank){
       Bullet bullet = (Bullet) o1;
       Tank tank = (Tank) o2;
 
-      if(Group.GOOD.equals(tank.getGroup()) || bullet.getGroup().equals(tank.getGroup())) return;
+      if(Group.GOOD.equals(tank.getGroup()) || bullet.getGroup().equals(tank.getGroup())) return true;
 
       Rectangle bulletRectangle = bullet.getRectangle();
       Rectangle tankRectangle = tank.getRectangle();
@@ -31,11 +31,13 @@ public class BulletTankCollider implements Collider {
           explodeAudio.play();
         }).start();
 
+        return false;
       }
     }else if(o1 instanceof Tank && o2 instanceof Bullet){
-      collideWith(o2,o1);
+      return collideWith(o2,o1);
     }else {
-      return;
+      return true;
     }
+    return true;
   }
 }
