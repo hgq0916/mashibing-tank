@@ -55,6 +55,10 @@ public class GameModel {
       add(tank);
     }
 
+    Wall wall = new Wall(100,200,this);
+    Wall wall1 = new Wall(800,300,this);
+    add(wall);
+    add(wall1);
   }
 
   public  void paint(Graphics g){
