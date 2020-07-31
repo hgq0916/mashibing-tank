@@ -3,18 +3,26 @@ package com.mashibing.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
  * 坦克类
  */
-public class Tank  extends GameObject{
+public class Tank extends GameObject{
 
   public static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
-  private final TankFrame tf;
+ // private final TankFrame tf;
+
+  private GameModel gameModel;
+
   private int x,y;
+
+  private int oldX;
+  private int oldY;
+
   private Dir dir = Dir.SOUTH;
 
   private Group group = Group.BAD;
@@ -31,11 +39,16 @@ public class Tank  extends GameObject{
 
   private FireStrategy fireStrategy;
 
-  public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
+  private FireStrategy  fourDirectionFireStrategy = FourDirectionFireStrategy.getInstance();
+  private FireStrategy  eightDirectionFireStrategy = EightDirectionFireStrategy.getInstance();
+  private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
+  private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
+
+  public Tank(int x, int y, Dir dir, GameModel gameModel,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.tf = tf;
+    this.gameModel = gameModel;
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
 
@@ -52,8 +65,8 @@ public class Tank  extends GameObject{
     }
   }
 
-  public TankFrame getTf() {
-    return tf;
+  public GameModel getGameModel() {
+    return gameModel;
   }
 
   public Group getGroup() {
@@ -107,6 +120,7 @@ public class Tank  extends GameObject{
   public void paint(Graphics g) {
 
     if(!this.living){
+      this.gameModel.remove(this);
       return;
     }
 
@@ -176,6 +190,9 @@ public class Tank  extends GameObject{
 
   private void move() {
 
+    oldX = x;
+    oldY = y;
+
     if(moving){
       switch (dir){
         case NORTHEAST:
@@ -234,14 +251,8 @@ public class Tank  extends GameObject{
   }
 
   public void fire() {
-
-    if(Group.GOOD.equals(this.group)){
-      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
-      this.tf.bullets.add(bullet);
-    }else {
-      this.fireStrategy.fire(this);
-    }
-
+      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameModel,this.group);
+      this.gameModel.add(bullet);
   }
 
   public void fire(FireStrategy fireStrategy){
@@ -254,6 +265,128 @@ public class Tank  extends GameObject{
 
   public void die() {
     this.living = false;
+  }
+
+
+
+  private boolean BU = false;
+  private boolean BD = false;
+  private boolean BL = false;
+  private boolean BR = false;
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+
+    if(!Group.GOOD.equals(this.group)) return;
+
+    int keyCode = e.getKeyCode();
+
+    switch (keyCode){
+      case KeyEvent.VK_UP:
+        BU = true;
+        break;
+      case KeyEvent.VK_DOWN:
+        BD = true;
+        break;
+      case KeyEvent.VK_LEFT:
+        BL = true;
+        break;
+      case KeyEvent.VK_RIGHT:
+        BR = true;
+        break;
+    }
+
+    setMainTankDir();
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
+
+    if(!Group.GOOD.equals(this.group)) return;
+
+    int keyCode = e.getKeyCode();
+    switch (keyCode){
+      case KeyEvent.VK_UP:
+        BU = false;
+        break;
+      case KeyEvent.VK_DOWN:
+        BD = false;
+        break;
+      case KeyEvent.VK_LEFT:
+        BL = false;
+        break;
+      case KeyEvent.VK_RIGHT:
+        BR = false;
+        break;
+      case KeyEvent.VK_CONTROL:
+        this.fire();
+        break;
+      case KeyEvent.VK_Z:
+        this.fire(triplePlayFireStrategy);
+        break;
+      case KeyEvent.VK_SPACE:
+        this.fire(nuclearBombFireStrategy);
+        break;
+      case KeyEvent.VK_ENTER:
+        this.fire(eightDirectionFireStrategy);
+        break;
+    }
+
+    setMainTankDir();
+  }
+
+  private void setMainTankDir() {
+    boolean bu = BU;
+    boolean bd = BD;
+    boolean bl = BL;
+    boolean br = BR;
+
+    if(bu && bd){
+      bu = false;
+      bd = false;
+    }
+    if(bl && br){
+      bl = false;
+      br = false;
+    }
+
+    if(!bu && !bd && !bl && !br){
+      this.setMoving(false);
+    } else {
+      this.setMoving(true);
+
+      if(bu && bl){
+        this.setDir(Dir.NORTHWEST);
+      }else if(bu && br){
+        this.setDir(Dir.NORTHEAST);
+      }else if(br && bd){
+        this.setDir(Dir.SOUTHEAST);
+      }else if(bl && bd){
+        this.setDir(Dir.SOUTHWEST);
+      }else if(bu){
+        this.setDir(Dir.NORTH);
+      }else if(bd){
+        this.setDir(Dir.SOUTH);
+      }else if(bl){
+        this.setDir(Dir.WEST);
+      }else if(br){
+        this.setDir(Dir.EAST);
+      }
+
+    }
+
+  }
+
+  public void stop() {
+    this.moving = false;
+  }
+
+  /**
+   * 返回上一步
+   */
+  public void backToPrevious() {
+    this.x = oldX;
+    this.y = oldY;
   }
 
 }

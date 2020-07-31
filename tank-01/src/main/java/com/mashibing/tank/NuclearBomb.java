@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * @Description: 核弹
  * @date 2020/7/28 16:47
  */
-public class NuclearBomb  extends GameObject{
+public class NuclearBomb extends GameObject{
 
   private int x;
   private int y;
@@ -26,7 +26,7 @@ public class NuclearBomb  extends GameObject{
 
   private Group group;
 
-  private TankFrame tankFrame;
+  private GameModel gameModel;
 
   private Rectangle rectangle;
 
@@ -38,11 +38,11 @@ public class NuclearBomb  extends GameObject{
     this.group = group;
   }
 
-  public NuclearBomb(int x, int y,Dir dir, TankFrame tankFrame,Group group) {
+  public NuclearBomb(int x, int y,Dir dir, GameModel gameModel,Group group) {
     this.x = x;
     this.y = y;
     this.dir =dir;
-    this.tankFrame = tankFrame;
+    this.gameModel = gameModel;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
@@ -80,17 +80,16 @@ public class NuclearBomb  extends GameObject{
     this.dir = dir;
   }
 
-  public TankFrame getTankFrame() {
-    return tankFrame;
-  }
-
-  public void setTankFrame(TankFrame tankFrame) {
-    this.tankFrame = tankFrame;
+  public GameModel getGameModel() {
+    return gameModel;
   }
 
   public void paint(Graphics g){
 
-    if(!this.living) return;
+    if(!this.living){
+      this.gameModel.remove(this);
+      return;
+    }
 
     Color color = g.getColor();
     BufferedImage image = null;
@@ -158,7 +157,7 @@ public class NuclearBomb  extends GameObject{
         break;
     }
 
-    if(x<0 || y<0 || x>tankFrame.WIN_WIDTH || y>tankFrame.WIN_HEIGHT){
+    if(x<0 || y<0 || x> gameModel.tankFrame.WIN_WIDTH || y> gameModel.tankFrame.WIN_HEIGHT){
       this.living = false;
     }
 

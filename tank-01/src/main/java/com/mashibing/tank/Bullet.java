@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 
 /**
  * 子弹类
@@ -14,7 +13,9 @@ public class Bullet extends GameObject{
   public static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
-  private final TankFrame tf;
+  //private final TankFrame tf;
+
+  private GameModel gameModel;
 
   private Group group = Group.BAD;
 
@@ -42,12 +43,12 @@ public class Bullet extends GameObject{
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+  public Bullet(int x, int y, Dir dir, GameModel gameModel,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
-    this.tf = tankFrame;
+    this.gameModel = gameModel;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
@@ -79,7 +80,10 @@ public class Bullet extends GameObject{
 
   public void paint(Graphics g) {
 
-    if(!this.living) return;
+    if(!this.living) {
+      gameModel.remove(this);
+      return;
+    }
 
     Color oldColor = g.getColor();
     BufferedImage image = null;

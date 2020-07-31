@@ -22,8 +22,8 @@ public class EightDirectionFireStrategy implements FireStrategy{
     Dir[] values = Dir.values();
     for(int i=0;i<values.length;i++){
       Bullet bullet = new Bullet(tank.getX()+Tank.TANK_WIDTH/2-Bullet.WIDTH/2,tank.getY()
-          +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,values[i],tank.getTf(),tank.getGroup());
-      tank.getTf().bullets.add(bullet);
+          +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,values[i],tank.getGameModel(),tank.getGroup());
+      tank.getGameModel().add(bullet);
     }
 
   }
