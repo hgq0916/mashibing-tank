@@ -26,8 +26,7 @@ public class GameModel {
   List<Explode> explodes = new ArrayList<>();
   List<NuclearBomb> nuclearBombs = new ArrayList<>();*/
 
- Collider collider = new BulletTankCollider();
- Collider collider2 = new TankTankCollider();
+  ColliderChain colliderChain = new ColliderChain();
 
  List<GameObject> gameObjects = new ArrayList<>();
 
@@ -80,8 +79,7 @@ public class GameModel {
       for(int j=i+1;j<gameObjects.size();j++){
         GameObject o1 = gameObjects.get(i);
         GameObject o2 = gameObjects.get(j);
-        collider.collideWith(o1,o2);
-        collider2.collideWith(o1,o2);
+        colliderChain.collideWith(o1,o2);
       }
     }
   }
