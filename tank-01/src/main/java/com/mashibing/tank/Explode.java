@@ -11,7 +11,7 @@ public class Explode extends GameObject{
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
   //private final TankFrame tf;
-  private final GameObjectMgr gameObjectMgr;
+  private final GameModel gameObjectMgr;
   private int x;
   private int y;
 
@@ -41,7 +41,7 @@ public class Explode extends GameObject{
     this.living = living;
   }
 
-  public Explode(int x,int y,GameObjectMgr gameObjectMgr){
+  public Explode(int x,int y, GameModel gameObjectMgr){
     this.x = x;
     this.y = y;
     this.gameObjectMgr = gameObjectMgr;

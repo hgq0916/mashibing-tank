@@ -27,7 +27,7 @@ public class NuclearBomb {
   private Group group;
 
   //private TankFrame tankFrame;
-  private GameObjectMgr gameObjectMgr;
+  private GameModel gameObjectMgr;
 
   private Rectangle rectangle;
 
@@ -39,7 +39,7 @@ public class NuclearBomb {
     this.group = group;
   }
 
-  public NuclearBomb(int x, int y,Dir dir,GameObjectMgr gameObjectMgr,Group group) {
+  public NuclearBomb(int x, int y,Dir dir, GameModel gameObjectMgr,Group group) {
     this.x = x;
     this.y = y;
     this.dir =dir;
@@ -81,7 +81,7 @@ public class NuclearBomb {
     this.dir = dir;
   }
 
-  public GameObjectMgr getGameObjectMgr() {
+  public GameModel getGameObjectMgr() {
     return gameObjectMgr;
   }
 

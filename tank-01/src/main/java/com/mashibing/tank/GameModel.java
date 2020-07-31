@@ -15,7 +15,7 @@ import java.util.Random;
  * @Description: TODO
  * @date 2020/7/31 10:17
  */
-public class GameObjectMgr {
+public class GameModel {
 
   public final TankFrame tankFrame;
 
@@ -27,7 +27,7 @@ public class GameObjectMgr {
   List<NuclearBomb> nuclearBombs = new ArrayList<>();
 
 
-  public GameObjectMgr(TankFrame tankFrame){
+  public GameModel(TankFrame tankFrame){
     this.tankFrame = tankFrame;
 
     mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 
 /**
  * 子弹类
@@ -16,7 +15,7 @@ public class Bullet extends GameObject{
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   //private final TankFrame tf;
 
-  private GameObjectMgr gameObjectMgr;
+  private GameModel gameObjectMgr;
 
   private Group group = Group.BAD;
 
@@ -44,7 +43,7 @@ public class Bullet extends GameObject{
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir,GameObjectMgr gameObjectMgr,Group group) {
+  public Bullet(int x, int y, Dir dir, GameModel gameObjectMgr,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;

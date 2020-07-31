@@ -4,15 +4,10 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 
 public class TankFrame extends Frame {
 
@@ -20,7 +15,7 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
   private Image image = null;
 
-  GameObjectMgr gameObjectMgr = new GameObjectMgr(this);
+  GameModel gameModel = new GameModel(this);
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
@@ -53,19 +48,19 @@ public class TankFrame extends Frame {
 
   @Override
   public void paint(Graphics g) {
-    gameObjectMgr.paint(g);
+    gameModel.paint(g);
   }
 
   private class MyKeyListener extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
-      gameObjectMgr.keyPressed(e);
+      gameModel.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-      gameObjectMgr.keyReleased(e);
+      gameModel.keyReleased(e);
     }
   }
 }

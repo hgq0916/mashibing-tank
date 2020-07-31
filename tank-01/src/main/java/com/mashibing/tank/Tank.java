@@ -3,7 +3,6 @@ package com.mashibing.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -17,7 +16,7 @@ public class Tank extends GameObject{
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
  // private final TankFrame tf;
 
-  private GameObjectMgr gameObjectMgr;
+  private GameModel gameObjectMgr;
 
   private int x,y;
   private Dir dir = Dir.SOUTH;
@@ -41,7 +40,7 @@ public class Tank extends GameObject{
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
-  public Tank(int x, int y, Dir dir,GameObjectMgr gameObjectMgr,Group group) {
+  public Tank(int x, int y, Dir dir, GameModel gameObjectMgr,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
@@ -62,7 +61,7 @@ public class Tank extends GameObject{
     }
   }
 
-  public GameObjectMgr getGameObjectMgr() {
+  public GameModel getGameObjectMgr() {
     return gameObjectMgr;
   }
 
