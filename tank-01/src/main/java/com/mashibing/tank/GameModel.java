@@ -27,6 +27,7 @@ public class GameModel {
   List<NuclearBomb> nuclearBombs = new ArrayList<>();*/
 
  Collider collider = new BulletTankCollider();
+ Collider collider2 = new TankTankCollider();
 
  List<GameObject> gameObjects = new ArrayList<>();
 
@@ -44,7 +45,7 @@ public class GameModel {
 
     mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
 
-    //add(mytank);
+    add(mytank);
 
     Dir[] values = Dir.values();
     Random random = new Random();
@@ -69,8 +70,6 @@ public class GameModel {
     g.drawString("爆炸数量："+explodes.size(),60,100);*/
     g.setColor(color);
 
-    mytank.paint(g);
-
     for(int i=0;i<gameObjects.size();i++){
       GameObject gameObject = gameObjects.get(i);
       gameObject.paint(g);
@@ -82,6 +81,7 @@ public class GameModel {
         GameObject o1 = gameObjects.get(i);
         GameObject o2 = gameObjects.get(j);
         collider.collideWith(o1,o2);
+        collider2.collideWith(o1,o2);
       }
     }
   }

@@ -16,7 +16,7 @@ public class BulletTankCollider implements Collider {
       Bullet bullet = (Bullet) o1;
       Tank tank = (Tank) o2;
 
-      if(bullet.getGroup().equals(tank.getGroup())) return;
+      if(Group.GOOD.equals(tank.getGroup()) || bullet.getGroup().equals(tank.getGroup())) return;
 
       Rectangle bulletRectangle = bullet.getRectangle();
       Rectangle tankRectangle = tank.getRectangle();

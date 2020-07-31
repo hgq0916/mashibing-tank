@@ -19,6 +19,10 @@ public class Tank extends GameObject{
   private GameModel gameModel;
 
   private int x,y;
+
+  private int oldX;
+  private int oldY;
+
   private Dir dir = Dir.SOUTH;
 
   private Group group = Group.BAD;
@@ -186,6 +190,9 @@ public class Tank extends GameObject{
 
   private void move() {
 
+    oldX = x;
+    oldY = y;
+
     if(moving){
       switch (dir){
         case NORTHEAST:
@@ -244,14 +251,8 @@ public class Tank extends GameObject{
   }
 
   public void fire() {
-
-    if(Group.GOOD.equals(this.group)){
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameModel,this.group);
       this.gameModel.add(bullet);
-    }else {
-      this.fireStrategy.fire(this);
-    }
-
   }
 
   public void fire(FireStrategy fireStrategy){
@@ -374,6 +375,18 @@ public class Tank extends GameObject{
 
     }
 
+  }
+
+  public void stop() {
+    this.moving = false;
+  }
+
+  /**
+   * 返回上一步
+   */
+  public void backToPrevious() {
+    this.x = oldX;
+    this.y = oldY;
   }
 
 }
