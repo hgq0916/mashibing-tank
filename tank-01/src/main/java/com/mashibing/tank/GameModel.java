@@ -72,11 +72,17 @@ public class GameModel {
       gameObject.paint(g);
     }
 
+    System.out.println(gameObjects);
     //碰撞检测
     for(int i=0;i<gameObjects.size();i++){
       for(int j=i+1;j<gameObjects.size();j++){
         GameObject o1 = gameObjects.get(i);
         GameObject o2 = gameObjects.get(j);
+
+        if(o1 instanceof NuclearBomb || o2 instanceof NuclearBomb){
+          System.out.println("dfdf");
+        }
+
         colliderChain.collideWith(o1,o2);
       }
     }
