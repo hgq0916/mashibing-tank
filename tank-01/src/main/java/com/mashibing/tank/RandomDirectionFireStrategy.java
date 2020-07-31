@@ -12,9 +12,9 @@ public class RandomDirectionFireStrategy implements FireStrategy{
   public void fire(Tank tank) {
 
     Bullet bullet = new Bullet(tank.getX()+Tank.TANK_WIDTH/2-Bullet.WIDTH/2,tank.getY()
-        +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,Dir.randomDir(),tank.getGameObjectMgr(),tank.getGroup());
+        +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,Dir.randomDir(),tank.getGameModel(),tank.getGroup());
 
-    tank.getGameObjectMgr().bullets.add(bullet);
+    tank.getGameModel().add(bullet);
   }
 
 }

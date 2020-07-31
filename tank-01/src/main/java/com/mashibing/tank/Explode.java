@@ -11,7 +11,7 @@ public class Explode extends GameObject{
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
   //private final TankFrame tf;
-  private final GameModel gameObjectMgr;
+  private final GameModel gameModel;
   private int x;
   private int y;
 
@@ -41,17 +41,20 @@ public class Explode extends GameObject{
     this.living = living;
   }
 
-  public Explode(int x,int y, GameModel gameObjectMgr){
+  public Explode(int x,int y, GameModel gameModel){
     this.x = x;
     this.y = y;
-    this.gameObjectMgr = gameObjectMgr;
+    this.gameModel = gameModel;
   }
 
   private int step = 0;
 
   public void paint(Graphics g){
 
-    if(!this.living) return;
+    if(!this.living) {
+      gameModel.remove(this);
+      return;
+    }
 
     BufferedImage bufferedImage = ReourseMgr.explodes[step++];
 

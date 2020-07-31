@@ -16,7 +16,7 @@ public class Tank extends GameObject{
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
  // private final TankFrame tf;
 
-  private GameModel gameObjectMgr;
+  private GameModel gameModel;
 
   private int x,y;
   private Dir dir = Dir.SOUTH;
@@ -40,11 +40,11 @@ public class Tank extends GameObject{
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
-  public Tank(int x, int y, Dir dir, GameModel gameObjectMgr,Group group) {
+  public Tank(int x, int y, Dir dir, GameModel gameModel,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.gameObjectMgr = gameObjectMgr;
+    this.gameModel = gameModel;
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
 
@@ -61,8 +61,8 @@ public class Tank extends GameObject{
     }
   }
 
-  public GameModel getGameObjectMgr() {
-    return gameObjectMgr;
+  public GameModel getGameModel() {
+    return gameModel;
   }
 
   public Group getGroup() {
@@ -116,6 +116,7 @@ public class Tank extends GameObject{
   public void paint(Graphics g) {
 
     if(!this.living){
+      this.gameModel.remove(this);
       return;
     }
 
@@ -245,8 +246,8 @@ public class Tank extends GameObject{
   public void fire() {
 
     if(Group.GOOD.equals(this.group)){
-      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameObjectMgr,this.group);
-      this.gameObjectMgr.bullets.add(bullet);
+      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameModel,this.group);
+      this.gameModel.add(bullet);
     }else {
       this.fireStrategy.fire(this);
     }

@@ -21,16 +21,28 @@ public class GameModel {
 
   Tank mytank;
 
-  List<Bullet> bullets = new ArrayList<>();
+ /* List<Bullet> bullets = new ArrayList<>();
   List<Tank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
-  List<NuclearBomb> nuclearBombs = new ArrayList<>();
+  List<NuclearBomb> nuclearBombs = new ArrayList<>();*/
+
+ List<GameObject> gameObjects = new ArrayList<>();
+
+ public void add(GameObject gameObject){
+   gameObjects.add(gameObject);
+ }
+
+ public void remove(GameObject gameObject){
+   gameObjects.remove(gameObject);
+ }
 
 
   public GameModel(TankFrame tankFrame){
     this.tankFrame = tankFrame;
 
     mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
+
+    add(mytank);
 
     Dir[] values = Dir.values();
     Random random = new Random();
@@ -40,7 +52,7 @@ public class GameModel {
       Dir dir = values[random.nextInt(values.length)];
       Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
       tank.setMoving(true);
-      enemyTanks.add(tank);
+      add(tank);
     }
 
   }
@@ -50,59 +62,21 @@ public class GameModel {
     Color color = g.getColor();
 
     g.setColor(Color.WHITE);
-    g.drawString("子弹数量："+bullets.size(),60,60);
+    /*g.drawString("子弹数量："+bullets.size(),60,60);
     g.drawString("坦克数量："+enemyTanks.size(),60,80);
-    g.drawString("爆炸数量："+explodes.size(),60,100);
+    g.drawString("爆炸数量："+explodes.size(),60,100);*/
     g.setColor(color);
 
-    mytank.paint(g);
-
-    Iterator<Explode> explodeIterator = explodes.iterator();
-    while (explodeIterator.hasNext()){
-      Explode explode = explodeIterator.next();
-      if(!explode.isLiving()) {
-        explodeIterator.remove();
-        continue;
-      }
-      explode.paint(g);
-    }
-
-    int i =0;
-    Iterator<Tank> tankIterator = enemyTanks.iterator();
-    while (tankIterator.hasNext()){
-      Tank tank = tankIterator.next();
-      if(!tank.isLiving()) {
-        tankIterator.remove();
-        continue;
-      }
-      tank.paint(g);
-    }
-
-    Iterator<Bullet> bulletIterator = bullets.iterator();
-    while (bulletIterator.hasNext()){
-      Bullet bullet = bulletIterator.next();
-      if(!bullet.isLiving()) {
-        bulletIterator.remove();
-        continue;
-      }
-      bullet.paint(g);
-    }
-
-    Iterator<NuclearBomb> nuclearBombIterator = nuclearBombs.iterator();
-    while (nuclearBombIterator.hasNext()){
-      NuclearBomb nuclearBomb = nuclearBombIterator.next();
-      if(!nuclearBomb.isLiving()) {
-        nuclearBombIterator.remove();
-        continue;
-      }
-      nuclearBomb.paint(g);
+    for(int i=0;i<gameObjects.size();i++){
+      GameObject gameObject = gameObjects.get(i);
+      gameObject.paint(g);
     }
 
     //碰撞检测
-    collisionDetection();
+    //collisionDetection();
   }
 
-  private void collisionDetection() {
+  /*private void collisionDetection() {
     //让每一颗子弹和每一辆坦克相撞
     for(int i=0;i<bullets.size();i++){
       for(int j=0;j<enemyTanks.size();j++){
@@ -150,7 +124,7 @@ public class GameModel {
       }
     }
 
-  }
+  }*/
 
   public void keyPressed(KeyEvent e) {
     mytank.keyPressed(e);

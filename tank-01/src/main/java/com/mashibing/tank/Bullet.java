@@ -15,7 +15,7 @@ public class Bullet extends GameObject{
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
   //private final TankFrame tf;
 
-  private GameModel gameObjectMgr;
+  private GameModel gameModel;
 
   private Group group = Group.BAD;
 
@@ -43,12 +43,12 @@ public class Bullet extends GameObject{
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir, GameModel gameObjectMgr,Group group) {
+  public Bullet(int x, int y, Dir dir, GameModel gameModel,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
-    this.gameObjectMgr = gameObjectMgr;
+    this.gameModel = gameModel;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
@@ -80,7 +80,10 @@ public class Bullet extends GameObject{
 
   public void paint(Graphics g) {
 
-    if(!this.living) return;
+    if(!this.living) {
+      gameModel.remove(this);
+      return;
+    }
 
     Color oldColor = g.getColor();
     BufferedImage image = null;
