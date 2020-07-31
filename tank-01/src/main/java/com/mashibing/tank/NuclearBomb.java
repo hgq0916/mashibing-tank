@@ -26,7 +26,8 @@ public class NuclearBomb {
 
   private Group group;
 
-  private TankFrame tankFrame;
+  //private TankFrame tankFrame;
+  private GameObjectMgr gameObjectMgr;
 
   private Rectangle rectangle;
 
@@ -38,11 +39,11 @@ public class NuclearBomb {
     this.group = group;
   }
 
-  public NuclearBomb(int x, int y,Dir dir, TankFrame tankFrame,Group group) {
+  public NuclearBomb(int x, int y,Dir dir,GameObjectMgr gameObjectMgr,Group group) {
     this.x = x;
     this.y = y;
     this.dir =dir;
-    this.tankFrame = tankFrame;
+    this.gameObjectMgr = gameObjectMgr;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
@@ -80,12 +81,8 @@ public class NuclearBomb {
     this.dir = dir;
   }
 
-  public TankFrame getTankFrame() {
-    return tankFrame;
-  }
-
-  public void setTankFrame(TankFrame tankFrame) {
-    this.tankFrame = tankFrame;
+  public GameObjectMgr getGameObjectMgr() {
+    return gameObjectMgr;
   }
 
   public void paint(Graphics g){
@@ -158,7 +155,7 @@ public class NuclearBomb {
         break;
     }
 
-    if(x<0 || y<0 || x>tankFrame.WIN_WIDTH || y>tankFrame.WIN_HEIGHT){
+    if(x<0 || y<0 || x>gameObjectMgr.tankFrame.WIN_WIDTH || y>gameObjectMgr.tankFrame.WIN_HEIGHT){
       this.living = false;
     }
 

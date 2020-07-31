@@ -9,12 +9,14 @@ import java.util.HashMap;
 /**
  * 子弹类
  */
-public class Bullet {
+public class Bullet extends GameObject{
 
   public static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
-  private final TankFrame tf;
+  //private final TankFrame tf;
+
+  private GameObjectMgr gameObjectMgr;
 
   private Group group = Group.BAD;
 
@@ -42,12 +44,12 @@ public class Bullet {
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+  public Bullet(int x, int y, Dir dir,GameObjectMgr gameObjectMgr,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
-    this.tf = tankFrame;
+    this.gameObjectMgr = gameObjectMgr;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);

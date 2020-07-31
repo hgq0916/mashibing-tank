@@ -6,11 +6,12 @@ import java.awt.image.BufferedImage;
 /**
  * 爆炸
  */
-public class Explode {
+public class Explode extends GameObject{
 
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
-  private final TankFrame tf;
+  //private final TankFrame tf;
+  private final GameObjectMgr gameObjectMgr;
   private int x;
   private int y;
 
@@ -40,10 +41,10 @@ public class Explode {
     this.living = living;
   }
 
-  public Explode(int x,int y,TankFrame tf){
+  public Explode(int x,int y,GameObjectMgr gameObjectMgr){
     this.x = x;
     this.y = y;
-    this.tf = tf;
+    this.gameObjectMgr = gameObjectMgr;
   }
 
   private int step = 0;
