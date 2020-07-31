@@ -26,6 +26,8 @@ public class GameModel {
   List<Explode> explodes = new ArrayList<>();
   List<NuclearBomb> nuclearBombs = new ArrayList<>();*/
 
+ Collider collider = new BulletTankCollider();
+
  List<GameObject> gameObjects = new ArrayList<>();
 
  public void add(GameObject gameObject){
@@ -42,7 +44,7 @@ public class GameModel {
 
     mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
 
-    add(mytank);
+    //add(mytank);
 
     Dir[] values = Dir.values();
     Random random = new Random();
@@ -67,64 +69,22 @@ public class GameModel {
     g.drawString("爆炸数量："+explodes.size(),60,100);*/
     g.setColor(color);
 
+    mytank.paint(g);
+
     for(int i=0;i<gameObjects.size();i++){
       GameObject gameObject = gameObjects.get(i);
       gameObject.paint(g);
     }
 
     //碰撞检测
-    //collisionDetection();
+    for(int i=0;i<gameObjects.size();i++){
+      for(int j=i+1;j<gameObjects.size();j++){
+        GameObject o1 = gameObjects.get(i);
+        GameObject o2 = gameObjects.get(j);
+        collider.collideWith(o1,o2);
+      }
+    }
   }
-
-  /*private void collisionDetection() {
-    //让每一颗子弹和每一辆坦克相撞
-    for(int i=0;i<bullets.size();i++){
-      for(int j=0;j<enemyTanks.size();j++){
-        Bullet bullet = bullets.get(i);
-        Tank tank = enemyTanks.get(j);
-        if(!tank.getGroup().equals(bullet.getGroup())){
-          Rectangle bulletRectangle = bullet.getRectangle();
-          Rectangle tankRectangle = tank.getRectangle();
-          if(bulletRectangle.intersects(tankRectangle)){
-            //发生碰撞
-            bullet.die();
-            tank.die();
-            //产生爆炸
-            explodes.add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
-            new Thread(()->{
-              Audio explodeAudio = new Audio("audio/explode.wav");
-              explodeAudio.play();
-            }).start();
-            break;
-          }
-        }
-      }
-    }
-
-    for(int i=0;i<nuclearBombs.size();i++){
-      for(int j=0;j<enemyTanks.size();j++){
-        NuclearBomb nuclearBomb = nuclearBombs.get(i);
-        Tank tank = enemyTanks.get(j);
-        if(!tank.getGroup().equals(nuclearBomb.getGroup())){
-          Rectangle nuclearBombRectangle = nuclearBomb.getRectangle();
-          Rectangle tankRectangle = tank.getRectangle();
-          if(nuclearBombRectangle.intersects(tankRectangle)){
-            //发生碰撞
-            nuclearBomb.die();
-            tank.die();
-            //产生爆炸
-            explodes.add(new Explode(nuclearBomb.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,nuclearBomb.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
-            new Thread(()->{
-              Audio explodeAudio = new Audio("audio/explode.wav");
-              explodeAudio.play();
-            }).start();
-            break;
-          }
-        }
-      }
-    }
-
-  }*/
 
   public void keyPressed(KeyEvent e) {
     mytank.keyPressed(e);
