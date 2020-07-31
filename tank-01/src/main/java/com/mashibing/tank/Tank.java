@@ -253,10 +253,20 @@ public class Tank extends GameObject{
   public void fire() {
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameModel,this.group);
       this.gameModel.add(bullet);
+      if(Group.GOOD.equals(this.group)){
+        new Thread(()->{
+          new Audio("audio/tank_fire.wav").play();
+        }).start();
+      }
   }
 
   public void fire(FireStrategy fireStrategy){
     fireStrategy.fire(this);
+    if(Group.GOOD.equals(this.group)){
+      new Thread(()->{
+        new Audio("audio/tank_fire.wav").play();
+      }).start();
+    }
   }
 
   public Rectangle getRectangle() {
