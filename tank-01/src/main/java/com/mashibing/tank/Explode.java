@@ -41,10 +41,10 @@ public class Explode extends GameObject{
     this.living = living;
   }
 
-  public Explode(int x,int y,TankFrame tf){
+  public Explode(int x,int y,GameModel gameModel){
     this.x = x;
     this.y = y;
-    this.tf = tf;
+    this.gameModel = gameModel;
   }
 
   private int step = 0;

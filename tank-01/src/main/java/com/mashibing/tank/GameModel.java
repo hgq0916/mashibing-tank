@@ -79,10 +79,6 @@ public class GameModel {
         GameObject o1 = gameObjects.get(i);
         GameObject o2 = gameObjects.get(j);
 
-        if(o1 instanceof NuclearBomb || o2 instanceof NuclearBomb){
-          System.out.println("dfdf");
-        }
-
         colliderChain.collideWith(o1,o2);
       }
     }
