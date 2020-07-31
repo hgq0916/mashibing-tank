@@ -72,7 +72,6 @@ public class GameModel {
       gameObject.paint(g);
     }
 
-    System.out.println(gameObjects);
     //碰撞检测
     for(int i=0;i<gameObjects.size();i++){
       for(int j=i+1;j<gameObjects.size();j++){

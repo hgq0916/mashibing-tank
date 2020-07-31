@@ -33,7 +33,7 @@ public class NuclearBombTankCollider implements Collider {
 
         return false;
       }
-    }else if(o1 instanceof Tank && o2 instanceof Bullet){
+    }else if(o1 instanceof Tank && o2 instanceof NuclearBomb){
       return collideWith(o2,o1);
     }else {
       return true;
