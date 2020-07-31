@@ -14,10 +14,18 @@ public class ColliderChain implements Collider{
   private List<Collider> colliders = new LinkedList<>();
 
   public ColliderChain(){
-    Collider collider = new BulletTankCollider();
-    Collider collider2 = new TankTankCollider();
-    colliders.add(collider);
-    colliders.add(collider2);
+
+    String colliderClass = PropertyMgr.getInstance().getString("colliderClass");
+    String[] colliderClasses = colliderClass.split(",");
+    for(int i=0;i<colliderClasses.length;i++){
+      try {
+        Class<?> aClass = Class.forName(colliderClasses[i]);
+        Object newInstance = aClass.newInstance();
+        colliders.add((Collider) newInstance);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public ColliderChain add(Collider collider){
