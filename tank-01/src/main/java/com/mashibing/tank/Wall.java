@@ -9,21 +9,22 @@ import java.awt.Rectangle;
  */
 public class Wall extends GameObject{
 
-  public static final int WIDTH=40;
-  public static final int HEIGHT=150;
-
   private int x;
   private int y;
+  private int w;
+  private int h;
 
   private Rectangle rectangle;
 
   //private GameModel gameModel;
 
-  public Wall(int x, int y) {
+  public Wall(int x, int y,int w,int h) {
     this.x = x;
     this.y = y;
+    this.w = w;
+    this.h = h;
     //this.gameModel = gameModel;
-    rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
+    rectangle = new Rectangle(x,y,w,h);
   }
 
   public int getX() {
@@ -54,7 +55,7 @@ public class Wall extends GameObject{
   public void paint(Graphics g) {
     Color color = g.getColor();
     g.setColor(Color.WHITE);
-    g.fillRect(x,y,WIDTH,HEIGHT);
+    g.fillRect(x,y,w,h);
     g.setColor(color);
   }
 
