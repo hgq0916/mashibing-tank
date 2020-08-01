@@ -13,7 +13,7 @@ public class TankWallCollider implements Collider {
       Rectangle rectangle1 = tank.getRectangle();
       if(rectangle.intersects(rectangle1)){
         if(tank.getGroup().equals(Group.BAD)){
-          tank.backToPrevious();
+          tank.back();
         }
       }
     }else if(o1 instanceof Tank && o2 instanceof Wall){

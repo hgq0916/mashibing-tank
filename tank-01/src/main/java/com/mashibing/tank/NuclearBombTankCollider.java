@@ -25,7 +25,7 @@ public class NuclearBombTankCollider implements Collider {
         bullet.die();
         tank.die();
         //产生爆炸
-        tank.getGameModel().add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,tank.getGameModel()));
+        GameModel.getInstance().add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2));
         new Thread(()->{
           Audio explodeAudio = new Audio("audio/explode.wav");
           explodeAudio.play();

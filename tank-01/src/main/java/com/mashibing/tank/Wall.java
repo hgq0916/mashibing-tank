@@ -17,12 +17,12 @@ public class Wall extends GameObject{
 
   private Rectangle rectangle;
 
-  private GameModel gameModel;
+  //private GameModel gameModel;
 
-  public Wall(int x, int y, GameModel gameModel) {
+  public Wall(int x, int y) {
     this.x = x;
     this.y = y;
-    this.gameModel = gameModel;
+    //this.gameModel = gameModel;
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
   }
 
@@ -42,13 +42,13 @@ public class Wall extends GameObject{
     this.y = y;
   }
 
-  public GameModel getGameModel() {
+/*  public GameModel getGameModel() {
     return gameModel;
   }
 
   public void setGameModel(GameModel gameModel) {
     this.gameModel = gameModel;
-  }
+  }*/
 
   @Override
   public void paint(Graphics g) {

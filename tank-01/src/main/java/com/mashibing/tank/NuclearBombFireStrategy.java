@@ -19,8 +19,8 @@ public class NuclearBombFireStrategy implements FireStrategy{
   @Override
   public void fire(Tank tank) {
     NuclearBomb nuclearBomb = new NuclearBomb(tank.getX()+Tank.TANK_WIDTH/2-NuclearBomb.WIDTH/2,tank.getY()
-        +Tank.TANK_HEIGHT/2-NuclearBomb.HEIGHT/2,tank.getDir(),tank.getGameModel(),tank.getGroup());
-    tank.getGameModel().add(nuclearBomb);
+        +Tank.TANK_HEIGHT/2-NuclearBomb.HEIGHT/2,tank.getDir(),tank.getGroup());
+    GameModel.getInstance().add(nuclearBomb);
   }
 
 }

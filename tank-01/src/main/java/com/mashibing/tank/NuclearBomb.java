@@ -26,7 +26,7 @@ public class NuclearBomb extends GameObject{
 
   private Group group;
 
-  private GameModel gameModel;
+  //private GameModel gameModel;
 
   private Rectangle rectangle;
 
@@ -38,11 +38,11 @@ public class NuclearBomb extends GameObject{
     this.group = group;
   }
 
-  public NuclearBomb(int x, int y,Dir dir, GameModel gameModel,Group group) {
+  public NuclearBomb(int x, int y,Dir dir, Group group) {
     this.x = x;
     this.y = y;
     this.dir =dir;
-    this.gameModel = gameModel;
+    //this.gameModel = gameModel;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
@@ -80,14 +80,14 @@ public class NuclearBomb extends GameObject{
     this.dir = dir;
   }
 
-  public GameModel getGameModel() {
+  /*public GameModel getGameModel() {
     return gameModel;
-  }
+  }*/
 
   public void paint(Graphics g){
 
     if(!this.living){
-      this.gameModel.remove(this);
+      GameModel.getInstance().remove(this);
       return;
     }
 
@@ -157,7 +157,7 @@ public class NuclearBomb extends GameObject{
         break;
     }
 
-    if(x<0 || y<0 || x> gameModel.tankFrame.WIN_WIDTH || y> gameModel.tankFrame.WIN_HEIGHT){
+    if(x<0 || y<0 || x> TankFrame.WIN_WIDTH || y> TankFrame.WIN_HEIGHT){
       this.living = false;
     }
 

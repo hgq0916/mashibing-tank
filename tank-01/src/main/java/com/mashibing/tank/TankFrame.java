@@ -15,7 +15,7 @@ public class TankFrame extends Frame {
   public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
   private Image image = null;
 
-  GameModel gameModel = new GameModel(this);
+  final GameModel gameModel = GameModel.getInstance();
 
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);

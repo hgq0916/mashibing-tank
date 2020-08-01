@@ -16,7 +16,7 @@ public class Tank extends GameObject{
   public static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
  // private final TankFrame tf;
 
-  private GameModel gameModel;
+  //private GameModel gameModel;
 
   private int x,y;
 
@@ -44,11 +44,11 @@ public class Tank extends GameObject{
   private FireStrategy  triplePlayFireStrategy = TriplePlayFireStrategy.getInstance();
   private FireStrategy  nuclearBombFireStrategy = NuclearBombFireStrategy.getInstance();
 
-  public Tank(int x, int y, Dir dir, GameModel gameModel,Group group) {
+  public Tank(int x, int y, Dir dir,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.gameModel = gameModel;
+    //this.gameModel = gameModel;
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
 
@@ -65,9 +65,9 @@ public class Tank extends GameObject{
     }
   }
 
-  public GameModel getGameModel() {
+/*  public GameModel getGameModel() {
     return gameModel;
-  }
+  }*/
 
   public Group getGroup() {
     return group;
@@ -120,7 +120,7 @@ public class Tank extends GameObject{
   public void paint(Graphics g) {
 
     if(!this.living){
-      this.gameModel.remove(this);
+      GameModel.getInstance().remove(this);
       return;
     }
 
@@ -251,8 +251,8 @@ public class Tank extends GameObject{
   }
 
   public void fire() {
-      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.gameModel,this.group);
-      this.gameModel.add(bullet);
+      Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group);
+      GameModel.getInstance().add(bullet);
       if(Group.GOOD.equals(this.group)){
         new Thread(()->{
           new Audio("audio/tank_fire.wav").play();
@@ -394,7 +394,7 @@ public class Tank extends GameObject{
   /**
    * 返回上一步
    */
-  public void backToPrevious() {
+  public void back() {
     this.x = oldX;
     this.y = oldY;
   }

@@ -15,14 +15,13 @@ import java.util.Random;
  */
 public class GameModel {
 
-  public final TankFrame tankFrame;
+  private static GameModel gameModel = new GameModel();
+
+  public static GameModel getInstance(){
+    return gameModel;
+  }
 
   Tank mytank;
-
- /* List<Bullet> bullets = new ArrayList<>();
-  List<Tank> enemyTanks = new ArrayList<>();
-  List<Explode> explodes = new ArrayList<>();
-  List<NuclearBomb> nuclearBombs = new ArrayList<>();*/
 
   ColliderChain colliderChain = new ColliderChain();
 
@@ -37,10 +36,9 @@ public class GameModel {
  }
 
 
-  public GameModel(TankFrame tankFrame){
-    this.tankFrame = tankFrame;
+  private GameModel(){
 
-    mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
+    mytank = new Tank(200,400,Dir.SOUTH,Group.GOOD);
 
     add(mytank);
 
@@ -50,13 +48,13 @@ public class GameModel {
     int initTankCount = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("initTankCount");
     for(int i=0;i<initTankCount;i++){
       Dir dir = values[random.nextInt(values.length)];
-      Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
+      Tank tank = new Tank(20+i*80,100,dir,Group.BAD);
       tank.setMoving(true);
       add(tank);
     }
 
-    Wall wall = new Wall(100,200,this);
-    Wall wall1 = new Wall(800,300,this);
+    Wall wall = new Wall(100,200);
+    Wall wall1 = new Wall(800,300);
     add(wall);
     add(wall1);
   }
