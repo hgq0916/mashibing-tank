@@ -2,6 +2,9 @@ package com.mashibing.tank;
 
 import com.mashibing.tank.decorator.RectDecorator;
 import com.mashibing.tank.decorator.TailDecorator;
+import com.mashibing.tank.observer.FireEvent;
+import com.mashibing.tank.observer.FireListener;
+import com.mashibing.tank.observer.MyTankFireListener;
 import com.mashibing.tank.singleton.PropertyMgrEnum;
 import com.mashibing.tank.strategy.EightDirectionFireStrategy;
 import com.mashibing.tank.strategy.FireStrategy;
@@ -13,6 +16,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,6 +30,12 @@ public class Tank extends GameObject{
  // private final TankFrame tf;
 
   //private GameModel gameModel;
+
+  private List<FireListener> fireListeners = new ArrayList<>();
+
+  {
+    fireListeners.add(new MyTankFireListener());
+  }
 
   private int oldX;
   private int oldY;
@@ -241,12 +252,18 @@ public class Tank extends GameObject{
   }
 
   public void fire() {
+
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group);
       GameModel.getInstance().add(new TailDecorator(new RectDecorator(bullet)));
       if(Group.GOOD.equals(this.group)){
         new Thread(()->{
           new Audio("audio/tank_fire.wav").play();
         }).start();
+      }
+
+    FireEvent fireEvent = new FireEvent(this);
+      for(FireListener fireListener :fireListeners){
+        fireListener.fire(fireEvent);
       }
   }
 
