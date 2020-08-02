@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.decorator.RectDecorator;
+import com.mashibing.tank.decorator.TailDecorator;
 import com.mashibing.tank.singleton.PropertyMgrEnum;
 import com.mashibing.tank.strategy.EightDirectionFireStrategy;
 import com.mashibing.tank.strategy.FireStrategy;
@@ -240,7 +242,7 @@ public class Tank extends GameObject{
 
   public void fire() {
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group);
-      GameModel.getInstance().add(bullet);
+      GameModel.getInstance().add(new TailDecorator(new RectDecorator(bullet)));
       if(Group.GOOD.equals(this.group)){
         new Thread(()->{
           new Audio("audio/tank_fire.wav").play();

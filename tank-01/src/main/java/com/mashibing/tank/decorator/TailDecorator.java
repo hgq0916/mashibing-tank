@@ -4,35 +4,30 @@ import com.mashibing.tank.GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class RectDecorator extends GameObject {
+public class TailDecorator extends GameObject {
 
   private GameObject gameObject;
 
-  public RectDecorator(GameObject gameObject) {
+  public TailDecorator(GameObject gameObject){
     this.gameObject = gameObject;
-    this.x = gameObject.getX();
-    this.y = gameObject.getY();
   }
 
   @Override
   public void paint(Graphics g) {
-    this.x = gameObject.getX();
-    this.y = gameObject.getY();
     gameObject.paint(g);
     Color color = g.getColor();
-    g.setColor(Color.YELLOW);
-    g.drawRect(x,y,getWidth()+2,getHeight()+2);
+    g.setColor(Color.RED);
+    g.drawLine(gameObject.getX(),gameObject.getY(),gameObject.getX()+getWidth(),gameObject.getY()+getHeight());
     g.setColor(color);
   }
 
   @Override
   public int getWidth() {
-    return gameObject.getWidth()+2;
+    return gameObject.getWidth();
   }
 
   @Override
   public int getHeight() {
-    return gameObject.getHeight()+2;
+    return gameObject.getHeight();
   }
-
 }
