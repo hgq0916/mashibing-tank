@@ -1,5 +1,8 @@
-package com.mashibing.tank;
+package com.mashibing.tank.cor;
 
+import com.mashibing.tank.GameObject;
+import com.mashibing.tank.Tank;
+import com.mashibing.tank.cor.Collider;
 import java.awt.Rectangle;
 
 /**

@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.cor.ColliderChain;
+import com.mashibing.tank.singleton.PropertyMgrEnum;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;

@@ -1,4 +1,8 @@
-package com.mashibing.tank;
+package com.mashibing.tank.strategy;
+
+import com.mashibing.tank.Bullet;
+import com.mashibing.tank.GameModel;
+import com.mashibing.tank.Tank;
 
 /**
  * @author gangquan.hu
@@ -6,7 +10,7 @@ package com.mashibing.tank;
  * @Description: 三连发射子弹
  * @date 2020/7/28 15:47
  */
-public class TriplePlayFireStrategy implements FireStrategy{
+public class TriplePlayFireStrategy implements FireStrategy {
 
   private TriplePlayFireStrategy(){}
 

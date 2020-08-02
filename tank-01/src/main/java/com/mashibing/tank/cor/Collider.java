@@ -1,4 +1,6 @@
-package com.mashibing.tank;
+package com.mashibing.tank.cor;
+
+import com.mashibing.tank.GameObject;
 
 /**
  * @author gangquan.hu

@@ -1,5 +1,8 @@
-package com.mashibing.tank;
+package com.mashibing.tank.cor;
 
+import com.mashibing.tank.Bullet;
+import com.mashibing.tank.GameObject;
+import com.mashibing.tank.Wall;
 import java.awt.Rectangle;
 
 public class BulletWallCollider implements Collider {

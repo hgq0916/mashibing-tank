@@ -1,5 +1,11 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.singleton.PropertyMgrEnum;
+import com.mashibing.tank.strategy.EightDirectionFireStrategy;
+import com.mashibing.tank.strategy.FireStrategy;
+import com.mashibing.tank.strategy.FourDirectionFireStrategy;
+import com.mashibing.tank.strategy.NuclearBombFireStrategy;
+import com.mashibing.tank.strategy.TriplePlayFireStrategy;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -17,8 +23,6 @@ public class Tank extends GameObject{
  // private final TankFrame tf;
 
   //private GameModel gameModel;
-
-  private int x,y;
 
   private int oldX;
   private int oldY;
@@ -91,22 +95,6 @@ public class Tank extends GameObject{
 
   public void setMoving(boolean moving) {
     this.moving = moving;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
   }
 
   public Dir getDir() {
@@ -343,6 +331,16 @@ public class Tank extends GameObject{
     }
 
     setMainTankDir();
+  }
+
+  @Override
+  public int getWidth() {
+    return TANK_WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return TANK_HEIGHT;
   }
 
   private void setMainTankDir() {

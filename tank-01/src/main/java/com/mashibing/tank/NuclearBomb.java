@@ -13,8 +13,6 @@ import java.awt.image.BufferedImage;
  */
 public class NuclearBomb extends GameObject{
 
-  private int x;
-  private int y;
   public static final int WIDTH = ReourseMgr.nuclearBombD.getWidth();
   public static final int HEIGHT = ReourseMgr.nuclearBombD.getHeight();
 
@@ -46,22 +44,6 @@ public class NuclearBomb extends GameObject{
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH,HEIGHT);
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
   }
 
   public boolean isLiving() {
@@ -123,6 +105,16 @@ public class NuclearBomb extends GameObject{
     g.setColor(color);
 
     move();
+  }
+
+  @Override
+  public int getWidth() {
+    return WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
   private void move() {

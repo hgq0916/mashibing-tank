@@ -1,4 +1,9 @@
-package com.mashibing.tank;
+package com.mashibing.tank.strategy;
+
+import com.mashibing.tank.Bullet;
+import com.mashibing.tank.Dir;
+import com.mashibing.tank.GameModel;
+import com.mashibing.tank.Tank;
 
 /**
  * @author gangquan.hu
@@ -6,7 +11,7 @@ package com.mashibing.tank;
  * @Description: 往四个方向发射子弹
  * @date 2020/7/28 15:47
  */
-public class FourDirectionFireStrategy implements FireStrategy{
+public class FourDirectionFireStrategy implements FireStrategy {
 
   private static FourDirectionFireStrategy fourDirectionFireStrategy = new FourDirectionFireStrategy();
 
@@ -20,7 +25,7 @@ public class FourDirectionFireStrategy implements FireStrategy{
   public void fire(Tank tank) {
 
     Bullet bullet = new Bullet(tank.getX()+Tank.TANK_WIDTH/2-Bullet.WIDTH/2,tank.getY()
-        +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,Dir.NORTH,tank.getGroup());
+        +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2, Dir.NORTH,tank.getGroup());
 
     Bullet bullet1 = new Bullet(tank.getX()+Tank.TANK_WIDTH/2-Bullet.WIDTH/2,tank.getY()
         +Tank.TANK_HEIGHT/2-Bullet.HEIGHT/2,Dir.EAST,tank.getGroup());

@@ -1,5 +1,7 @@
-package com.mashibing.tank;
+package com.mashibing.tank.cor;
 
+import com.mashibing.tank.GameObject;
+import com.mashibing.tank.PropertyMgr;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * @Description: 碰撞链
  * @date 2020/7/31 17:35
  */
-public class ColliderChain implements Collider{
+public class ColliderChain implements Collider {
 
   private List<Collider> colliders = new LinkedList<>();
 

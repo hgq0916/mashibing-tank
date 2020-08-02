@@ -1,5 +1,14 @@
-package com.mashibing.tank;
+package com.mashibing.tank.cor;
 
+import com.mashibing.tank.Audio;
+import com.mashibing.tank.Bullet;
+import com.mashibing.tank.Explode;
+import com.mashibing.tank.GameModel;
+import com.mashibing.tank.GameObject;
+import com.mashibing.tank.Group;
+import com.mashibing.tank.NuclearBomb;
+import com.mashibing.tank.Tank;
+import com.mashibing.tank.cor.Collider;
 import java.awt.Rectangle;
 
 /**
@@ -8,12 +17,12 @@ import java.awt.Rectangle;
  * @Description: 子弹和坦克碰撞
  * @date 2020/7/31 17:04
  */
-public class BulletTankCollider implements Collider {
+public class NuclearBombTankCollider implements Collider {
 
   @Override
   public boolean collideWith(GameObject o1, GameObject o2) {
-    if(o1 instanceof Bullet && o2 instanceof Tank){
-      Bullet bullet = (Bullet) o1;
+    if(o1 instanceof NuclearBomb && o2 instanceof Tank){
+      NuclearBomb bullet = (NuclearBomb) o1;
       Tank tank = (Tank) o2;
 
       if(Group.GOOD.equals(tank.getGroup()) || bullet.getGroup().equals(tank.getGroup())) return true;
@@ -25,7 +34,7 @@ public class BulletTankCollider implements Collider {
         bullet.die();
         tank.die();
         //产生爆炸
-        GameModel.getInstance().add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2));
+        GameModel.getInstance().add(new Explode(bullet.getX()+ Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2));
         new Thread(()->{
           Audio explodeAudio = new Audio("audio/explode.wav");
           explodeAudio.play();
@@ -33,7 +42,7 @@ public class BulletTankCollider implements Collider {
 
         return false;
       }
-    }else if(o1 instanceof Tank && o2 instanceof Bullet){
+    }else if(o1 instanceof Tank && o2 instanceof NuclearBomb){
       return collideWith(o2,o1);
     }else {
       return true;

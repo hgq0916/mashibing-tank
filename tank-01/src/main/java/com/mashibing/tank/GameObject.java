@@ -11,6 +11,25 @@ import java.awt.event.KeyEvent;
  */
 public abstract class GameObject {
 
+  protected int x;
+  protected int y;
+
+  public int getX() {
+    return x;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
+
   public abstract void paint(Graphics g);
 
   public void keyPressed(KeyEvent e){
@@ -20,5 +39,9 @@ public abstract class GameObject {
   public void keyReleased(KeyEvent e){
 
   }
+
+  public abstract int getWidth();
+
+  public abstract int getHeight();
 
 }

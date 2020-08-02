@@ -9,8 +9,6 @@ import java.awt.Rectangle;
  */
 public class Wall extends GameObject{
 
-  private int x;
-  private int y;
   private int w;
   private int h;
 
@@ -27,22 +25,6 @@ public class Wall extends GameObject{
     rectangle = new Rectangle(x,y,w,h);
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
 /*  public GameModel getGameModel() {
     return gameModel;
   }
@@ -57,6 +39,16 @@ public class Wall extends GameObject{
     g.setColor(Color.WHITE);
     g.fillRect(x,y,w,h);
     g.setColor(color);
+  }
+
+  @Override
+  public int getWidth() {
+    return w;
+  }
+
+  @Override
+  public int getHeight() {
+    return h;
   }
 
   public Rectangle getRectangle(){

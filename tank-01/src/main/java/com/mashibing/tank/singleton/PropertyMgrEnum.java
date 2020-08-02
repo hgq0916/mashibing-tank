@@ -1,5 +1,6 @@
-package com.mashibing.tank;
+package com.mashibing.tank.singleton;
 
+import com.mashibing.tank.PropertyMgr;
 import java.io.IOException;
 import java.util.Properties;
 

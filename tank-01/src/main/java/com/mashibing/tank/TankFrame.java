@@ -1,5 +1,6 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.singleton.PropertyMgrEnum;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;

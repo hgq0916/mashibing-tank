@@ -1,4 +1,9 @@
-package com.mashibing.tank;
+package com.mashibing.tank.strategy;
+
+import com.mashibing.tank.Bullet;
+import com.mashibing.tank.Dir;
+import com.mashibing.tank.GameModel;
+import com.mashibing.tank.Tank;
 
 /**
  * @author gangquan.hu
@@ -6,7 +11,7 @@ package com.mashibing.tank;
  * @Description: 往八个方向发射子弹
  * @date 2020/7/28 15:47
  */
-public class EightDirectionFireStrategy implements FireStrategy{
+public class EightDirectionFireStrategy implements FireStrategy {
 
   private EightDirectionFireStrategy(){}
 

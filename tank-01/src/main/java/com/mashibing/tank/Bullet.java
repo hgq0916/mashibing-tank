@@ -1,5 +1,6 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.singleton.PropertyMgrEnum;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -21,8 +22,6 @@ public class Bullet extends GameObject{
 
   private Rectangle rectangle;
 
-  private int x;
-  private int y;
   private Dir dir;
 
   boolean living;
@@ -52,22 +51,6 @@ public class Bullet extends GameObject{
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
   }
 
   public Dir getDir() {
@@ -117,6 +100,16 @@ public class Bullet extends GameObject{
     g.setColor(oldColor);
 
     move();
+  }
+
+  @Override
+  public int getWidth() {
+    return WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
   private void move() {

@@ -12,26 +12,8 @@ public class Explode extends GameObject{
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
   //private final TankFrame tf;
   //private final GameModel gameModel;
-  private int x;
-  private int y;
 
   private boolean living = true;
-
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
 
   public boolean isLiving() {
     return living;
@@ -61,6 +43,16 @@ public class Explode extends GameObject{
       this.living = false;
     }
 
+  }
+
+  @Override
+  public int getWidth() {
+    return WIDTH;
+  }
+
+  @Override
+  public int getHeight() {
+    return HEIGHT;
   }
 
 }

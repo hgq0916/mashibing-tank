@@ -1,4 +1,8 @@
-package com.mashibing.tank;
+package com.mashibing.tank.strategy;
+
+import com.mashibing.tank.GameModel;
+import com.mashibing.tank.NuclearBomb;
+import com.mashibing.tank.Tank;
 
 /**
  * @author gangquan.hu
@@ -6,7 +10,7 @@ package com.mashibing.tank;
  * @Description: 发射核弹
  * @date 2020/7/28 15:47
  */
-public class NuclearBombFireStrategy implements FireStrategy{
+public class NuclearBombFireStrategy implements FireStrategy {
 
   private NuclearBombFireStrategy(){}
 
