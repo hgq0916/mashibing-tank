@@ -57,8 +57,8 @@ public class GameModel {
 
     Wall wall = new Wall(100,200,40,150);
     Wall wall1 = new Wall(800,300,40,200);
-    add(wall);
-    add(wall1);
+    //add(wall);
+    //add(wall1);
   }
 
   public  void paint(Graphics g){

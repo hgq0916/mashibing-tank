@@ -21,7 +21,7 @@ public class TankFrame extends Frame {
   public TankFrame(){
     setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
-    setTitle("mytank war");
+    setTitle("坦克大战进阶版-户雪敏专用 ^v^ ");
 
     setVisible(true);
     this.addKeyListener(new MyKeyListener());

@@ -254,7 +254,8 @@ public class Tank extends GameObject{
   public void fire() {
 
       Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group);
-      GameModel.getInstance().add(new TailDecorator(new RectDecorator(bullet)));
+      //GameModel.getInstance().add(new TailDecorator(new RectDecorator(bullet)));
+      GameModel.getInstance().add(bullet);
       if(Group.GOOD.equals(this.group)){
         new Thread(()->{
           new Audio("audio/tank_fire.wav").play();
