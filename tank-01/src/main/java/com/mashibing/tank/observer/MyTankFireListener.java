@@ -7,6 +7,6 @@ public class MyTankFireListener implements FireListener {
   @Override
   public void fire(FireEvent fireEvent) {
     Tank source = fireEvent.getSource();
-    System.out.println("tank group:"+source.getGroup()+" fire...");
+    //System.out.println("tank group:"+source.getGroup()+" fire...");
   }
 }

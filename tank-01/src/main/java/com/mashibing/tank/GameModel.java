@@ -5,6 +5,13 @@ import com.mashibing.tank.singleton.PropertyMgrEnum;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -88,7 +95,79 @@ public class GameModel {
   }
 
   public void keyPressed(KeyEvent e) {
+
+    int keyCode = e.getKeyCode();
+    switch (keyCode){
+      case KeyEvent.VK_S:
+        save();
+        break;
+      case KeyEvent.VK_L:
+        load();
+        break;
+    }
+
     mytank.keyPressed(e);
+  }
+
+  /**
+   * 游戏加载到磁盘
+   */
+  private void load() {
+    System.out.println("游戏加载到磁盘");
+    ObjectInputStream ois = null;
+    try {
+      File file = new File("H:\\学习\\马士兵课程\\4-设计模式（坦克一期)\\project\\tank\\tank.data");
+      FileInputStream fileInputStream = new FileInputStream(file);
+      ois = new ObjectInputStream(fileInputStream);
+      mytank = (Tank) ois.readObject();
+      gameObjects = (List<GameObject>) ois.readObject();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }finally {
+      if(ois != null){
+        try {
+          ois.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    System.out.println("游戏加载到磁盘完成");
+  }
+
+  /**
+   * 游戏存盘
+   */
+  private void save() {
+    System.out.println("游戏开始存盘");
+
+    FileOutputStream fos = null;
+    ObjectOutputStream oos = null;
+    try {
+      File file = new File("H:\\学习\\马士兵课程\\4-设计模式（坦克一期)\\project\\tank\\tank.data");
+      fos = new FileOutputStream(file);
+      oos = new ObjectOutputStream(fos);
+      oos.writeObject(mytank);
+      oos.writeObject(gameObjects);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }finally {
+      if(oos != null){
+        try {
+          oos.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    System.out.println("游戏存盘结束");
   }
 
   public void keyReleased(KeyEvent e) {
