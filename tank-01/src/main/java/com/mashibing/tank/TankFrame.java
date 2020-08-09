@@ -1,19 +1,18 @@
 package com.mashibing.tank;
 
-import com.mashibing.io.TankJoinMsg;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 public class TankFrame extends Frame {
 
@@ -26,8 +25,9 @@ public class TankFrame extends Frame {
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
   List<Bullet> bullets = new ArrayList<>();
-  List<Tank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
+
+  Map<String,Tank> enemyTankMap = new HashMap<>();
 
   private TankFrame(){
     WIN_WIDTH = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameWidth");
@@ -35,18 +35,6 @@ public class TankFrame extends Frame {
     setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
     setTitle("mytank war");
-
-   /* Dir[] values = Dir.values();
-    Random random = new Random();*/
-
-   /* int initTankCount = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("initTankCount");
-    for(int i=0;i<initTankCount;i++){
-
-      Dir dir = values[random.nextInt(values.length)];
-      Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
-      tank.setMoving(true);
-      enemyTanks.add(tank);
-    }*/
 
     setVisible(true);
     this.addKeyListener(new MyKeyListener());
@@ -79,7 +67,7 @@ public class TankFrame extends Frame {
 
     g.setColor(Color.WHITE);
     g.drawString("子弹数量："+bullets.size(),60,60);
-    g.drawString("坦克数量："+enemyTanks.size(),60,80);
+    g.drawString("坦克数量："+enemyTankMap.values().size(),60,80);
     g.drawString("爆炸数量："+explodes.size(),60,100);
     g.setColor(color);
 
@@ -95,8 +83,7 @@ public class TankFrame extends Frame {
       explode.paint(g);
     }
 
-    int i =0;
-    Iterator<Tank> tankIterator = enemyTanks.iterator();
+    Iterator<Tank> tankIterator = enemyTankMap.values().iterator();
     while (tankIterator.hasNext()){
       Tank tank = tankIterator.next();
       if(!tank.isLiving()) {
@@ -114,34 +101,10 @@ public class TankFrame extends Frame {
         continue;
       }
       bullet.paint(g);
-    }
-
-    //碰撞检测
-    collisionDetection();
-  }
-
-  private void collisionDetection() {
-    //让每一颗子弹和每一辆坦克相撞
-    for(int i=0;i<bullets.size();i++){
-      for(int j=0;j<enemyTanks.size();j++){
-        Bullet bullet = bullets.get(i);
-        Tank tank = enemyTanks.get(j);
-        if(!tank.getGroup().equals(bullet.getGroup())){
-          Rectangle bulletRectangle = bullet.getRectangle();
-          Rectangle tankRectangle = tank.getRectangle();
-          if(bulletRectangle.intersects(tankRectangle)){
-            //发生碰撞
-            bullet.die();
-            tank.die();
-            //产生爆炸
-            explodes.add(new Explode(bullet.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,bullet.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this));
-            new Thread(()->{
-              Audio explodeAudio = new Audio("audio/explode.wav");
-              explodeAudio.play();
-            }).start();
-            break;
-          }
-        }
+      Iterator<Tank> tankIterator2 = enemyTankMap.values().iterator();
+      while (tankIterator2.hasNext()){
+        Tank tank = tankIterator2.next();
+        bullet.strikeWithTank(tank);
       }
     }
   }

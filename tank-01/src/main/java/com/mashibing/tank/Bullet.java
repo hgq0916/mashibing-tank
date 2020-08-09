@@ -164,4 +164,22 @@ public class Bullet {
     this.living = false;
   }
 
+  public void strikeWithTank(Tank tank) {
+    if(!tank.getGroup().equals(this.getGroup())){
+      Rectangle bulletRectangle = this.getRectangle();
+      Rectangle tankRectangle = tank.getRectangle();
+      if(bulletRectangle.intersects(tankRectangle)){
+        //发生碰撞
+        this.die();
+        tank.die();
+        //产生爆炸
+        this.tf.explodes.add(new Explode(this.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,this.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this.tf));
+        new Thread(()->{
+          Audio explodeAudio = new Audio("audio/explode.wav");
+          explodeAudio.play();
+        }).start();
+      }
+    }
+  }
+
 }
