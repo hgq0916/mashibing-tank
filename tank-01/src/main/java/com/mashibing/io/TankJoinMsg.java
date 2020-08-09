@@ -4,17 +4,14 @@ import com.mashibing.tank.Dir;
 import com.mashibing.tank.Group;
 import com.mashibing.tank.Tank;
 import com.mashibing.tank.TankFrame;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
-public class TankJoinMsg {
+public class TankJoinMsg extends Msg{
 
   private String id;
 
@@ -118,6 +115,7 @@ public class TankJoinMsg {
     return null;
   }
 
+  @Override
   public byte[] toBytes(){
     ByteArrayOutputStream bos = null;
     DataOutputStream dos = null;
@@ -181,6 +179,7 @@ public class TankJoinMsg {
     return new Tank(this.id,this.x,this.y,this.dir, this.group);
   }
 
+  @Override
   public void handle() {
     String tankId = this.getId();
     if(!TankFrame.INSTANCE.getMainTank().getId().equals(tankId) && !TankFrame.INSTANCE.existsTankById(tankId)){
@@ -190,6 +189,11 @@ public class TankJoinMsg {
 
       NettyClient.INSTANCE.write(new TankJoinMsg(TankFrame.INSTANCE.getMainTank()));
     }
+  }
+
+  @Override
+  public MsgType getMsgType() {
+    return MsgType.TANK_JOIN_MSG;
   }
 
 }

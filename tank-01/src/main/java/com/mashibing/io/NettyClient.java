@@ -1,6 +1,5 @@
 package com.mashibing.io;
 
-import com.mashibing.tank.Tank;
 import com.mashibing.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -34,7 +33,7 @@ public class NettyClient {
             protected void initChannel(NioSocketChannel ch) throws Exception {
               ChannelPipeline pipeline = ch.pipeline();
               pipeline.addLast(new TankMsgDecoder());
-              pipeline.addLast(new TankMsgEncoder());
+              pipeline.addLast(new MsgEncoder());
               pipeline.addLast(new ClientEventHandler());
             }
           })
@@ -62,12 +61,12 @@ public class NettyClient {
     }
   }
 
-  public void write(TankJoinMsg tankJoinMsg) {
-    this.channel.writeAndFlush(tankJoinMsg);
+  public void write(Msg msg) {
+    this.channel.writeAndFlush(msg);
   }
 }
 
-class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
+class ClientEventHandler extends SimpleChannelInboundHandler<Msg> {
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -82,9 +81,10 @@ class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
   }
 
   @Override
-  protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg)
+  protected void channelRead0(ChannelHandlerContext channelHandlerContext, Msg msg)
       throws Exception {
-    tankJoinMsg.handle();
+    System.out.println(msg);
+    msg.handle();
   }
 
 }

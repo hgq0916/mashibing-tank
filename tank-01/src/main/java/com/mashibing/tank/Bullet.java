@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * 子弹类
@@ -25,6 +26,25 @@ public class Bullet {
 
   boolean living;
 
+  private String id;
+  private String tankId;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getTankId() {
+    return tankId;
+  }
+
+  public void setTankId(String tankId) {
+    this.tankId = tankId;
+  }
+
   public Group getGroup() {
     return group;
   }
@@ -41,12 +61,26 @@ public class Bullet {
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir,Group group) {
+  public Bullet(int x, int y, Dir dir,Group group,String tankId) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
     this.group = group;
+    this.tankId = tankId;
+    this.id = UUID.randomUUID().toString();
+
+    rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
+  }
+
+  public Bullet(String id,int x, int y, Dir dir,Group group,String tankId) {
+    this.x = x;
+    this.y = y;
+    this.dir = dir;
+    this.living =  true;
+    this.group = group;
+    this.id = id;
+    this.tankId = tankId;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
   }

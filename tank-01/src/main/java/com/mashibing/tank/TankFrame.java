@@ -24,7 +24,7 @@ public class TankFrame extends Frame {
   private Image image = null;
 
   Tank mytank;
-  List<Bullet> bullets = new ArrayList<>();
+  Map<String,Bullet> bulletMap = new HashMap<>();
   List<Explode> explodes = new ArrayList<>();
 
   Map<String,Tank> enemyTankMap = new HashMap<>();
@@ -68,7 +68,7 @@ public class TankFrame extends Frame {
     Color color = g.getColor();
 
     g.setColor(Color.WHITE);
-    g.drawString("子弹数量："+bullets.size(),60,60);
+    g.drawString("子弹数量："+ bulletMap.values().size(),60,60);
     g.drawString("坦克数量："+enemyTankMap.values().size(),60,80);
     g.drawString("爆炸数量："+explodes.size(),60,100);
     g.setColor(color);
@@ -95,7 +95,7 @@ public class TankFrame extends Frame {
       tank.paint(g);
     }
 
-    Iterator<Bullet> bulletIterator = bullets.iterator();
+    Iterator<Bullet> bulletIterator = bulletMap.values().iterator();
     while (bulletIterator.hasNext()){
       Bullet bullet = bulletIterator.next();
       if(!bullet.isLiving()) {
@@ -121,6 +121,14 @@ public class TankFrame extends Frame {
 
   public void addTank(Tank tank) {
     enemyTankMap.put(tank.getId(),tank);
+  }
+
+  public boolean existBulletById(String bulletId) {
+    return bulletMap.containsKey(bulletId);
+  }
+
+  public void addBullet(Bullet bullet) {
+    this.bulletMap.put(bullet.getId(),bullet);
   }
 
   private class MyKeyListener extends KeyAdapter {
