@@ -72,11 +72,11 @@ class ServerReadHanler extends ChannelInboundHandlerAdapter {
     try{
       buf = (ByteBuf) msg;
       if(buf.readableBytes()>0){
-        int len = buf.readableBytes();
+        /*int len = buf.readableBytes();
         byte[] data = new byte[len];
         buf.getBytes(buf.readerIndex(),data);
         String str = new String(data);
-        ServerFrame.INSTANCE.updateClientMsg(str);
+        ServerFrame.INSTANCE.updateClientMsg(str);*/
 
         //向所有的客户端转发消息
         NettyServer.clients.writeAndFlush(buf);

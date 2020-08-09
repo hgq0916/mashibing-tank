@@ -5,7 +5,7 @@ import com.mashibing.io.NettyClient;
 public class Main {
 
   public static void main(String[] args) {
-    TankFrame tankFrame = new TankFrame();
+    TankFrame tankFrame = TankFrame.INSTANCE;
 
     new Thread(()->{
       NettyClient.INSTANCE.connect();

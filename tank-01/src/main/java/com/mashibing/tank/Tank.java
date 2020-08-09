@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 坦克类
@@ -16,6 +17,8 @@ public class Tank {
   private final TankFrame tf;
   private int x,y;
   private Dir dir = Dir.SOUTH;
+
+  private String id;
 
   private Group group = Group.BAD;
 
@@ -35,7 +38,26 @@ public class Tank {
     this.dir = dir;
     this.tf = tf;
     this.group = group;
+    this.id =  UUID.randomUUID().toString();
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+  }
+
+  public Tank(String id,int x, int y, Dir dir,TankFrame tf,Group group) {
+    this.x = x;
+    this.y = y;
+    this.dir = dir;
+    this.tf = tf;
+    this.group = group;
+    rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
+    this.id =  id;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public TankFrame getTf() {
@@ -65,6 +87,8 @@ public class Tank {
   public void setMoving(boolean moving) {
     this.moving = moving;
   }
+
+
 
   public int getX() {
     return x;
@@ -97,6 +121,8 @@ public class Tank {
     }
 
     Color color = g.getColor();
+    g.setColor(Color.GREEN);
+    g.drawString(this.id,x,y-10);
     BufferedImage image = null;
 
     if(Group.GOOD.equals(group)){

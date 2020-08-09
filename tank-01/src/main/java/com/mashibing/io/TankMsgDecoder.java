@@ -9,11 +9,11 @@ public class TankMsgDecoder extends ByteToMessageDecoder {
 
   @Override
   protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-    if(in.readableBytes()>=8){
-      int x = in.readInt();
-      int y = in.readInt();
-      TankMsg tankMsg = new TankMsg(x,y);
-      out.add(tankMsg);
+    if(in.readableBytes()>=34){
+      byte[] data = new byte[34];
+      in.readBytes(data);
+      TankJoinMsg tankJoinMsg = TankJoinMsg.deserialize(data);
+      out.add(tankJoinMsg);
     }
   }
 }

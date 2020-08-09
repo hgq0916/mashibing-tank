@@ -1,5 +1,6 @@
 package com.mashibing.tank;
 
+import com.mashibing.io.TankJoinMsg;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -16,8 +17,11 @@ import java.util.Random;
 
 public class TankFrame extends Frame {
 
-  public static final int WIN_WIDTH = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameWidth");
-  public static final int WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
+  public static final TankFrame INSTANCE = new TankFrame();
+
+  public static  int WIN_WIDTH;
+  public static  int WIN_HEIGHT;
+
   private Image image = null;
 
   Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
@@ -25,22 +29,24 @@ public class TankFrame extends Frame {
   List<Tank> enemyTanks = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
 
-  public TankFrame(){
+  private TankFrame(){
+    WIN_WIDTH = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameWidth");
+    WIN_HEIGHT = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("gameHeight");
     setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
     setTitle("mytank war");
 
-    Dir[] values = Dir.values();
-    Random random = new Random();
+   /* Dir[] values = Dir.values();
+    Random random = new Random();*/
 
-    int initTankCount = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("initTankCount");
+   /* int initTankCount = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("initTankCount");
     for(int i=0;i<initTankCount;i++){
 
       Dir dir = values[random.nextInt(values.length)];
       Tank tank = new Tank(20+i*80,100,dir,this,Group.BAD);
       tank.setMoving(true);
       enemyTanks.add(tank);
-    }
+    }*/
 
     setVisible(true);
     this.addKeyListener(new MyKeyListener());
@@ -138,6 +144,10 @@ public class TankFrame extends Frame {
         }
       }
     }
+  }
+
+  public Tank getMainTank() {
+    return mytank;
   }
 
   private class MyKeyListener extends KeyAdapter {

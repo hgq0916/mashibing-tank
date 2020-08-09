@@ -1,12 +1,11 @@
 package com.mashibing.io;
 
+import com.mashibing.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
@@ -64,19 +63,20 @@ public class NettyClient {
 
 }
 
-class ClientEventHandler extends SimpleChannelInboundHandler<TankMsg> {
+class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) throws Exception {
-    TankMsg tankMsg = new TankMsg(100,50);
-    ctx.writeAndFlush(tankMsg);
+
+    TankJoinMsg tankJoinMsg = new TankJoinMsg(TankFrame.INSTANCE.getMainTank());
+    ctx.writeAndFlush(tankJoinMsg);
   }
 
 
   @Override
-  protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankMsg tankMsg)
+  protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg)
       throws Exception {
-    System.out.println(tankMsg);
+    System.out.println(tankJoinMsg);
   }
 
 }
