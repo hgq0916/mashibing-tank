@@ -73,6 +73,10 @@ class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
     ctx.writeAndFlush(tankJoinMsg);
   }
 
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    System.out.println("与服务端连接断开");
+  }
 
   @Override
   protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg)
@@ -82,6 +86,8 @@ class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
       //不存在该坦克
       Tank tank = tankJoinMsg.createTank();
       TankFrame.INSTANCE.addTank(tank);
+
+      channelHandlerContext.writeAndFlush(new TankJoinMsg(TankFrame.INSTANCE.getMainTank()));
     }
   }
 

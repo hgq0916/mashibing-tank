@@ -10,7 +10,6 @@ public class Explode {
 
   public static final int WIDTH = ReourseMgr.explodes[0].getWidth();
   public static final int HEIGHT = ReourseMgr.explodes[0].getHeight();
-  private final TankFrame tf;
   private int x;
   private int y;
 
@@ -40,10 +39,9 @@ public class Explode {
     this.living = living;
   }
 
-  public Explode(int x,int y,TankFrame tf){
+  public Explode(int x,int y){
     this.x = x;
     this.y = y;
-    this.tf = tf;
   }
 
   private int step = 0;

@@ -178,7 +178,7 @@ public class TankJoinMsg {
   }
 
   public Tank createTank() {
-    return new Tank(this.id,this.x,this.y,this.dir, TankFrame.INSTANCE,this.group);
+    return new Tank(this.id,this.x,this.y,this.dir, this.group);
   }
 
 }

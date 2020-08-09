@@ -14,7 +14,6 @@ public class Bullet {
   public static final int SPEED = PropertyMgrEnum.PROPERTY_MGR_INSTANCE.getInt("bulletSpeed");
   public static final int WIDTH =  ReourseMgr.bulletD.getWidth();
   public static final int HEIGHT = ReourseMgr.bulletD.getHeight();
-  private final TankFrame tf;
 
   private Group group = Group.BAD;
 
@@ -42,12 +41,11 @@ public class Bullet {
     this.living = living;
   }
 
-  public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+  public Bullet(int x, int y, Dir dir,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.living =  true;
-    this.tf = tankFrame;
     this.group = group;
 
     rectangle = new Rectangle(x,y,WIDTH, HEIGHT);
@@ -173,7 +171,7 @@ public class Bullet {
         this.die();
         tank.die();
         //产生爆炸
-        this.tf.explodes.add(new Explode(this.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,this.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2,this.tf));
+        TankFrame.INSTANCE.explodes.add(new Explode(this.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,this.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2));
         new Thread(()->{
           Audio explodeAudio = new Audio("audio/explode.wav");
           explodeAudio.play();

@@ -15,7 +15,7 @@ public class Tank {
 
   private static final int TANK_WIDTH = ReourseMgr.goodtankD.getWidth();
   private static final int TANK_HEIGHT = ReourseMgr.goodtankD.getHeight();
-  private final TankFrame tf;
+
   private int x,y;
   private Dir dir = Dir.SOUTH;
 
@@ -33,21 +33,19 @@ public class Tank {
 
   private Random random = new Random();
 
-  public Tank(int x, int y, Dir dir,TankFrame tf,Group group) {
+  public Tank(int x, int y, Dir dir,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.tf = tf;
     this.group = group;
     this.id =  UUID.randomUUID().toString();
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
   }
 
-  public Tank(String id,int x, int y, Dir dir,TankFrame tf,Group group) {
+  public Tank(String id,int x, int y, Dir dir,Group group) {
     this.x = x;
     this.y = y;
     this.dir = dir;
-    this.tf = tf;
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
     this.id =  id;
@@ -58,7 +56,7 @@ public class Tank {
     int x = r.nextInt(TankFrame.WIN_WIDTH - TANK_WIDTH);
     int y = r.nextInt(TankFrame.WIN_HEIGHT-TANK_HEIGHT-28)+28;
     Dir dir = Dir.randomDir();
-    Tank tank = new Tank(x,y,dir,TankFrame.INSTANCE,group);
+    Tank tank = new Tank(x,y,dir,group);
     return tank;
   }
 
@@ -68,10 +66,6 @@ public class Tank {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public TankFrame getTf() {
-    return tf;
   }
 
   public Group getGroup() {
@@ -256,8 +250,8 @@ public class Tank {
   }
 
   public void fire() {
-    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.tf,this.group);
-    this.tf.bullets.add(bullet);
+    Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group);
+    TankFrame.INSTANCE.bullets.add(bullet);
   }
 
   public Rectangle getRectangle() {
