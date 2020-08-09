@@ -83,7 +83,6 @@ class ClientEventHandler extends SimpleChannelInboundHandler<Msg> {
   @Override
   protected void channelRead0(ChannelHandlerContext channelHandlerContext, Msg msg)
       throws Exception {
-    System.out.println(msg);
     msg.handle();
   }
 
