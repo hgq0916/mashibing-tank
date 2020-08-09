@@ -21,7 +21,7 @@ public class BulletMsg extends Msg {
   private boolean living;
   private Group group;
 
-  private BulletMsg(){}
+  public BulletMsg(){}
 
   public BulletMsg(Bullet bullet) {
     this.x = bullet.getX();
@@ -41,33 +41,6 @@ public class BulletMsg extends Msg {
     this.group = group;
     this.id = id;
     this.tankId = tankId;
-  }
-
-  public static BulletMsg deserialize(byte[] data) {
-    ByteArrayInputStream bis = null;
-    DataInputStream dis = null;
-    try {
-      bis = new ByteArrayInputStream(data);
-      dis = new DataInputStream(bis);
-      BulletMsg bulletMsg = new BulletMsg();
-      long mostSigBits = dis.readLong();
-      long leastSigBits = dis.readLong();
-      bulletMsg.setId(new UUID(mostSigBits,leastSigBits).toString());
-      bulletMsg.setX(dis.readInt());
-      bulletMsg.setY(dis.readInt());
-      bulletMsg.setDir(Dir.values()[dis.readInt()]);
-      bulletMsg.setGroup(Group.values()[dis.readInt()]);
-      bulletMsg.setLiving(dis.readBoolean());
-      long tMostSigBits = dis.readLong();
-      long tMeastSigBits = dis.readLong();
-      bulletMsg.setTankId(new UUID(tMostSigBits,tMeastSigBits).toString());
-
-      return bulletMsg;
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return null;
   }
 
   public String getId() {
@@ -168,7 +141,33 @@ public class BulletMsg extends Msg {
 
   @Override
   public MsgType getMsgType() {
-    return MsgType.BULLET_MSG;
+    return MsgType.BULLET_NEW;
+  }
+
+  @Override
+  public BulletMsg parse(byte[] data) {
+    ByteArrayInputStream bis = null;
+    DataInputStream dis = null;
+    try {
+      bis = new ByteArrayInputStream(data);
+      dis = new DataInputStream(bis);
+      long mostSigBits = dis.readLong();
+      long leastSigBits = dis.readLong();
+      this.setId(new UUID(mostSigBits,leastSigBits).toString());
+      this.setX(dis.readInt());
+      this.setY(dis.readInt());
+      this.setDir(Dir.values()[dis.readInt()]);
+      this.setGroup(Group.values()[dis.readInt()]);
+      this.setLiving(dis.readBoolean());
+      long tMostSigBits = dis.readLong();
+      long tMeastSigBits = dis.readLong();
+      this.setTankId(new UUID(tMostSigBits,tMeastSigBits).toString());
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return this;
   }
 
   @Override

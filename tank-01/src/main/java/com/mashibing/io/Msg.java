@@ -8,4 +8,6 @@ public abstract class Msg {
 
   public abstract MsgType getMsgType();
 
+  public abstract Msg parse(byte[] data);
+
 }

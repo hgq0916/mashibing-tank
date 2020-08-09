@@ -34,6 +34,8 @@ public class NettyServer {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
               ChannelPipeline pipeline = ch.pipeline();
+              pipeline.addLast(new MsgDecoder());
+              pipeline.addLast(new MsgEncoder());
               pipeline.addLast(new ServerReadHanler());
             }
           })
@@ -68,21 +70,10 @@ class ServerReadHanler extends ChannelInboundHandlerAdapter {
 
   @Override
   public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-    ByteBuf buf = null;
-    try{
-      buf = (ByteBuf) msg;
-      if(buf.readableBytes()>0){
-        /*int len = buf.readableBytes();
-        byte[] data = new byte[len];
-        buf.getBytes(buf.readerIndex(),data);
-        String str = new String(data);
-        ServerFrame.INSTANCE.updateClientMsg(str);*/
 
-        //向所有的客户端转发消息
-        NettyServer.clients.writeAndFlush(buf);
-      }
-    }finally{
-    }
+    ServerFrame.INSTANCE.updateClientMsg(msg.toString());
+    //向所有的客户端转发消息
+    NettyServer.clients.writeAndFlush(msg);
   }
 
   @Override

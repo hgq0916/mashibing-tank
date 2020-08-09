@@ -6,7 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import java.util.List;
 
-public class TankMsgDecoder extends ByteToMessageDecoder {
+public class MsgDecoder extends ByteToMessageDecoder {
 
   @Override
   protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
@@ -23,11 +23,11 @@ public class TankMsgDecoder extends ByteToMessageDecoder {
         MsgType msgType = dataPacket.msgType;
         Msg msg = null;
         switch (msgType){
-          case BULLET_MSG:
-            msg = BulletMsg.deserialize(data);
+          case BULLET_NEW:
+            msg = new BulletMsg().parse(data);
             break;
-          case TANK_JOIN_MSG:
-            msg = TankJoinMsg.deserialize(data);
+          case TANK_JOIN:
+            msg = new TankJoinMsg().parse(data);
             break;
             default:
               throw new IllegalStateException("不支持的类型");

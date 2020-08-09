@@ -32,7 +32,7 @@ public class NettyClient {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
               ChannelPipeline pipeline = ch.pipeline();
-              pipeline.addLast(new TankMsgDecoder());
+              pipeline.addLast(new MsgDecoder());
               pipeline.addLast(new MsgEncoder());
               pipeline.addLast(new ClientEventHandler());
             }

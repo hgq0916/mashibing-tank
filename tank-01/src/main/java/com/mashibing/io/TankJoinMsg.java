@@ -67,7 +67,7 @@ public class TankJoinMsg extends Msg{
     this.living = living;
   }
 
-  private TankJoinMsg(){}
+  public TankJoinMsg(){}
 
   public TankJoinMsg(Tank tank){
     this.x = tank.getX();
@@ -87,32 +87,6 @@ public class TankJoinMsg extends Msg{
     this.group = group;
     this.moving = moving;
     this.living = living;
-  }
-
-  public static TankJoinMsg deserialize(byte[] data) {
-
-    ByteArrayInputStream bis = null;
-    DataInputStream dis = null;
-    try {
-      bis = new ByteArrayInputStream(data);
-      dis = new DataInputStream(bis);
-      TankJoinMsg tankJoinMsg = new TankJoinMsg();
-      long mostSigBits = dis.readLong();
-      long leastSigBits = dis.readLong();
-      tankJoinMsg.setId(new UUID(mostSigBits,leastSigBits).toString());
-      tankJoinMsg.setX(dis.readInt());
-      tankJoinMsg.setY(dis.readInt());
-      tankJoinMsg.setDir(Dir.values()[dis.readInt()]);
-      tankJoinMsg.setGroup(Group.values()[dis.readInt()]);
-      tankJoinMsg.setMoving(dis.readBoolean());
-      tankJoinMsg.setLiving(dis.readBoolean());
-
-      return tankJoinMsg;
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return null;
   }
 
   @Override
@@ -193,7 +167,31 @@ public class TankJoinMsg extends Msg{
 
   @Override
   public MsgType getMsgType() {
-    return MsgType.TANK_JOIN_MSG;
+    return MsgType.TANK_JOIN;
+  }
+
+  @Override
+  public TankJoinMsg parse(byte[] data) {
+    ByteArrayInputStream bis = null;
+    DataInputStream dis = null;
+    try {
+      bis = new ByteArrayInputStream(data);
+      dis = new DataInputStream(bis);
+      long mostSigBits = dis.readLong();
+      long leastSigBits = dis.readLong();
+      this.setId(new UUID(mostSigBits,leastSigBits).toString());
+      this.setX(dis.readInt());
+      this.setY(dis.readInt());
+      this.setDir(Dir.values()[dis.readInt()]);
+      this.setGroup(Group.values()[dis.readInt()]);
+      this.setMoving(dis.readBoolean());
+      this.setLiving(dis.readBoolean());
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return this;
   }
 
 }
