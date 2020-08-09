@@ -174,6 +174,8 @@ public class TankFrame extends Frame {
     }
 
     private void setMainTankDir() {
+      if(!mytank.isLiving()) return;
+
       boolean bu = BU;
       boolean bd = BD;
       boolean bl = BL;

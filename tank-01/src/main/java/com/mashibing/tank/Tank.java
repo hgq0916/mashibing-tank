@@ -251,6 +251,7 @@ public class Tank {
   }
 
   public void fire() {
+    if(!this.living) return;
     Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group,this.id);
     TankFrame.INSTANCE.bulletMap.put(bullet.getId(),bullet);
     //发送子弹消息
