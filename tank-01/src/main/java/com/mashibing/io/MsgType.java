@@ -1,5 +1,5 @@
 package com.mashibing.io;
 
 public enum MsgType {
-  TANK_JOIN, BULLET_NEW;
+  TANK_JOIN,TANK_MOVING, TANK_STOP,TANK_CHANGE_DIR,BULLET_NEW;
 }

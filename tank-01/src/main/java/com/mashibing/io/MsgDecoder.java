@@ -29,6 +29,9 @@ public class MsgDecoder extends ByteToMessageDecoder {
           case TANK_JOIN:
             msg = new TankJoinMsg().parse(data);
             break;
+          case TANK_MOVING:
+            msg = new TankMoveMsg().parse(data);
+            break;
             default:
               throw new IllegalStateException("不支持的类型");
         }

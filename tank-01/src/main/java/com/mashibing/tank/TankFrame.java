@@ -1,5 +1,7 @@
 package com.mashibing.tank;
 
+import com.mashibing.io.NettyClient;
+import com.mashibing.io.TankMoveMsg;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -131,6 +133,10 @@ public class TankFrame extends Frame {
     this.bulletMap.put(bullet.getId(),bullet);
   }
 
+  public Tank getTankById(String tankId) {
+    return enemyTankMap.get(tankId);
+  }
+
   private class MyKeyListener extends KeyAdapter {
 
     boolean BU = false;
@@ -179,7 +185,11 @@ public class TankFrame extends Frame {
       if(!bu && !bd && !bl && !br){
         mytank.setMoving(false);
       } else {
-        mytank.setMoving(true);
+
+        if(!mytank.isMoving()){
+          NettyClient.INSTANCE.write(new TankMoveMsg(mytank));
+          mytank.setMoving(true);
+        }
 
         if(bu && bl){
           mytank.setDir(Dir.NORTHWEST);
