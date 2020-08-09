@@ -15,7 +15,7 @@ public class MsgDecoder extends ByteToMessageDecoder {
       in.getBytes(in.readerIndex(),header);
       DataPacket dataPacket = Builder.deserialize(header);
       int len = dataPacket.len;
-      if((DataPacket.DATA_PACKET_HEADER_LEN+len)>=in.readableBytes()){
+      if((DataPacket.DATA_PACKET_HEADER_LEN+len)<=in.readableBytes()){
         in.skipBytes(DataPacket.DATA_PACKET_HEADER_LEN);
         byte[] data = new byte[len];
         in.readBytes(data);

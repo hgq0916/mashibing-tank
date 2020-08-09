@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import com.mashibing.io.NettyClient;
+import com.mashibing.io.TankDirectionChangeMsg;
 import com.mashibing.io.TankMoveMsg;
 import com.mashibing.io.TankStopMsg;
 import java.awt.Color;
@@ -193,6 +194,7 @@ public class TankFrame extends Frame {
           mytank.setMoving(true);
         }
 
+        Dir oldDir = mytank.getDir();
         if(bu && bl){
           mytank.setDir(Dir.NORTHWEST);
         }else if(bu && br){
@@ -211,8 +213,14 @@ public class TankFrame extends Frame {
           mytank.setDir(Dir.EAST);
         }
 
+        if(!oldDir.equals(mytank.getDir())){
+          //发现改变
+          NettyClient.INSTANCE.write(new TankDirectionChangeMsg(mytank));
+        }
+
       }
 
+      System.out.println(mytank);
     }
 
     @Override

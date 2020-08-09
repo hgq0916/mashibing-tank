@@ -11,9 +11,9 @@ public class Main {
       NettyClient.INSTANCE.connect();
     }).start();
 
-    new Thread(()->{
+   /* new Thread(()->{
       new Audio("audio/war1.wav").loop();
-    }).start();
+    }).start();*/
 
     while (true){
       try {

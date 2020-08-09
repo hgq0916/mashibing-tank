@@ -1,8 +1,11 @@
 package com.mashibing.io;
 
 public enum MsgType {
-  TANK_JOIN(TankJoinMsg.class),TANK_MOVING(TankMoveMsg.class), TANK_STOP(TankStopMsg.class),TANK_CHANGE_DIR(null),BULLET_NEW(
-      BulletNewMsg.class);
+  TANK_JOIN(TankJoinMsg.class),
+  TANK_MOVING(TankMoveMsg.class),
+  TANK_STOP(TankStopMsg.class),
+  TANK_CHANGE_DIR(TankDirectionChangeMsg.class),
+  BULLET_NEW(BulletNewMsg.class);
 
   private Class<? extends Msg> msgClazz;
 

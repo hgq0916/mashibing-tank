@@ -265,4 +265,18 @@ public class Tank {
     this.living = false;
   }
 
+  @Override
+  public String toString() {
+    return "Tank{" +
+        "x=" + x +
+        ", y=" + y +
+        ", dir=" + dir +
+        ", id='" + id + '\'' +
+        ", group=" + group +
+        ", rectangle=" + rectangle +
+        ", moving=" + moving +
+        ", living=" + living +
+        ", random=" + random +
+        '}';
+  }
 }
