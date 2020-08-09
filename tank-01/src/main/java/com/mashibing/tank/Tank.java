@@ -1,5 +1,6 @@
 package com.mashibing.tank;
 
+import com.mashibing.io.TankJoinMsg;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -50,6 +51,15 @@ public class Tank {
     this.group = group;
     rectangle = new Rectangle(x,y,TANK_WIDTH,TANK_HEIGHT);
     this.id =  id;
+  }
+
+  public static Tank randomTank(Group group) {
+    Random r = new Random();
+    int x = r.nextInt(TankFrame.WIN_WIDTH - TANK_WIDTH);
+    int y = r.nextInt(TankFrame.WIN_HEIGHT-TANK_HEIGHT-28)+28;
+    Dir dir = Dir.randomDir();
+    Tank tank = new Tank(x,y,dir,TankFrame.INSTANCE,group);
+    return tank;
   }
 
   public String getId() {

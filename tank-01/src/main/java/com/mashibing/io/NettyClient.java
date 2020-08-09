@@ -1,5 +1,6 @@
 package com.mashibing.io;
 
+import com.mashibing.tank.Tank;
 import com.mashibing.tank.TankFrame;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -76,7 +77,12 @@ class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
   @Override
   protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg)
       throws Exception {
-    System.out.println(tankJoinMsg);
+    String tankId = tankJoinMsg.getId();
+    if(!TankFrame.INSTANCE.getMainTank().getId().equals(tankId) && !TankFrame.INSTANCE.existsTankById(tankId)){
+      //不存在该坦克
+      Tank tank = tankJoinMsg.createTank();
+      TankFrame.INSTANCE.addTank(tank);
+    }
   }
 
 }

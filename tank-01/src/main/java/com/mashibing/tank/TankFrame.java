@@ -23,7 +23,7 @@ public class TankFrame extends Frame {
 
   private Image image = null;
 
-  Tank mytank = new Tank(200,400,Dir.SOUTH,this,Group.GOOD);
+  Tank mytank;
   List<Bullet> bullets = new ArrayList<>();
   List<Explode> explodes = new ArrayList<>();
 
@@ -35,6 +35,8 @@ public class TankFrame extends Frame {
     setSize(WIN_WIDTH,WIN_HEIGHT);
     setResizable(false);
     setTitle("mytank war");
+
+    mytank = Tank.randomTank(Group.GOOD);
 
     setVisible(true);
     this.addKeyListener(new MyKeyListener());
@@ -111,6 +113,14 @@ public class TankFrame extends Frame {
 
   public Tank getMainTank() {
     return mytank;
+  }
+
+  public boolean existsTankById(String tankId) {
+    return enemyTankMap.containsKey(tankId);
+  }
+
+  public void addTank(Tank tank) {
+    enemyTankMap.put(tank.getId(),tank);
   }
 
   private class MyKeyListener extends KeyAdapter {

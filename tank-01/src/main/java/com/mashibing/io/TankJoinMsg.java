@@ -3,6 +3,7 @@ package com.mashibing.io;
 import com.mashibing.tank.Dir;
 import com.mashibing.tank.Group;
 import com.mashibing.tank.Tank;
+import com.mashibing.tank.TankFrame;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import java.io.ByteArrayInputStream;
@@ -174,6 +175,10 @@ public class TankJoinMsg {
         ", moving=" + moving +
         ", living=" + living +
         '}';
+  }
+
+  public Tank createTank() {
+    return new Tank(this.id,this.x,this.y,this.dir, TankFrame.INSTANCE,this.group);
   }
 
 }
