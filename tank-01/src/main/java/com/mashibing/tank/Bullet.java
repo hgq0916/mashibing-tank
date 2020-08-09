@@ -1,5 +1,8 @@
 package com.mashibing.tank;
 
+import com.mashibing.io.BulletDeadMsg;
+import com.mashibing.io.NettyClient;
+import com.mashibing.io.TankDeadMsg;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -197,13 +200,15 @@ public class Bullet {
   }
 
   public void strikeWithTank(Tank tank) {
-    if(!tank.getGroup().equals(this.getGroup())){
+    if(!tank.getId().equals(this.getTankId())){
       Rectangle bulletRectangle = this.getRectangle();
       Rectangle tankRectangle = tank.getRectangle();
       if(bulletRectangle.intersects(tankRectangle)){
         //发生碰撞
         this.die();
         tank.die();
+        NettyClient.INSTANCE.write(new BulletDeadMsg(this));
+        NettyClient.INSTANCE.write(new TankDeadMsg(tank));
         //产生爆炸
         TankFrame.INSTANCE.explodes.add(new Explode(this.getX()+Bullet.WIDTH/2-Explode.WIDTH/2,this.getY()+Bullet.HEIGHT/2-Explode.HEIGHT/2));
         new Thread(()->{

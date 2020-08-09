@@ -29,7 +29,7 @@ public class TankFrame extends Frame {
 
   Tank mytank;
   Map<String,Bullet> bulletMap = new HashMap<>();
-  List<Explode> explodes = new ArrayList<>();
+  public List<Explode> explodes = new ArrayList<>();
 
   Map<String,Tank> enemyTankMap = new HashMap<>();
 
@@ -139,6 +139,10 @@ public class TankFrame extends Frame {
     return enemyTankMap.get(tankId);
   }
 
+  public Bullet getBulletById(String id) {
+    return bulletMap.get(id);
+  }
+
   private class MyKeyListener extends KeyAdapter {
 
     boolean BU = false;
@@ -220,7 +224,6 @@ public class TankFrame extends Frame {
 
       }
 
-      System.out.println(mytank);
     }
 
     @Override
