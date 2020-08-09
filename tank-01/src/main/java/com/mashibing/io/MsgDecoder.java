@@ -21,20 +21,10 @@ public class MsgDecoder extends ByteToMessageDecoder {
         in.readBytes(data);
         dataPacket.data = data;
         MsgType msgType = dataPacket.msgType;
-        Msg msg = null;
-        switch (msgType){
-          case BULLET_NEW:
-            msg = new BulletMsg().parse(data);
-            break;
-          case TANK_JOIN:
-            msg = new TankJoinMsg().parse(data);
-            break;
-          case TANK_MOVING:
-            msg = new TankMoveMsg().parse(data);
-            break;
-            default:
-              throw new IllegalStateException("不支持的类型");
-        }
+
+        Class<? extends Msg> msgClazz = msgType.getMsgClazz();
+        Msg msg = msgClazz.newInstance();
+        msg.parse(data);
         out.add(msg);
       }
     }

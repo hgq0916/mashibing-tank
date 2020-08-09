@@ -2,6 +2,7 @@ package com.mashibing.tank;
 
 import com.mashibing.io.NettyClient;
 import com.mashibing.io.TankMoveMsg;
+import com.mashibing.io.TankStopMsg;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -183,6 +184,7 @@ public class TankFrame extends Frame {
       }
 
       if(!bu && !bd && !bl && !br){
+        NettyClient.INSTANCE.write(new TankStopMsg(mytank));
         mytank.setMoving(false);
       } else {
 

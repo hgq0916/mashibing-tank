@@ -1,6 +1,6 @@
 package com.mashibing.tank;
 
-import com.mashibing.io.BulletMsg;
+import com.mashibing.io.BulletNewMsg;
 import com.mashibing.io.NettyClient;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -254,7 +254,7 @@ public class Tank {
     Bullet bullet = new Bullet(this.x+TANK_WIDTH/2-Bullet.WIDTH/2,this.y+TANK_HEIGHT/2-Bullet.HEIGHT/2,this.dir,this.group,this.id);
     TankFrame.INSTANCE.bulletMap.put(bullet.getId(),bullet);
     //发送子弹消息
-    NettyClient.INSTANCE.write(new BulletMsg(bullet));
+    NettyClient.INSTANCE.write(new BulletNewMsg(bullet));
   }
 
   public Rectangle getRectangle() {

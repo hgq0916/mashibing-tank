@@ -11,7 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-public class BulletMsg extends Msg {
+public class BulletNewMsg extends Msg {
 
   private String id;
   private String tankId;
@@ -21,9 +21,9 @@ public class BulletMsg extends Msg {
   private boolean living;
   private Group group;
 
-  public BulletMsg(){}
+  public BulletNewMsg(){}
 
-  public BulletMsg(Bullet bullet) {
+  public BulletNewMsg(Bullet bullet) {
     this.x = bullet.getX();
     this.y = bullet.getY();
     this.dir = bullet.getDir();
@@ -33,7 +33,7 @@ public class BulletMsg extends Msg {
     this.tankId = bullet.getTankId();
   }
 
-  public BulletMsg(String id, int x, int y, Dir dir, boolean living, Group group,String tankId) {
+  public BulletNewMsg(String id, int x, int y, Dir dir, boolean living, Group group,String tankId) {
     this.x = x;
     this.y = y;
     this.dir = dir;
@@ -145,7 +145,7 @@ public class BulletMsg extends Msg {
   }
 
   @Override
-  public BulletMsg parse(byte[] data) {
+  public BulletNewMsg parse(byte[] data) {
     ByteArrayInputStream bis = null;
     DataInputStream dis = null;
     try {
@@ -172,7 +172,7 @@ public class BulletMsg extends Msg {
 
   @Override
   public String toString() {
-    return "BulletMsg{" +
+    return "BulletNewMsg{" +
         "id='" + id + '\'' +
         ", tankId='" + tankId + '\'' +
         ", x=" + x +
