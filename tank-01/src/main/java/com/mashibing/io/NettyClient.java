@@ -62,6 +62,9 @@ public class NettyClient {
     }
   }
 
+  public void write(TankJoinMsg tankJoinMsg) {
+    this.channel.writeAndFlush(tankJoinMsg);
+  }
 }
 
 class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
@@ -81,14 +84,7 @@ class ClientEventHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
   @Override
   protected void channelRead0(ChannelHandlerContext channelHandlerContext, TankJoinMsg tankJoinMsg)
       throws Exception {
-    String tankId = tankJoinMsg.getId();
-    if(!TankFrame.INSTANCE.getMainTank().getId().equals(tankId) && !TankFrame.INSTANCE.existsTankById(tankId)){
-      //不存在该坦克
-      Tank tank = tankJoinMsg.createTank();
-      TankFrame.INSTANCE.addTank(tank);
-
-      channelHandlerContext.writeAndFlush(new TankJoinMsg(TankFrame.INSTANCE.getMainTank()));
-    }
+    tankJoinMsg.handle();
   }
 
 }

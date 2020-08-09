@@ -181,4 +181,15 @@ public class TankJoinMsg {
     return new Tank(this.id,this.x,this.y,this.dir, this.group);
   }
 
+  public void handle() {
+    String tankId = this.getId();
+    if(!TankFrame.INSTANCE.getMainTank().getId().equals(tankId) && !TankFrame.INSTANCE.existsTankById(tankId)){
+      //不存在该坦克
+      Tank tank = this.createTank();
+      TankFrame.INSTANCE.addTank(tank);
+
+      NettyClient.INSTANCE.write(new TankJoinMsg(TankFrame.INSTANCE.getMainTank()));
+    }
+  }
+
 }
